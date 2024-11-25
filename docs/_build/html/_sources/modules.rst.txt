@@ -1,7 +1,7 @@
-RadioSunPy
+RATANSunPy
 ==========
 
 .. toctree::
    :maxdepth: 4
 
-   radiosunpy
+   ratansunpy

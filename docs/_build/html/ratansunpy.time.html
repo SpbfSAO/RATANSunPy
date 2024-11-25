@@ -1,0 +1,730 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>ratansunpy.time package &#8212; RATANSunPy v1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ratansunpy.utils package" href="ratansunpy.utils.html" />
+    <link rel="prev" title="ratansunpy.scrapper package" href="ratansunpy.scrapper.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="ratansunpy-time-package">
+<h1>ratansunpy.time package<a class="headerlink" href="#ratansunpy-time-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-ratansunpy.time.time">
+<span id="ratansunpy-time-time-module"></span><h2>ratansunpy.time.time module<a class="headerlink" href="#module-ratansunpy.time.time" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ratansunpy.time.time.TimeFormats">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">TimeFormats</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">common_formats:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">examples:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratansunpy/time/time.html#TimeFormats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.TimeFormats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ratansunpy.time.time.TimeFormats.common_formats">
+<span class="sig-name descname"><span class="pre">common_formats</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ratansunpy.time.time.TimeFormats.common_formats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ratansunpy.time.time.TimeFormats.examples">
+<span class="sig-name descname"><span class="pre">examples</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#ratansunpy.time.time.TimeFormats.examples" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.check_equal_time">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">check_equal_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Time</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Time</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#check_equal_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.check_equal_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if two time objects are equal within a nanosecond precision.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t1</strong> (<em>Time</em>) – The first time object.</p></li>
+<li><p><strong>t2</strong> (<em>Time</em>) – The second time object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the time difference is less than a nanosecond, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00.000000000&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t2</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00.000000001&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_equal_time</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">)</span>  <span class="c1"># Returns: True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Timestamp</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DatetimeIndex</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime64</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Time</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span></dt>
+<dd><p>Create an Astropy Time object from various time representations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>Any</em>) – The time data, which can be of various types.</p></li>
+<li><p><strong>format</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The time format string, if known.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00.000000&#39;</span><span class="p">)</span>
+<span class="go"># Returns: &lt;Time object: scale=&#39;utc&#39; format=&#39;isot&#39; value=2020-01-01T00:00:00.000&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_astropy">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_astropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Time</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_astropy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_astropy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the provided Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>Time</em>) – An Astropy Time object.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The provided Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;isot&#39; value=2020-01-01T00:00:00.000&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_date">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">date</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a date object to an Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>date</em>) – A date object.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">date</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;iso&#39; value=2020-01-01T00:00:00.000&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_datetime">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_datetime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_datetime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a datetime object to an Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>datetime</em>) – A datetime object.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;datetime&#39; value=2020-01-01T00:00:00.000&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_list">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a list of time strings to an Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_list</strong> (<em>list</em>) – A list of time strings.</p></li>
+<li><p><strong>format</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – The time format string, if known.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">time_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2020-01-01T00:00:00&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">time_list</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;isot&#39; value=[2020-01-01T00:00:00.000]&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_npdatetime64">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_npdatetime64</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">datetime64</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_npdatetime64"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_npdatetime64" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a numpy datetime64 object to an Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>np.datetime64</em>) – A numpy datetime64 object.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt64</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">dt64</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;iso&#39; value=2020-01-01T00:00:00.000&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_npndarray">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_npndarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_npndarray"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_npndarray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a numpy ndarray of datetime64 objects to an Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>np.ndarray</em>) – A numpy ndarray of datetime64 objects.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt64_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;2020-01-01T00:00:00&#39;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">dt64_array</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;iso&#39; value=[2020-01-01T00:00:00.000]&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_pandasDatetimeIndex">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_pandasDatetimeIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DatetimeIndex</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_pandasDatetimeIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_pandasDatetimeIndex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a pandas DatetimeIndex to an Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>pd.DatetimeIndex</em>) – A pandas DatetimeIndex object.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dt_index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DatetimeIndex</span><span class="p">([</span><span class="s1">&#39;2020-01-01T00:00:00&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">dt_index</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;datetime64&#39; value=[2020-01-01T00:00:00.000]&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_pandasSeries">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_pandasSeries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Series</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_pandasSeries"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_pandasSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a pandas Series of timestamps to an Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>pd.Series</em>) – A pandas Series of timestamp objects.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts_series</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00&#39;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">ts_series</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;datetime64&#39; value=[2020-01-01T00:00:00.000]&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_pandasTimestamp">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_pandasTimestamp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Timestamp</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_pandasTimestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_pandasTimestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a pandas Timestamp to an Astropy Time object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>pd.Timestamp</em>) – A pandas Timestamp object.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="n">ts</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;datetime64&#39; value=2020-01-01T00:00:00.000&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.create_time_str">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">create_time_str</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Time</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#create_time_str"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.create_time_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a time string to an Astropy Time object using common time formats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>str</em>) – A time string.</p></li>
+<li><p><strong>kwargs</strong> – Additional keyword arguments passed to <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>An Astropy Time object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">create_time</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00&#39;</span><span class="p">)</span>
+<span class="go">&lt;Time object: scale=&#39;utc&#39; format=&#39;isot&#39; value=2020-01-01T00:00:00.000&gt;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.get_time_format">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">get_time_format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#get_time_format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.get_time_format" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine the time format of a given time string.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time_string</strong> (<em>str</em>) – The time string to check.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The format string if a matching format is found, otherwise None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[str]</p>
+</dd>
+<dt class="field-even">Example<span class="colon">:</span></dt>
+<dd class="field-even"><p></p></dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_time_format</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00.000000&#39;</span><span class="p">)</span>
+<span class="go">Returns: &#39;%Y-%m-%dT%H:%M:%S.%f&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.parse_time">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">parse_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratansunpy/time/time.html#parse_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.parse_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="ratansunpy.time.time.regex_time">
+<span class="sig-prename descclassname"><span class="pre">ratansunpy.time.time.</span></span><span class="sig-name descname"><span class="pre">regex_time</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_string</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/time/time.html#regex_time"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.time.regex_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match a time string against a format using regular expressions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>time_string</strong> (<em>str</em>) – The time string to match.</p></li>
+<li><p><strong>format</strong> (<em>str</em>) – The time format string.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The time string if a match is found, otherwise None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[str]</p>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">regex_time</span><span class="p">(</span><span class="s1">&#39;2020-01-01T00:00:00.000000&#39;</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">T%H:%M:%S.</span><span class="si">%f</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go"> # Returns: &#39;2020-01-01T00:00:00.000000&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="module-ratansunpy.time.timerange">
+<span id="ratansunpy-time-timerange-module"></span><h2>ratansunpy.time.timerange module<a class="headerlink" href="#module-ratansunpy.time.timerange" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ratansunpy.time.timerange.</span></span><span class="sig-name descname"><span class="pre">TimeRange</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><span class="pre">TimeRange</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Time</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Time</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Time</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Time</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Time</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">timedelta</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">TimeDelta</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">format</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratansunpy/time/timerange.html#TimeRange"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A class to represent a time range, providing various utilities for time manipulation.</p>
+<p><strong>Attributes</strong></p>
+<ul class="simple">
+<li><p><strong>start</strong> (<cite>Time</cite>): The start time of the range.</p></li>
+<li><p><strong>end</strong> (<cite>Time</cite>): The end time of the range.</p></li>
+<li><p><strong>delta</strong> (<cite>TimeDelta</cite>): The duration of the time range.</p></li>
+<li><p><strong>days</strong> (<cite>float</cite>): The duration of the time range in days.</p></li>
+<li><p><strong>hours</strong> (<cite>float</cite>): The duration of the time range in hours.</p></li>
+<li><p><strong>minutes</strong> (<cite>float</cite>): The duration of the time range in minutes.</p></li>
+<li><p><strong>seconds</strong> (<cite>float</cite>): The duration of the time range in seconds.</p></li>
+</ul>
+<p><strong>Methods</strong></p>
+<ul class="simple">
+<li><p><strong>__init__(a, b=None, format=None)</strong>: Initializes a <cite>TimeRange</cite> object.</p></li>
+<li><p><strong>__eq__(other)</strong>: Checks if two <cite>TimeRange</cite> objects are equal.</p></li>
+<li><p><strong>__ne__(other)</strong>: Checks if two <cite>TimeRange</cite> objects are not equal.</p></li>
+<li><p><strong>__contains__(time)</strong>: Checks if a given time is within the time range.</p></li>
+<li><p><strong>__repr__()</strong>: Returns a string representation of the <cite>TimeRange</cite> object.</p></li>
+<li><p><strong>__str__()</strong>: Returns a simple string representation of the start and end times.</p></li>
+<li><p><strong>have_intersection(other)</strong>: Checks if the time range intersects with another <cite>TimeRange</cite>.</p></li>
+<li><p><strong>get_dates(filter=None)</strong>: Returns a list of dates within the time range, optionally excluding certain dates.</p></li>
+<li><p><strong>moving_window(window_size, window_period)</strong>: Returns a list of <cite>TimeRange</cite> objects representing moving windows within the original time range.</p></li>
+<li><p><strong>equal_split(n_splits=2)</strong>: Splits the time range into equal subranges.</p></li>
+<li><p><strong>shift_forward(delta=None)</strong>: Shifts the time range forward by a specified delta or its own duration.</p></li>
+<li><p><strong>shift_backward(delta=None)</strong>: Shifts the time range backward by a specified delta or its own duration.</p></li>
+<li><p><strong>extend_range(start_delta, end_delta)</strong>: Extends the start and end times of the time range by the specified deltas.</p></li>
+</ul>
+<dl class="py property">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.days">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">days</span></span><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.days" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.delta">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delta</span></span><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.delta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.end">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">end</span></span><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.equal_split">
+<span class="sig-name descname"><span class="pre">equal_split</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_splits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><span class="pre">TimeRange</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/time/timerange.html#TimeRange.equal_split"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.equal_split" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split the time range into equal subranges.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n_splits</strong> (<em>int</em>) – The number of subranges to divide the time range into. Must be greater than or equal to 1.</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If <cite>n_splits</cite> is less than or equal to 0.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of <cite>TimeRange</cite> objects representing the equal subranges.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list of TimeRange</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.extend_range">
+<span class="sig-name descname"><span class="pre">extend_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TimeDelta</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TimeDelta</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">self</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/timerange.html#TimeRange.extend_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.extend_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extend the time range by modifying the start and end times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_delta</strong> (<em>TimeDelta</em>) – The amount of time to add to the start of the range.</p></li>
+<li><p><strong>end_delta</strong> (<em>TimeDelta</em>) – The amount of time to add to the end of the range.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The instance with the extended time range.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.get_dates">
+<span class="sig-name descname"><span class="pre">get_dates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">datetime</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/time/timerange.html#TimeRange.get_dates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.get_dates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a list of dates within the time range defined by the instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filter</strong> (<em>list of datetime-like objects</em><em> or </em><em>None</em>) – A list of dates to be excluded from the result. If provided, only dates not in this list will be included.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dates from start to end of the time range, with optional exclusion.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of datetime-like objects</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.have_intersection">
+<span class="sig-name descname"><span class="pre">have_intersection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><span class="pre">TimeRange</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/timerange.html#TimeRange.have_intersection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.have_intersection" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><p>Checks if the time range intersects with another TimeRange.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> (<a class="reference internal" href="#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><em>TimeRange</em></a>) – Another TimeRange object to compare.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the ranges intersect, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool``</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.hours">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">hours</span></span><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.hours" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.minutes">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">minutes</span></span><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.minutes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.moving_window">
+<span class="sig-name descname"><span class="pre">moving_window</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">window_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">TimeDelta</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">TimeDelta</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><span class="pre">TimeRange</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/time/timerange.html#TimeRange.moving_window"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.moving_window" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a list of time ranges using a moving window approach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>window_size</strong> (<em>TimeDelta</em><em> or </em><em>int</em>) – The duration of each time window.</p></li>
+<li><p><strong>window_period</strong> (<em>TimeDelta</em><em> or </em><em>int</em>) – The period to shift the window after each iteration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of <cite>TimeRange</cite> objects representing the moving windows.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list of TimeRange</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.seconds">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">seconds</span></span><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.seconds" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.shift_backward">
+<span class="sig-name descname"><span class="pre">shift_backward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">TimeDelta</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">self</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/timerange.html#TimeRange.shift_backward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.shift_backward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shift the entire time range backward by a specified duration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>delta</strong> (<em>TimeDelta</em><em> or </em><em>None</em>) – The duration by which to shift the time range. If not provided, the entire duration of the time range is used.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The instance with the updated time range.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.shift_forward">
+<span class="sig-name descname"><span class="pre">shift_forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">delta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">TimeDelta</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">self</span></span></span><a class="reference internal" href="_modules/ratansunpy/time/timerange.html#TimeRange.shift_forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.shift_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shift the entire time range forward by a specified duration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>delta</strong> (<em>TimeDelta</em><em> or </em><em>None</em>) – The duration by which to shift the time range. If not provided, the entire duration of the time range is used.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The instance with the updated time range.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="ratansunpy.time.timerange.TimeRange.start">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">start</span></span><a class="headerlink" href="#ratansunpy.time.timerange.TimeRange.start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-ratansunpy.time">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-ratansunpy.time" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">RATANSunPy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">RATANSunPy</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ratansunpy.html">ratansunpy package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">RATANSunPy</a><ul>
+  <li><a href="ratansunpy.html">ratansunpy package</a><ul>
+      <li>Previous: <a href="ratansunpy.scrapper.html" title="previous chapter">ratansunpy.scrapper package</a></li>
+      <li>Next: <a href="ratansunpy.utils.html" title="next chapter">ratansunpy.utils package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Igor Lysov, Evgenii Kurochkin, Andrey Shendrik, Irina Knyazeva.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/ratansunpy.time.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

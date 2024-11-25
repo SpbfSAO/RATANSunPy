@@ -2,8 +2,8 @@ import pytest
 from datetime import timedelta
 from astropy.time import Time, TimeDelta
 import astropy.units as u
-from radiosunpy.time import parse_time
-from radiosunpy.time import TimeRange
+from ratansunpy.time import parse_time
+from ratansunpy.time import TimeRange
 
 
 @pytest.fixture

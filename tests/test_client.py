@@ -2,9 +2,9 @@ import pytest
 import numpy as np
 from datetime import timedelta
 from pathlib import Path
-from radiosunpy.time import TimeRange
-from radiosunpy.client import SRSClient, RATANClient
-from radiosunpy.utils import get_project_root
+from ratansunpy.time import TimeRange
+from ratansunpy.client import SRSClient, RATANClient
+from ratansunpy.utils import get_project_root
 from urllib.request import urlopen
 from astropy.table import  Table
 from astropy.io import fits

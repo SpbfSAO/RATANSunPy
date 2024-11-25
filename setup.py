@@ -4,7 +4,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="radiosunpy",
+    name="ratansunpy",
     version="0.2.2",
     author=[
         "Igor Lysov <iilysov.sci@gmail.com>", 

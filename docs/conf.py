@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'RadioSunPy'
+project = 'RATANSunPy'
 copyright = '2024, Igor Lysov, Evgenii Kurochkin, Andrey Shendrik, Irina Knyazeva'
 author = 'Igor Lysov, Evgenii Kurochkin, Andrey Shendrik, Irina Knyazeva'
 
@@ -56,7 +56,7 @@ html_static_path = ['_static']
 
 import os
 import sys
-# sys.path.insert(0, os.path.abspath(os.path.join('..', '..', 'radiosunpy')))
+# sys.path.insert(0, os.path.abspath(os.path.join('..', '..', 'ratansunpy')))
 # sys.path.append(os.path.abspath(
 #     os.path.join(__file__, "..")
 # ))

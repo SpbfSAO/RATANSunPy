@@ -1,6 +1,6 @@
-from .context import radiosunpy
-from radiosunpy.time import check_equal_time, get_time_format
-from radiosunpy.time import TimeFormats
+from .context import ratansunpy
+from ratansunpy.time import check_equal_time, get_time_format
+from ratansunpy.time import TimeFormats
 import astropy.units as u
 import pytest
 from astropy.time import Time

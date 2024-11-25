@@ -1,6 +1,6 @@
 import numpy as np
 from pathlib import Path
-from radiosunpy.utils import (
+from ratansunpy.utils import (
     get_project_root,
     SunSolidAngle,
     gauss2d,
