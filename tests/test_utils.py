@@ -17,7 +17,7 @@ from ratansunpy.utils import (
 
 def test_get_project_root():
     project_root = get_project_root()
-    assert project_root.parts[-1] == 'RadioSunPy'
+    assert project_root.parts[-1] == 'RATANSunPy'
 
 def test_sun_solid_angle():
     angle = SunSolidAngle(960)

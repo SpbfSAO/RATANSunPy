@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "radiosunpy"
+name = "ratansunpy"
 version = "0.2.2"
 description = "RATAN-600 radioastronomical solar data and methods Python library"
 authors = [
@@ -10,8 +10,8 @@ authors = [
 ]
 license = "MIT"
 readme = "README.md"
-repository = "https://github.com/radiosunpy/RadioSunPy"
-documentation = "https://radiosunpy.github.io/RadioSunPy/"
+repository = "https://github.com/SpbfSAO/RATANSunPy"
+documentation = "https://SpbfSAO.github.io/RATANSunPy/"
 
 keywords = ["solar physics", "radioastronomy", "physics", "data proccessing", "ratan-600"]
 
