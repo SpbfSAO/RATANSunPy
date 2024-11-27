@@ -14,7 +14,7 @@ The easiest way to get going is to install the pypi package using pip:
 
 .. code-block:: bash
 
-    pip install radiosunpy
+    pip install ratansunpy
 
 ------------------
 
