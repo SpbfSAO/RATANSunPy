@@ -1,9 +1,0 @@
-numpy
-astropy
-requests
-python-dateutil
-pytest
-pandas
-scipy
-PyWavelets
-openpyxl
