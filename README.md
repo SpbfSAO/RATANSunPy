@@ -23,7 +23,7 @@ pip install ratansunpy
 
 ## Usage
  
-For more detailed information about the package and its functionalities, please refer to the [official documentation](https://github.com/SpbfSAO/RATANSunPy).
+For more detailed information about the package and its functionalities, please refer to the [official documentation](https://spbfsao.github.io/RATANSunPy/).
 The best place to start is the in [example gallery](https://github.com/SpbfSAO/RATANSunPy/tree/main/notebooks)  
 also includes a collection of shorter and more specific examples of using ratansunpy, or you can look at example usages in [colab notebook](https://colab.research.google.com/drive/1JCaW_Kj-1Al-sDoNhJRawlSit5gietKm?usp=sharing) if you want to try it yourself. 
 
