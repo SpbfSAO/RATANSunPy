@@ -1,7 +1,7 @@
 # ``RATANSunPy``
 ``RATANSunPy`` 
 
-RadioSunPy is a Python package developed for accessing, visualizing, and analyzing
+RATANSunPy is a Python package developed for accessing, visualizing, and analyzing
 multi-band radio observations of the Sun from the RATAN-600 complex. These data are 
 valuable for diagnosing solar plasma conditions and predicting solar activity. 
 However, working with these data requires extensive processing and a thorough 
