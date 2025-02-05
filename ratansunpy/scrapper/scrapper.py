@@ -1,5 +1,6 @@
 import re
 from datetime import datetime
+from pathlib import Path
 from ftplib import FTP
 from typing import List, Optional, Callable, Any
 from urllib.parse import urlsplit
@@ -30,7 +31,7 @@ class Scrapper:
         """
         Initialize the Scrapper object with base URL and optional parameters.
 
-        :param baseurl: The base URL to scrape data from.
+        :param baseurl: The base URL to scrape data from or the core folder.
         :param regex_pattern: Optional regex pattern to match filenames.
         :param condition: Optional callable to generate dates based on extracted data.
         :param filter: Optional filter to apply to the extracted data.
@@ -213,6 +214,26 @@ class Scrapper:
                         file_urls.append(file_path)
         return file_urls
 
+    def srs_localfiles(self, timerange: TimeRange) -> List[str]:
+        """
+        Retrieve a list of files from an HTTP server within the specified time range.
+
+        :param timerange: The `TimeRange` object representing the time range.
+        :return: A list of file URLs.
+         """
+        base_dir = self.baseurl
+        directories = self.range(timerange)
+        file_paths = []
+
+        for year_dir in directories:
+            year_dir = Path(year_dir)
+            for file_path in year_dir.glob("*.txt"):
+                if self.check_date_in_timerange_from_url(str(file_path), timerange):
+                    file_paths.append(str(file_path))
+
+        return file_paths
+
+
     def httpfiles(self, timerange: TimeRange) -> List[str]:
         """
         Retrieve a list of files from an HTTP server within the specified time range.
@@ -275,6 +296,9 @@ class Scrapper:
         RATAN url: http://spbf.sao.ru/data/ratan/2010/01/100113sun0_out.fits
         """
         # SWPC SRS, for example
+        if len(urlsplit(self.baseurl).scheme) == 0:
+            return self.srs_localfiles(timerange)
+
         if urlsplit(self.baseurl).scheme == 'ftp':
             return self.ftpfiles(timerange)
         # RATAN, for example
