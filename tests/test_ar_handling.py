@@ -5,7 +5,6 @@ from pathlib import Path
 from ratansunpy.time import TimeRange
 from ratansunpy.client import SRSClient, RATANClient
 from ratansunpy.utils import get_project_root
-from urllib.request import urlopen
 from astropy.table import Table
 import matplotlib.pyplot as plt
 from astropy.io import fits
