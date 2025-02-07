@@ -239,11 +239,11 @@ class ARHandler:
         primary_hdu.header['SOL_DEC'] = self.SOL_DEC
         primary_hdu.header['ANGLE'] = self.ANGLE
 
-        stats_hdu_list = [primary_hdu]
+        hdu_list = [primary_hdu]
         for key, value in ar_stats.items():
-            stats_hdu_list.append(fits.ImageHDU(data=value.astype('float32'), name=key))
-
-        ar_hdulist = fits.HDUList(stats_hdu_list)
+            hdu_list.append(fits.ImageHDU(data=value.astype('float32'), name=key))
+        hdu_list.append(fits.ImageHDU(data=self.FREQ.astype('float32'), name='FREQ'))
+        ar_hdulist = fits.HDUList(hdu_list)
         ar_hdulist.verify('fix')
         # Combine date and time
         datetime_obj = datetime.strptime(f"{self.DATE_OBS} {self.TIME_OBS}", "%Y/%m/%d %H:%M:%S.%f")
