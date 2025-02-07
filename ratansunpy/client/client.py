@@ -407,7 +407,6 @@ class RATANClient(BaseClient):
         header['TIME-OBS'] = OBS_TIME
         header['AZIMUTH'] = AZIMUTH
         header['SOL_DEC'] = SOL_DEC
-        header['SOLAR_P'] = SOLAR_P
         header['ANGLE'] = angle
 
         hdulist = fits.HDUList([primary_hdu, I_hdu, V_hdu, freq_hdu, mask_hdu, hdul[1]])

@@ -33,12 +33,36 @@ class TestARHandler:
             fits.PrimaryHDU(),
             fits.ImageHDU(data=np.random.rand(8, 100)),  # I
             fits.ImageHDU(data=np.random.rand(8, 100)),  # V
-            fits.ImageHDU(data=np.linspace(1, 18, 10)),  # FREQ
-            fits.ImageHDU(data=np.ones((10, 100), dtype=bool))  # Mask
+            fits.ImageHDU(data=np.linspace(1, 18, 8)),  # FREQ
+            fits.ImageHDU(data=np.ones((8, 100), dtype=int))  # Mask
         ])
         hdul[0].header['CDELT1'] = 0.1
         hdul[0].header['CRPIX1'] = 50
+        hdul[0].header['DATE-OBS'] = '2023'
+        hdul[0].header['TIME-OBS'] = '19-04'
+        hdul[0].header['AZIMUTH'] = 0.1
+        hdul[0].header['SOLAR_R'] = 50
+        hdul[0].header['SOLAR_B'] = 0.1
+        hdul[0].header['SOL_DEC'] = 50
+        hdul[0].header['ANGLE'] = 50
         return hdul
+
+
+    @pytest.fixture
+    def sample_srs_table(self):
+        """Fixture for sample SRS table."""
+        return Table({
+            'Number': [1158],
+            'Latitude': [0.5],
+            'Timestamp': ['20170905_121217']
+        })
+
+    @pytest.fixture
+    def sample_handler(self, sample_calibrated_data, sample_srs_table):
+
+        handler = ARHandler(sample_calibrated_data, srs_table=sample_srs_table)
+
+        return handler
 
 
 
@@ -50,7 +74,7 @@ class TestARHandler:
         ar_handler = ARHandler(processed_hdul, srs_table=srs_table)
         assert isinstance(ar_handler.solar_x, np.ndarray)
         ar_handler_with_url = ARHandler(processed_hdul, srs_base_url=local_srs_base_url)
-        assert ar_handler.window_size == 100  # Default window size
+        assert ar_handler.window_size == 50  # Default window size
         assert ar_handler.srs_table['Latitude'].max() == ar_handler_with_url.srs_table['Latitude'].max()
 
     def test_extract_ar_data_with_window(self, sample_radio_data, local_srs_base_url):
@@ -60,14 +84,16 @@ class TestARHandler:
         handler = ARHandler(processed_hdul, srs_base_url=local_srs_base_url)
         spectrum_data = handler.extract_ar_data_with_window(latitude=408.69)
         assert spectrum_data.shape == (2, 84, 101)  # 2 * window_size + 1
-    def test_check_bad_data(self, sample_radio_data, local_srs_base_url):
-        """Test interval calculation for active regions."""
-        raw_hdul, processed_hdul = sample_radio_data
 
-        handler = ARHandler(processed_hdul, srs_base_url=local_srs_base_url)
-        spectrum_data = handler.extract_ar_data_with_window(latitude=408.69)
-        (p99, p100) = handler.check_bad_data(spectrum_data)
-        assert p100 > p99
+    def test_identify_and_replace_outliers(self, sample_handler):
+        """Test interval calculation for active regions."""
+
+        handler = sample_handler
+        spectrum_data = handler.I
+        spectrum_data[4, 20] = 50
+        spectrum_data = handler.identify_and_replace_outliers(spectrum_data,
+                                                              threshold_multiplier=2)
+        assert spectrum_data[4, 20] < 50
 
     def test_compute_ar_mask(self, sample_radio_data, local_srs_base_url):
         raw_hdul, processed_hdul = sample_radio_data
@@ -79,6 +105,37 @@ class TestARHandler:
 
         assert isinstance(mask, np.ndarray)
         assert mask.dtype == "bool"
+
+    def test_compute_ar_stats(self, sample_handler):
+        handler = sample_handler
+        spectrum_data = handler.I
+        spectrum_data[:, 60:80] = spectrum_data[:, 60:80]+5
+        mask = handler.compute_ar_mask(spectrum_data)
+        stats = handler.compute_ar_stats(spectrum_data, mask=mask, ax_data=None)
+        mean_all = np.mean(spectrum_data, axis=1)
+        assert isinstance(stats, dict)
+        assert isinstance(stats['mean'], np.ndarray)
+        assert stats['mean'].max() > mean_all.max()
+
+    def test_process_one_regions(self, sample_radio_data, local_srs_base_url):
+        """Test interval calculation for active regions."""
+        raw_hdul, processed_hdul = sample_radio_data
+
+        handler = ARHandler(processed_hdul, srs_base_url=local_srs_base_url)
+        ar_hdul, filename = handler.process_one_regions(latitude=408.69, ar_number='2673')
+
+        assert True
+
+    def test_extract_ars_from_scan(self, sample_radio_data, local_srs_base_url):
+        raw_hdul, processed_hdul = sample_radio_data
+        handler = ARHandler(processed_hdul, srs_base_url=local_srs_base_url)
+        save_path = get_project_root()/"data"
+        ar_data = handler.extract_ars_from_scan(save_path=save_path)
+
+        assert isinstance(ar_data, list)
+
+
+
 
 
 

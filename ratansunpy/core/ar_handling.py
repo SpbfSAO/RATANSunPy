@@ -1,12 +1,15 @@
 from astropy.io import fits
 from astropy.table import Table
+from pathlib import Path
 from typing import Optional, List, Tuple
+from datetime import datetime
+from numpy import ndarray
+
 from ratansunpy.client import SRSClient, RATANClient
 import numpy as np
 from scipy.ndimage import binary_fill_holes
 from scipy.stats import zscore
 import matplotlib.pyplot as plt
-
 
 from ratansunpy.scrapper import Scrapper
 from ratansunpy.time import TimeRange
@@ -14,13 +17,13 @@ from ratansunpy.time import TimeRange
 
 class ARHandler:
     def __init__(
-        self,
-        calibrated_data: fits.HDUList,
-        bad_freq: Optional[List[float]] = None,
-        window_size: int = 50,
-        scrap_srs_table: bool = True,
-        srs_table: Optional[Table] = None,
-        srs_base_url: Optional[str] = None,
+            self,
+            calibrated_data: fits.HDUList,
+            bad_freq: Optional[List[float]] = None,
+            window_size: int = 50,
+            scrap_srs_table: bool = True,
+            srs_table: Optional[Table] = None,
+            srs_base_url: Optional[str] = None,
     ) -> None:
         """
         Initialize the ARHandler for extracting and processing active regions (ARs).
@@ -38,11 +41,18 @@ class ARHandler:
             bad_freq = [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062]
         self.bad_freq = bad_freq
 
-            # Extract header and data
+        # Extract header and data
         self.CDELT1 = calibrated_data[0].header['CDELT1']
         self.CRPIX = calibrated_data[0].header['CRPIX1']
         FREQ = calibrated_data[3].data
         bad_freq_mask = np.isin(FREQ, bad_freq)
+        self.DATE_OBS = calibrated_data[0].header['DATE-OBS']
+        self.TIME_OBS = calibrated_data[0].header['TIME-OBS']
+        self.AZIMUTH = calibrated_data[0].header['AZIMUTH']
+        self.SOLAR_R = calibrated_data[0].header['SOLAR_R']
+        self.SOLAR_B = calibrated_data[0].header['SOLAR_B']
+        self.SOL_DEC = calibrated_data[0].header['SOL_DEC']
+        self.ANGLE = calibrated_data[0].header['ANGLE']
         self.I = calibrated_data[1].data[~bad_freq_mask]
         self.V = calibrated_data[2].data[~bad_freq_mask]
         self.FREQ = FREQ[~bad_freq_mask]
@@ -81,12 +91,11 @@ class ARHandler:
 
         center_index = np.argmin(np.abs(self.solar_x - latitude))
         left_index = max(0, center_index - window_size)
-        right_index = min(len_x, center_index + window_size+1)
+        right_index = min(len_x, center_index + window_size + 1)
 
         # Handle padding if the window exceeds the data boundaries
         pad_left = max(0, window_size - center_index)
         pad_right = max(0, (center_index + window_size) - len_x)
-
 
         # Extract data
         nfreq = self.I.shape[0]
@@ -106,19 +115,46 @@ class ARHandler:
         plt.show()
         return plt.gcf()
 
-    def check_bad_data(self, spectrum_data: np.ndarray) -> tuple:
+    @staticmethod
+    def identify_and_replace_outliers(spectrum_data: np.ndarray, threshold_multiplier: float = 2.0) -> ndarray:
         """
-        Check data quality by identifying outliers and noisy regions.
+       Identify and replace outliers in a spectrum.
 
-        :param spectrum_data: Extracted spectrum data.
-        :return: Boolean mask indicating good data points.
-        """
-        # Use z-score to identify outliers
-        res = np.percentile(spectrum_data[0], [99, 100])
-        return (res[0], res[1])
+       :param spectrum: 1D array representing the spectrum.
+       :param threshold_multiplier: Multiplier for the 99th percentile to define outliers (default: 2.0).
+       :return: Spectrum with outliers replaced by the average of neighbors.
+       """
 
-    def compute_ar_mask(self,
-                        spectrum_data: np.ndarray,
+        if not isinstance(spectrum_data, np.ndarray):
+            raise ValueError("Input must be a NumPy array")
+        if spectrum_data.ndim == 3:
+            data = spectrum_data[0]
+        else:
+            data = spectrum_data
+        percentile_99 = np.percentile(data, 99)
+
+        # Define the outlier threshold
+        outlier_threshold = threshold_multiplier * percentile_99
+
+        # Identify outliers
+        outlier_indices = np.where(data > outlier_threshold)[0]
+
+        # Replace outliers with the average of neighbors
+        for idx in outlier_indices:
+            # Get neighboring values (avoid boundary issues)
+            left = data[idx - 1] if idx > 0 else data[idx + 1]
+            right = data[idx + 1] if idx < len(data) - 1 else data[idx - 1]
+            data[idx] = (left + right) / 2
+
+        if spectrum_data.ndim == 3:
+            spectrum_data[0] = data
+        else:
+            spectrum_data = data
+
+        return spectrum_data
+
+    @staticmethod
+    def compute_ar_mask(spectrum_data: np.ndarray,
                         dec_coeff: float = 2.5) -> np.ndarray:
         """
         Smooth the spectrum data with a 2D Gaussian and compute a mask. Filter out bad data points.
@@ -127,60 +163,112 @@ class ARHandler:
         :param perc: Percentile to half
         :return: Boolean mask indicating significant regions.
         """
-        top_perc = np.percentile(spectrum_data[0], 99)
-        mask = spectrum_data[0] > top_perc/dec_coeff
+        if not isinstance(spectrum_data, np.ndarray):
+            raise ValueError("Input must be a NumPy array")
+        if spectrum_data.ndim == 3:
+            spectrum_data = spectrum_data[0]
+
+        top_perc = np.percentile(spectrum_data, 99)
+        mask = spectrum_data > top_perc / dec_coeff
         mask = binary_fill_holes(mask)
 
         return mask
 
-    def compute_ar_stats(self, spectrum_data: np.ndarray, mask: np.ndarray = None) -> dict:
+    def compute_ar_stats(self,
+                         spectrum_data: np.ndarray,
+                         mask: np.ndarray = None,
+                         threshold_multiplier: float = 2.5,
+                         ax_data: int = 0,
+                         ax_along: int = 1) -> dict:
         """
         Compute basic statistics about the spectrum.
 
-        :param spectrum_data: Extracted spectrum data.
+        :param spectrum_data: Extracted spectrum data for one cpmponent (ex I).
         :return: Dictionary containing statistics (mean, std, min, max).
         """
+        spectrum_data = self.identify_and_replace_outliers(spectrum_data,
+                                                           threshold_multiplier=threshold_multiplier)
         if mask is not None:
-            spectrum_data = spectrum_data*mask
+            spectrum_data = spectrum_data * mask
             spectrum_data = np.ma.masked_equal(spectrum_data, 0)
+        if ax_data is not None:
+            data = spectrum_data[ax_data]
+        else:
+            data = spectrum_data
         return {
-            'mean': np.mean(spectrum_data, axis=1),
-            'std': np.std(spectrum_data, axis=1),
-            'min': np.min(spectrum_data, axis=1),
-            'max': np.max(spectrum_data, axis=1),
-            'sum': np.sum(spectrum_data, axis=1),
+            'mean': np.mean(data, axis=ax_along).filled(np.nan),
+            'std': np.std(data, axis=ax_along).filled(np.nan),
+            'min': np.min(data, axis=ax_along).filled(np.nan),
+            'max': np.max(data, axis=ax_along).filled(np.nan),
+            'sum': np.sum(data, axis=1).filled(np.nan),
         }
 
-    def extract_ars_from_scan(self) -> List[Tuple[str, fits.HDUList]]:
+    def process_one_regions(
+            self,
+            latitude: float,
+            ar_number: str,
+            window_size: Optional[int] = None,
+            threshold_multiplier: float = 2.5,
+    ) -> tuple[fits.HDUList, str]:
+
+        # Extract AR data
+        spectrum_data = self.extract_ar_data_with_window(latitude, window_size)
+
+
+        # Compute AR mask and statistics
+        ar_mask = np.expand_dims(self.compute_ar_mask(spectrum_data).astype('float'), axis=0)
+        spectrum_data = np.concatenate((spectrum_data, ar_mask), axis=0)
+        ar_stats = self.compute_ar_stats(spectrum_data,
+                                         mask=ar_mask,
+                                         threshold_multiplier=threshold_multiplier,
+                                         ax_data=0,
+                                         ax_along=1)
+
+        # Create FITS HDU
+        primary_hdu = fits.PrimaryHDU(spectrum_data)
+        primary_hdu.header['AR_NUM'] = ar_number
+        primary_hdu.header['LATITUDE'] = latitude
+        primary_hdu.header['DATE-OBS'] = self.DATE_OBS
+        primary_hdu.header['TIME-OBS'] = self.TIME_OBS
+        primary_hdu.header['CDELT1'] = self.CDELT1
+        primary_hdu.header['CRPIX '] = self.CRPIX
+
+        primary_hdu.header['AZIMUTH'] = self.AZIMUTH
+        primary_hdu.header['SOLAR_R'] = self.SOLAR_R
+        primary_hdu.header['SOLAR_B'] = self.SOLAR_B
+        primary_hdu.header['SOL_DEC'] = self.SOL_DEC
+        primary_hdu.header['ANGLE'] = self.ANGLE
+
+        stats_hdu_list = [primary_hdu]
+        for key, value in ar_stats.items():
+            stats_hdu_list.append(fits.ImageHDU(data=value.astype('float32'), name=key))
+
+        ar_hdulist = fits.HDUList(stats_hdu_list)
+        ar_hdulist.verify('fix')
+        # Combine date and time
+        datetime_obj = datetime.strptime(f"{self.DATE_OBS} {self.TIME_OBS}", "%Y/%m/%d %H:%M:%S.%f")
+
+        # Format the result as required
+        timestamp = datetime_obj.strftime("%Y%m%d_%H%M%S")
+
+        # Save to FITS file
+        filename = f"{timestamp}_AR{ar_number}.fits"
+
+        return ar_hdulist, filename
+
+    def extract_ars_from_scan(self, save_path=None) -> list:
         """
         Extract all ARs, process them, and save to FITS files.
 
         :return: List of tuples containing AR filenames and corresponding FITS HDUs.
         """
-        ar_files = []
+        ar_data = []
         for row in self.srs_table:
             ar_number = row['Number']
             latitude = row['Latitude']
+            ar_hdul, filename = self.process_one_regions(latitude=latitude, ar_number=ar_number)
+            ar_data.append((ar_hdul, filename))
+            if save_path:
+                ar_hdul.writeto(Path(save_path) / filename, overwrite=True)
 
-            # Extract AR data
-            spectrum_data = self.extract_ar_data_with_window(latitude)
-
-            # Check data quality
-            good_data_mask = self.check_bad_data(spectrum_data)
-
-            # Compute AR mask and statistics
-            ar_mask = self.compute_ar_mask(spectrum_data)
-            ar_stats = self.compute_ar_stats(spectrum_data, ar_mask)
-
-            # Create FITS HDU
-            primary_hdu = fits.PrimaryHDU(spectrum_data)
-            primary_hdu.header['AR_NUM'] = ar_number
-            primary_hdu.header['LATITUDE'] = latitude
-            for key, value in ar_stats.items():
-                primary_hdu.header[key.upper()] = value
-
-            # Save to FITS file
-            filename = f"{row['Timestamp']}_sun+0_AR{ar_number}.fits"
-            ar_files.append((filename, fits.HDUList([primary_hdu])))
-
-        return ar_files
+        return ar_data
