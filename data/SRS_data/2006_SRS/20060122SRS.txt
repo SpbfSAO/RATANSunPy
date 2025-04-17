@@ -1,0 +1,17 @@
+:Product: 0122SRS.txt
+:Issued: 2006 Jan 22 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 22 Issued at 0030Z on 22 Jan 2006
+Report compiled from data received at SWO on 21 Jan
+I.  Regions with Sunspots.  Locations Valid at 21/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0848 S19W02   321  0200 Eki  11   18 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 21/2400Z Jan
+Nmbr  Location  Lo
+0847  S08W85   044
+II. Regions Due to Return 22 Jan to 24 Jan
+Nmbr Lat    Lo
+None

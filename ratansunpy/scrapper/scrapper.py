@@ -1,5 +1,6 @@
 import re
 from datetime import datetime
+from pathlib import Path
 from ftplib import FTP
 from typing import List, Optional, Callable, Any
 from urllib.parse import urlsplit
@@ -8,7 +9,12 @@ from astropy.time import Time
 from dateutil.relativedelta import relativedelta
 
 from ratansunpy.time import TimeRange
-
+import os
+import tarfile
+from ftplib import FTP
+from urllib.parse import urlsplit
+from typing import List
+from io import BytesIO
 TIME_REGEX = {'%Y': r'\d{4}', '%y': r'\d{2}',
               '%b': '[A-Z][a-z]{2}', '%m': r'\d{2}',
               '%d': r'\d{2}', '%j': r'\d{3}',
@@ -30,7 +36,7 @@ class Scrapper:
         """
         Initialize the Scrapper object with base URL and optional parameters.
 
-        :param baseurl: The base URL to scrape data from.
+        :param baseurl: The base URL to scrape data from or the core folder.
         :param regex_pattern: Optional regex pattern to match filenames.
         :param condition: Optional callable to generate dates based on extracted data.
         :param filter: Optional filter to apply to the extracted data.
@@ -212,6 +218,90 @@ class Scrapper:
                     if self.check_date_in_timerange_from_url(file_path, timerange):
                         file_urls.append(file_path)
         return file_urls
+    
+    def ftp_archived_files(self, timerange) -> List[str]:
+        """
+        Retrieve a list of files from an archived .tar.gz FTP server within the specified time range,
+        unzip them, and delete the archives, leaving only the extracted files.
+
+        :param timerange: The `TimeRange` object representing the time range.
+        :return: A list of paths to the extracted files.
+        """
+        directories = self.range(timerange)
+        downloaded_files = []
+        extracted_files = []
+        ftpurl = urlsplit(directories[0]).netloc
+        
+        tmp_dir = os.path.join(os.getcwd(), "SRS_data")
+        os.makedirs(tmp_dir, exist_ok=True)
+        
+        with FTP(ftpurl, user="anonymous", passwd="anonymous@example.com") as ftp:
+            for current_directory in directories:
+                dir_name = urlsplit(current_directory).path.strip('/').split('/')[-1]
+                tar_file_name = f"{dir_name}_SRS.tar.gz"
+                tar_file_path = f"{urlsplit(current_directory).path}/{tar_file_name}"
+                local_file_path = os.path.join(tmp_dir, tar_file_name)
+                
+                try:
+                    ftp.cwd(urlsplit(current_directory).path)
+                except Exception as e:
+                    print(f'FTP CWD failed: {e}')
+                    continue
+                
+                try:
+                    files = ftp.nlst()
+                    if tar_file_name not in files:
+                        print(f"File {tar_file_name} does not exist in {current_directory}")
+                        continue
+                except Exception as e:
+                    print(f"Failed to list files in {current_directory}: {e}")
+                    continue
+                
+                try:
+                    with open(local_file_path, 'wb') as local_file:
+                        ftp.retrbinary(f"RETR {tar_file_path}", local_file.write)
+                    print(f"Downloaded {tar_file_path} to {local_file_path}")
+                    downloaded_files.append(local_file_path)
+                except Exception as e:
+                    print(f"Failed to download {tar_file_path}: {e}")
+                    continue
+        for tar_file in downloaded_files:
+            try:
+                with tarfile.open(tar_file, 'r:gz') as tar:
+                    tar.extractall(path=tmp_dir)
+                    print(f"Extracted {tar_file} to {tmp_dir}")
+                    extracted_files.extend([
+                        os.path.join(tmp_dir, member.name)
+                        for member in tar.getmembers()
+                        if member.isfile()
+                    ])
+                os.remove(tar_file)
+                print(f"Deleted archive {tar_file}")
+            except Exception as e:
+                print(f"Failed to extract or delete {tar_file}: {e}")
+                continue
+        
+        return extracted_files
+
+    def srs_localfiles(self, timerange: TimeRange) -> List[str]:
+        """
+        Retrieve a list of files from an HTTP server within the specified time range.
+
+        :param timerange: The `TimeRange` object representing the time range.
+        :return: A list of file URLs.
+         """
+        base_dir = self.baseurl
+        directories = self.range(timerange)
+        file_paths = []
+
+        for year_dir in directories:
+            year_dir = Path(year_dir)
+            for file_path in year_dir.glob("*.txt"):
+                if self.check_date_in_timerange_from_url(str(file_path), timerange):
+                    file_paths.append(str(file_path))
+
+        return file_paths
+
 
     def httpfiles(self, timerange: TimeRange) -> List[str]:
         """
@@ -275,6 +365,9 @@ class Scrapper:
         RATAN url: http://spbf.sao.ru/data/ratan/2010/01/100113sun0_out.fits
         """
         # SWPC SRS, for example
+        if len(urlsplit(self.baseurl).scheme) == 0:
+            return self.srs_localfiles(timerange)
+
         if urlsplit(self.baseurl).scheme == 'ftp':
             return self.ftpfiles(timerange)
         # RATAN, for example

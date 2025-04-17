@@ -1,0 +1,25 @@
+:Product: 0224SRS.txt
+:Issued: 2024 Feb 24 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 55 Issued at 0030Z on 24 Feb 2024
+Report compiled from data received at SWO on 23 Feb
+I.  Regions with Sunspots.  Locations Valid at 23/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3586 N28W46   282  0080 Hsx  02   01 Alpha
+3590 N18E13   223  1150 Fkc  18   44 Beta-Gamma-Delta
+3591 S35E71   165  0060 Hsx  03   01 Alpha
+3592 S10E69   167  0080 Dso  07   02 Beta
+3593 S07W69   305  0010 Bxo  03   03 Beta
+3594 N06E68   168  0030 Cao  05   05 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 23/2400Z Feb
+Nmbr  Location  Lo
+3585  N13W79   315
+3587  S20W72   308
+3588  S03W90   326
+II. Regions Due to Return 24 Feb to 26 Feb
+Nmbr Lat    Lo
+3580 N21    141
+3571 S17    119

@@ -1,0 +1,20 @@
+:Product: 0503SRS.txt
+:Issued: 2006 May 03 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 123 Issued at 0030Z on 03 May 2006
+Report compiled from data received at SWO on 02 May
+I.  Regions with Sunspots.  Locations Valid at 02/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0875 S12W47   115  0140 Dao  04   07 Beta
+0876 S18W16   084  0040 Cso  04   05 Beta
+0878 N13E31   037  0060 Cso  03   02 Beta
+0879 N16E07   061  0050 Dao  04   04 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 02/2400Z May
+Nmbr  Location  Lo
+0877  S05W28   097
+II. Regions Due to Return 03 May to 05 May
+Nmbr Lat    Lo
+0871 S06    312

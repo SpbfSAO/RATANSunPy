@@ -1,0 +1,18 @@
+:Product: 0127SRS.txt
+:Issued: 2021 Jan 27 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 27 Issued at 0030Z on 27 Jan 2021
+Report compiled from data received at SWO on 26 Jan
+I.  Regions with Sunspots.  Locations Valid at 26/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2797 S17W42   340  0010 Axx  02   02 Alpha
+2799 N23W83   021  0000 Axx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 26/2400Z Jan
+Nmbr  Location  Lo
+2798  S16W37   335
+II. Regions Due to Return 27 Jan to 29 Jan
+Nmbr Lat    Lo
+None

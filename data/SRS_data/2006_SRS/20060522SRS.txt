@@ -1,0 +1,18 @@
+:Product: 0522SRS.txt
+:Issued: 2006 May 22 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 142 Issued at 0030Z on 22 May 2006
+Report compiled from data received at SWO on 21 May
+I.  Regions with Sunspots.  Locations Valid at 21/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0884 S14E22   154  0050 Cso  07   05 Beta
+0885 S12E32   144  0060 Dro  06   05 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 21/2400Z May
+Nmbr  Location  Lo
+None
+II. Regions Due to Return 22 May to 24 May
+Nmbr Lat    Lo
+None

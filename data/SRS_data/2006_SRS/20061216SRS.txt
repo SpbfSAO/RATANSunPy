@@ -1,0 +1,17 @@
+:Product: 1216SRS.txt
+:Issued: 2006 Dec 16 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 350 Issued at 0030Z on 16 Dec 2006
+Report compiled from data received at SWO on 15 Dec
+I.  Regions with Sunspots.  Locations Valid at 15/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0930 S06W59   009  0550 Dki  09   09 Beta-Gamma-Delta
+IA. H-alpha Plages without Spots.  Locations Valid at 15/2400Z Dec
+Nmbr  Location  Lo
+0929  N03W76   027
+II. Regions Due to Return 16 Dec to 18 Dec
+Nmbr Lat    Lo
+0928 S07    180

@@ -1,0 +1,19 @@
+:Product: 1210SRS.txt
+:Issued: 2007 Dec 10 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 344 Issued at 0030Z on 10 Dec 2007
+Report compiled from data received at SWO on 09 Dec
+I.  Regions with Sunspots.  Locations Valid at 09/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0978 S09E26   225  0220 Dkc  10   20 Beta
+0979 N08W78   329  0080 Hax  04   02 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 09/2400Z Dec
+Nmbr  Location  Lo
+0976  S09W81   333
+0977  S05W42   330
+II. Regions Due to Return 10 Dec to 12 Dec
+Nmbr Lat    Lo
+None

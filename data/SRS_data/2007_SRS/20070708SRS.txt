@@ -1,0 +1,18 @@
+:Product: 0708SRS.txt
+:Issued: 2007 Jul 08 0032 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 189 Issued at 0030Z on 08 Jul 2007
+Report compiled from data received at SWO on 07 Jul
+I.  Regions with Sunspots.  Locations Valid at 07/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0961 S08W86   223  0060 Hsx  03   02 Alpha
+0963 S09E83   054  0050 Axx  05   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 07/2400Z Jul
+Nmbr  Location  Lo
+0962  S05W51   188
+II. Regions Due to Return 08 Jul to 10 Jul
+Nmbr Lat    Lo
+None

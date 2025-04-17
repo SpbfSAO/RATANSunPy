@@ -1,0 +1,18 @@
+:Product: 0528SRS.txt
+:Issued: 2021 May 28 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 148 Issued at 0030Z on 28 May 2021
+Report compiled from data received at SWO on 27 May
+I.  Regions with Sunspots.  Locations Valid at 27/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2824 N20W55   196  0250 Dho  05   05 Beta
+2826 N24W74   215  0280 Dko  05   09 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 27/2400Z May
+Nmbr  Location  Lo
+2825  N17W03   144
+II. Regions Due to Return 28 May to 30 May
+Nmbr Lat    Lo
+None

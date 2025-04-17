@@ -1,0 +1,34 @@
+:Product: 0626SRS.txt
+:Issued: 2023 Jun 26 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 177 Issued at 0030Z on 26 Jun 2023
+Report compiled from data received at SWO on 25 Jun
+I.  Regions with Sunspots.  Locations Valid at 25/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3335 S15W87   289  0200 Hax  02   01 Alpha
+3337 N21W61   263  0030 Hax  03   03 Alpha
+3338 N11W64   266  0020 Cro  02   03 Beta
+3339 S20W37   239  0090 Cso  04   06 Beta
+3340 N23W31   233  0300 Ekc  11   18 Beta-Delta
+3341 S16W05   207  0130 Cao  04   05 Beta
+3345 N09W09   211  0010 Hrx  01   01 Alpha
+3346 N08W33   235  0010 Bxo  04   02 Beta
+3347 S18W50   252  0010 Axx  01   02 Alpha
+3349 N08E11   191  0010 Bxo  06   02 Beta
+3351 N22E32   170  0020 Hrx  02   03 Alpha
+3352 N09W73   275  0010 Bxo  05   03 Beta
+3353 S18W26   228  0010 Axx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 25/2400Z Jun
+Nmbr  Location  Lo
+3334  N17W82   284
+3336  S19W86   288
+3343  N16W84   286
+3348  S31E20   182
+3350  S11E11   191
+II. Regions Due to Return 26 Jun to 28 Jun
+Nmbr Lat    Lo
+3330 N18    089
+3326 N26    079

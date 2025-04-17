@@ -1,0 +1,27 @@
+:Product: 1216SRS.txt
+:Issued: 2023 Dec 16 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 350 Issued at 0030Z on 16 Dec 2023
+Report compiled from data received at SWO on 15 Dec
+I.  Regions with Sunspots.  Locations Valid at 15/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3513 N18W69   147  0090 Hsx  02   01 Alpha
+3514 N05W68   146  0460 Ekc  12   22 Beta-Gamma-Delta
+3515 S14W17   095  0010 Axx  01   01 Alpha
+3516 S18W17   095  0010 Axx  01   01 Alpha
+3518 N13E34   044  0020 Hax  01   02 Alpha
+3519 S12E13   065  0150 Csi  06   18 Beta
+3520 N10W61   139  0060 Cso  05   04 Beta
+3521 N11E71   007  0020 Hsx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 15/2400Z Dec
+Nmbr  Location  Lo
+3517  N11W55   133
+II. Regions Due to Return 16 Dec to 18 Dec
+Nmbr Lat    Lo
+3494 S17    346
+3509 N11    333
+3500 S18    324
+3501 S11    317

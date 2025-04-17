@@ -1,0 +1,21 @@
+:Product: 0701SRS.txt
+:Issued: 2022 Jul 01 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 182 Issued at 0030Z on 01 Jul 2022
+Report compiled from data received at SWO on 30 Jun
+I.  Regions with Sunspots.  Locations Valid at 30/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3040 S13W50   323  0070 Dso  04   04 Beta
+3042 S02W49   322  0010 Bxo  02   02 Beta
+3045 S12E38   234  0010 Bxo  03   04 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 30/2400Z Jun
+Nmbr  Location  Lo
+3043  S14W05   279
+3044  S21W13   287
+II. Regions Due to Return 01 Jul to 03 Jul
+Nmbr Lat    Lo
+3039 N13    157
+3037 S21    155

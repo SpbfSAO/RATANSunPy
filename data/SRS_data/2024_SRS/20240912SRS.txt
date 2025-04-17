@@ -1,0 +1,29 @@
+:Product: 0912SRS.txt
+:Issued: 2024 Sep 12 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 256 Issued at 0030Z on 12 Sep 2024
+Report compiled from data received at SWO on 11 Sep
+I.  Regions with Sunspots.  Locations Valid at 11/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3811 S13W78   178  0160 Dso  06   05 Beta
+3813 S24W53   153  0070 Cso  03   05 Beta
+3814 N15W16   116  0300 Dhi  07   13 Beta-Gamma-Delta
+3815 S26W41   141  0130 Hsx  02   01 Alpha
+3816 S10W52   152  0060 Cso  06   05 Beta
+3819 S27W36   136  0010 Axx  01   01 Alpha
+3820 S21W52   152  0010 Axx  01   01 Alpha
+3822 N14W05   105  0120 Dac  06   20 Beta
+3823 S19W65   165  0150 Dai  06   13 Beta
+3824 S04E30   070  0140 Dai  06   15 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 11/2400Z Sep
+Nmbr  Location  Lo
+3817  S14W19   119
+3821  N14W79   179
+II. Regions Due to Return 12 Sep to 14 Sep
+Nmbr Lat    Lo
+3798 N04    350
+3800 S28    343
+3799 S11    333

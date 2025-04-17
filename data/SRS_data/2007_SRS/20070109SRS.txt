@@ -1,0 +1,20 @@
+:Product: 0109SRS.txt
+:Issued: 2007 Jan 09 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 9 Issued at 0030Z on 09 Jan 2007
+Report compiled from data received at SWO on 08 Jan
+I.  Regions with Sunspots.  Locations Valid at 08/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0933 S05W44   037  0230 Cki  07   08 Beta
+0935 S07W16   009  0250 Hkx  03   01 Alpha
+0936 N10E15   338  0010 Axx  01   01 Alpha
+0937 S14E07   346  0020 Cso  04   02 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 08/2400Z Jan
+Nmbr  Location  Lo
+0934  N04W41   034
+II. Regions Due to Return 09 Jan to 11 Jan
+Nmbr Lat    Lo
+None

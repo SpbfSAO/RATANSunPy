@@ -1,0 +1,17 @@
+:Product: 0613SRS.txt
+:Issued: 2007 Jun 13 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 164 Issued at 0030Z on 13 Jun 2007
+Report compiled from data received at SWO on 12 Jun
+I.  Regions with Sunspots.  Locations Valid at 12/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0960 S05W71   179  0080 Hsx  05   02 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 12/2400Z Jun
+Nmbr  Location  Lo
+0959  S10W96   204
+II. Regions Due to Return 13 Jun to 15 Jun
+Nmbr Lat    Lo
+None

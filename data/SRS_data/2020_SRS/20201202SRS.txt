@@ -1,0 +1,21 @@
+:Product: 1202SRS.txt
+:Issued: 2020 Dec 02 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 337 Issued at 0030Z on 02 Dec 2020
+Report compiled from data received at SWO on 01 Dec
+I.  Regions with Sunspots.  Locations Valid at 01/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2785 S22W48   002  0090 Hsx  02   01 Alpha
+2786 S17W27   341  0430 Cko  12   12 Beta
+2790 S23E62   253  0100 Cso  02   03 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 01/2400Z Dec
+Nmbr  Location  Lo
+2787  N30E10   305
+2788  S27W34   349
+2789  S25E15   300
+II. Regions Due to Return 02 Dec to 04 Dec
+Nmbr Lat    Lo
+None

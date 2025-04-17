@@ -1,0 +1,29 @@
+:Product: 1229SRS.txt
+:Issued: 2024 Dec 29 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 364 Issued at 0030Z on 29 Dec 2024
+Report compiled from data received at SWO on 28 Dec
+I.  Regions with Sunspots.  Locations Valid at 28/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3927 S08W71   187  0005 Axx  01   01 Alpha
+3928 S15W61   177  0100 Dao  06   06 Beta
+3929 N17W80   196  0030 Cao  04   03 Beta
+3932 S17W37   153  0140 Dac  07   13 Beta-Gamma
+3933 S08W61   177  0140 Eai  11   09 Beta
+3935 S19W12   128  0080 Hsx  02   01 Alpha
+3936 N13W29   145  0350 Ekc  11   30 Beta-Delta
+3937 S12W01   117  0030 Hsx  01   01 Alpha
+3938 N19E12   104  0210 Dai  09   20 Beta-Gamma
+3939 S17E34   082  0110 Dso  05   06 Beta
+3940 S06E38   078  0010 Axx  01   01 Alpha
+3941 S06E37   079  0020 Bxo  05   02 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 28/2400Z Dec
+Nmbr  Location  Lo
+3931  N25W80   196
+3934  N13W44   160
+II. Regions Due to Return 29 Dec to 31 Dec
+Nmbr Lat    Lo
+None

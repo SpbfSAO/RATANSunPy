@@ -1,0 +1,18 @@
+:Product: 1116SRS.txt
+:Issued: 2021 Nov 16 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 320 Issued at 0030Z on 16 Nov 2021
+Report compiled from data received at SWO on 15 Nov
+I.  Regions with Sunspots.  Locations Valid at 15/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2894 S28W62   091  0070 Hsx  02   02 Alpha
+2896 S18E58   331  0060 Hsx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 15/2400Z Nov
+Nmbr  Location  Lo
+2895  N22W48   077
+II. Regions Due to Return 16 Nov to 18 Nov
+Nmbr Lat    Lo
+2887 S27    289

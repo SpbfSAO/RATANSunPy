@@ -1,0 +1,27 @@
+:Product: 0619SRS.txt
+:Issued: 2022 Jun 19 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 170 Issued at 0030Z on 19 Jun 2022
+Report compiled from data received at SWO on 18 Jun
+I.  Regions with Sunspots.  Locations Valid at 18/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3030 N18W47   119  0200 Dai  07   18 Beta
+3031 S27W57   130  0120 Esi  15   08 Beta
+3032 N19W33   105  0100 Cso  05   02 Beta
+3033 N16W14   087  0010 Axx  02   03 Alpha
+3034 N01W00   072  0060 Hsx  01   01 Alpha
+3035 S18E01   071  0020 Bxo  08   05 Beta
+3037 S21W68   140  0030 Cro  05   04 Beta
+3038 N15E19   052  0080 Cai  06   11 Beta
+3039 N13W68   139  0020 Cro  04   03 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 18/2400Z Jun
+Nmbr  Location  Lo
+None
+II. Regions Due to Return 19 Jun to 21 Jun
+Nmbr Lat    Lo
+3023 S14    341
+3024 S35    321
+3027 S17    313

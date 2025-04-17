@@ -1,0 +1,28 @@
+:Product: 0115SRS.txt
+:Issued: 2024 Jan 15 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 15 Issued at 0030Z on 15 Jan 2024
+Report compiled from data received at SWO on 14 Jan
+I.  Regions with Sunspots.  Locations Valid at 14/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3539 N13W96   139  0110 Cao  03   03 Beta
+3540 S19W51   094  0110 Dai  10   16 Beta-Gamma
+3541 S22W48   091  0050 Cso  05   04 Beta
+3545 S06E02   041  0250 Cho  06   04 Beta
+3546 S24W17   060  0010 Bxi  08   09 Beta
+3547 N18W23   066  0010 Bxo  08   02 Beta
+3548 N12E14   029  0040 Cao  04   05 Beta
+3549 S21E36   007  0250 Chi  06   07 Beta
+3550 S18W03   046  0010 Axx  02   03 Alpha
+3551 N26E25   018  0010 Bxo  03   03 Beta
+3552 S22W39   082  0010 Axx  03   04 Alpha
+3553 N05E54   349  0080 Hsx  02   03 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 14/2400Z Jan
+Nmbr  Location  Lo
+3544  N18W38   081
+II. Regions Due to Return 15 Jan to 17 Jan
+Nmbr Lat    Lo
+3535 S08    307

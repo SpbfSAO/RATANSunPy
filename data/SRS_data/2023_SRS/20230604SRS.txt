@@ -1,0 +1,23 @@
+:Product: 0604SRS.txt
+:Issued: 2023 Jun 04 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 155 Issued at 0030Z on 04 Jun 2023
+Report compiled from data received at SWO on 03 Jun
+I.  Regions with Sunspots.  Locations Valid at 03/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3319 S19W70   204  0200 Eai  13   13 Beta-Gamma
+3320 N10E07   127  0030 Cso  08   04 Beta
+3321 S15E13   121  0180 Hax  05   01 Alpha
+3323 S07E32   102  0310 Ekc  13   13 Beta-Gamma
+3324 N15W25   159  0010 Bxo  05   06 Beta
+3325 N11W16   150  0030 Cao  03   04 Beta
+3326 N25E59   075  0120 Hsx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 03/2400Z Jun
+Nmbr  Location  Lo
+3316  N09W73   207
+II. Regions Due to Return 04 Jun to 06 Jun
+Nmbr Lat    Lo
+3308 N12    031

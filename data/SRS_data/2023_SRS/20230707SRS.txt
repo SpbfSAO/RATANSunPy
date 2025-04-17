@@ -1,0 +1,26 @@
+:Product: 0707SRS.txt
+:Issued: 2023 Jul 07 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 188 Issued at 0030Z on 07 Jul 2023
+Report compiled from data received at SWO on 06 Jul
+I.  Regions with Sunspots.  Locations Valid at 06/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3355 S15W59   116  0010 Bxo  02   04 Beta
+3357 S07W35   092  0010 Axx  02   01 Alpha
+3358 S11W15   072  0010 Bxo  11   11 Beta
+3359 S21W15   072  0240 Dao  09   10 Beta
+3360 N22W06   063  0030 Cro  04   07 Beta
+3361 N22E17   040  0230 Dai  10   17 Beta
+3362 S10E47   010  0040 Hsx  02   01 Alpha
+3363 S21E68   349  0390 Hhx  05   01 Alpha
+3364 N23E57   360  0020 Cro  02   07 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 06/2400Z Jul
+Nmbr  Location  Lo
+3356  S07W50   107
+II. Regions Due to Return 07 Jul to 09 Jul
+Nmbr Lat    Lo
+3335 S15    304
+3352 N09    292

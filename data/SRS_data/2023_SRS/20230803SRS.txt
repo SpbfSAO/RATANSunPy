@@ -1,0 +1,25 @@
+:Product: 0803SRS.txt
+:Issued: 2023 Aug 03 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 215 Issued at 0030Z on 03 Aug 2023
+Report compiled from data received at SWO on 02 Aug
+I.  Regions with Sunspots.  Locations Valid at 02/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3380 S10W66   125  0430 Dkc  09   10 Beta-Gamma
+3386 N12W33   092  0160 Eso  11   06 Beta
+3387 N20W10   069  0060 Cso  06   04 Beta
+3388 S24W18   077  0010 Axx  01   01 Alpha
+3389 S09W05   063  0020 Hsx  04   06 Alpha
+3390 S20E06   052  0010 Bxo  03   02 Beta
+3391 N23E25   033  0080 Cso  03   02 Beta
+3392 N09E23   035  0120 Dao  10   13 Beta
+3393 N16W03   061  0010 Axx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 02/2400Z Aug
+Nmbr  Location  Lo
+3384  S17W50   109
+II. Regions Due to Return 03 Aug to 05 Aug
+Nmbr Lat    Lo
+None

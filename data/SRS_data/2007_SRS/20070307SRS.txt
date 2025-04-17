@@ -1,0 +1,18 @@
+:Product: 0307SRS.txt
+:Issued: 2007 Mar 07 0032 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 66 Issued at 0030Z on 07 Mar 2007
+Report compiled from data received at SWO on 06 Mar
+I.  Regions with Sunspots.  Locations Valid at 06/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0944 S07W84   046  0020 Axx  01   01 Alpha
+0945 S06W43   005  0030 Bxo  02   05 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 06/2400Z Mar
+Nmbr  Location  Lo
+None
+II. Regions Due to Return 07 Mar to 09 Mar
+Nmbr Lat    Lo
+None

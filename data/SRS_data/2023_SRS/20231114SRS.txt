@@ -1,0 +1,24 @@
+:Product: 1114SRS.txt
+:Issued: 2023 Nov 14 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 318 Issued at 0030Z on 14 Nov 2023
+Report compiled from data received at SWO on 13 Nov
+I.  Regions with Sunspots.  Locations Valid at 13/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3477 S15W95   235  0060 Cao  03   01 Beta
+3483 N09W79   219  0260 Dko  07   04 Beta-Gamma
+3484 S15W76   216  0070 Cao  07   03 Beta
+3485 S18W66   206  0070 Dao  09   05 Beta
+3486 S09W22   162  0070 Dso  07   05 Beta
+3487 S16W33   173  0030 Dro  05   07 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 13/2400Z Nov
+Nmbr  Location  Lo
+3480  S19W70   210
+3481  N25W78   218
+3482  N04W43   183
+II. Regions Due to Return 14 Nov to 16 Nov
+Nmbr Lat    Lo
+None

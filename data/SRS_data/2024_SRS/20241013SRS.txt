@@ -1,0 +1,23 @@
+:Product: 1013SRS.txt
+:Issued: 2024 Oct 13 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 287 Issued at 0030Z on 13 Oct 2024
+Report compiled from data received at SWO on 12 Oct
+I.  Regions with Sunspots.  Locations Valid at 12/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3848 N14W67   118  0370 Dko  06   04 Beta-Gamma
+3849 S07W44   095  0200 Dai  09   19 Beta-Gamma
+3850 S09W45   096  0110 Hsx  05   03 Alpha
+3852 S11W02   053  0260 Dki  10   08 Beta-Delta
+3854 S05E07   045  0140 Dai  10   11 Beta-Gamma
+IA. H-alpha Plages without Spots.  Locations Valid at 12/2400Z Oct
+Nmbr  Location  Lo
+3851  S08W83   134
+3853  N22E09   042
+II. Regions Due to Return 13 Oct to 15 Oct
+Nmbr Lat    Lo
+3837 S11    313
+3834 S16    294

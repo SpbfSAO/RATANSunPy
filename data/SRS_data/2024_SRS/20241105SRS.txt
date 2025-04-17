@@ -1,0 +1,29 @@
+:Product: 1105SRS.txt
+:Issued: 2024 Nov 05 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 310 Issued at 0030Z on 05 Nov 2024
+Report compiled from data received at SWO on 04 Nov
+I.  Regions with Sunspots.  Locations Valid at 04/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3869 S18W88   196  0200 Dsi  09   10 Beta-Gamma
+3872 S16W76   184  0120 Dai  03   05 Beta
+3873 S09W70   178  0020 Hrx  01   01 Alpha
+3878 N16W30   138  0240 Eai  12   15 Beta
+3879 N15W04   112  0500 Hhx  06   01 Alpha
+3881 S09W15   123  0240 Dao  08   10 Beta-Gamma
+3883 S06E37   071  0260 Eki  12   30 Gamma-Delta
+3884 S07E51   057  0050 Cso  02   02 Beta
+3885 S10W58   166  0030 Dro  07   05 Beta
+3886 S05E62   046  0150 Eao  11   12 Beta-Gamma
+IA. H-alpha Plages without Spots.  Locations Valid at 04/2400Z Nov
+Nmbr  Location  Lo
+3877  S17W60   168
+3880  S14E02   106
+3882  N23W83   191
+II. Regions Due to Return 05 Nov to 07 Nov
+Nmbr Lat    Lo
+3859 S12    006
+3860 S06    355

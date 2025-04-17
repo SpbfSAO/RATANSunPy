@@ -1,0 +1,19 @@
+:Product: 1130SRS.txt
+:Issued: 2021 Nov 30 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 334 Issued at 0030Z on 30 Nov 2021
+Report compiled from data received at SWO on 29 Nov
+I.  Regions with Sunspots.  Locations Valid at 29/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2898 S24W36   240  0090 Cso  05   05 Beta
+2900 S26W51   255  0240 Dao  07   11 Beta
+2901 N15E50   153  0030 Hsx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 29/2400Z Nov
+Nmbr  Location  Lo
+None
+II. Regions Due to Return 30 Nov to 02 Dec
+Nmbr Lat    Lo
+2894 S28    102

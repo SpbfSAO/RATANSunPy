@@ -6,7 +6,7 @@ from ratansunpy.time import TimeRange
 from ratansunpy.client import SRSClient, RATANClient
 from ratansunpy.utils import get_project_root
 from urllib.request import urlopen
-from astropy.table import  Table
+from astropy.table import Table
 from astropy.io import fits
 
 
@@ -18,6 +18,7 @@ def tr():
     tr = TimeRange('2017-09-03', '2017-09-03')
     return tr
 
+
 @pytest.fixture
 def srs():
     """
@@ -26,9 +27,20 @@ def srs():
     srs = SRSClient()
     return srs
 
+
+@pytest.fixture
+def local_srs():
+    base_path = get_project_root()/"data"
+    base_url = str(base_path) + '/%Y_SRS/%Y%m%dSRS.txt'
+    srs = SRSClient(base_url=base_url)
+    return srs
+
+
+
 @pytest.fixture
 def ratan_client():
     return RATANClient()
+
 
 @pytest.fixture
 def r_fits_url():
@@ -37,9 +49,33 @@ def r_fits_url():
     url = ratan_client.acquire_data(tr)[0]
     return url
 
+
 @pytest.fixture
 def raw_fits_data_path():
     return get_project_root() / 'data' / '20170903_121257_sun+0_out.fits'
+
+
+#will work only if exist local folder, need manually change path
+class TestSRSLocalClient:
+
+    def test_acquire_data(self, tr, local_srs):
+        file_urls = local_srs.acquire_data(tr)
+        assert len(file_urls) == 1
+        assert isinstance(file_urls[0], str)
+
+    def test_extract_lines(self, tr, local_srs):
+        file_path = local_srs.acquire_data(tr)[0]
+        with open(file_path, 'r', encoding='utf-8') as file:
+            content = file.read().split('\n')
+        header, section_lines, supplementary_lines = local_srs.extract_lines(content)
+
+        assert len(header) == 11
+        assert len(section_lines) == 3
+
+    def test_get_table(self, tr, local_srs):
+        file_urls = local_srs.acquire_data(tr)
+        tbl = local_srs.get_table(file_urls[0])
+        assert isinstance(tbl, Table)
 
 
 class TestSRSClient:
@@ -50,15 +86,14 @@ class TestSRSClient:
         assert isinstance(file_urls[0], str)
 
     def test_extract_lines(self, tr, srs):
-
         file_url = srs.acquire_data(tr)[0]
         with urlopen(file_url) as response:
             content = response.read().decode('utf-8').split('\n')
-            header, section_lines, supplementary_lines = srs.extract_lines(content)
+        header, section_lines, supplementary_lines = srs.extract_lines(content)
         assert len(header) == 11
         assert len(section_lines) == 3
 
-    def test_form_data(self, tr,srs):
+    def test_form_data(self, tr, srs):
         file_url = srs.acquire_data(tr)
         data = srs.form_data(file_url)
         assert len(data) == 4
@@ -78,7 +113,7 @@ class TestRATANClient:
         assert isinstance(urls[0], str)
 
     def test_acquire_data_3_days(self, tr, ratan_client):
-        new_tr = TimeRange(tr.start, tr.start+timedelta(days=3))
+        new_tr = TimeRange(tr.start, tr.start + timedelta(days=3))
         urls = ratan_client.acquire_data(new_tr)
         assert len(urls) == 4
 
@@ -88,10 +123,9 @@ class TestRATANClient:
         assert isinstance(tables, Table)
 
     def test_process_fits_data(self, ratan_client, r_fits_url):
-
         raw, processed = ratan_client.process_fits_data(r_fits_url,
-                                                   save_path=None,
-                                                   save_with_original=False)
+                                                        save_path=None,
+                                                        save_with_original=False)
         assert isinstance(processed, fits.hdu.hdulist.HDUList)
         assert isinstance(raw, fits.hdu.hdulist.HDUList)
         assert processed[1].header['NAXIS'] == 2
@@ -100,40 +134,40 @@ class TestRATANClient:
         assert processed[2].name == 'V'
 
     def test_process_fits_data_with_saving(self, ratan_client, r_fits_url):
-        save_path = Path(__file__).absolute().parents[1]/'data'
+        save_path = Path(__file__).absolute().parents[1] / 'data'
         raw, processed = ratan_client.process_fits_data(r_fits_url,
-                                                       save_path=save_path,
-                                                       save_with_original=False,
-                                                       save_raw=True
-                                                    )
+                                                        save_path=save_path,
+                                                        save_with_original=False,
+                                                        save_raw=True
+                                                        )
         assert isinstance(processed, fits.hdu.hdulist.HDUList)
 
     def test_process_fits_data_from_disk(self, ratan_client):
-        save_path = Path(__file__).absolute().parents[1]/'data'
-        data_path = Path(__file__).absolute().parents[1]/'data'/'20170903_121257_sun+0_out.fits'
+        save_path = Path(__file__).absolute().parents[1] / 'data'
+        data_path = Path(__file__).absolute().parents[1] / 'data' / '20170903_121257_sun+0_out.fits'
         raw, processed = ratan_client.process_fits_data(data_path,
-                                                       save_path=save_path,
-                                                       save_with_original=False,
-                                                       save_raw=False
-                                                    )
+                                                        save_path=save_path,
+                                                        save_with_original=False,
+                                                        save_raw=False
+                                                        )
         assert processed[1].data.shape == (84, 3000)
         assert isinstance(processed, fits.hdu.hdulist.HDUList)
 
     def test_process_fits_with_period(self, tr, ratan_client):
         new_tr = TimeRange("2017-09-03", "2017-09-04")
-        save_path = Path(__file__).absolute().parents[1]/'data'
+        save_path = Path(__file__).absolute().parents[1] / 'data'
         _, list_phdul = ratan_client.process_fits_with_period(new_tr,
-                                                                  save_path=save_path,
-                                                                  save_with_original=False,
-                                                                  save_raw=True)
+                                                              save_path=save_path,
+                                                              save_with_original=False,
+                                                              save_raw=True)
         assert isinstance(list_phdul, list)
         assert isinstance(list_phdul[0], fits.HDUList)
 
     def test_form_srstable_with_time_shift(self, ratan_client, r_fits_url):
         #first url from '2017-09-03'
-        _ , processed = ratan_client.process_fits_data(r_fits_url,
-                                                        save_path=None,
-                                                        save_with_original=False)
+        _, processed = ratan_client.process_fits_data(r_fits_url,
+                                                      save_path=None,
+                                                      save_with_original=False)
         srs_table = ratan_client.form_srstable_with_time_shift(processed)
         latitude = [59.0928548152582, -327.04700624851887, 808.1400074522206, 672.3535489330781]
         longitude = [-282.6809474507876, -0.6094350999806579, 106.6366431326339, -7.442298067666002]
@@ -166,7 +200,7 @@ class TestRATANClient:
 
         assert isinstance(ar_info, Table)
 
-    def test_get_ar_info_from_processed(self,ratan_client,
+    def test_get_ar_info_from_processed(self, ratan_client,
                                         raw_fits_data_path):
         hdul = ratan_client.get_ar_info_from_processed(str(raw_fits_data_path))
         assert hdul[1].data[0]['Number'] == 2673
@@ -177,21 +211,13 @@ class TestRATANClient:
 
         assert isinstance(hdul, fits.HDUList)
 
-
     def test_get_local_sources_info_from_processed_path(self,
                                                         ratan_client,
                                                         raw_fits_data_path):
         sources_info = ratan_client.get_local_sources_info_from_processed(str(raw_fits_data_path))
         assert isinstance(sources_info, Table)
 
-
-
-
-
-
     def test_get_data(self, tr, ratan_client):
         ar_data = ratan_client.get_data(tr)
 
         assert isinstance(ar_data, Table)
-
-

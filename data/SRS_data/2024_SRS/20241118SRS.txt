@@ -1,0 +1,29 @@
+:Product: 1118SRS.txt
+:Issued: 2024 Nov 18 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 323 Issued at 0030Z on 18 Nov 2024
+Report compiled from data received at SWO on 17 Nov
+I.  Regions with Sunspots.  Locations Valid at 17/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3889 S09W71   008  0430 Fko  21   12 Beta-Gamma
+3893 S19E06   291  0030 Hsx  02   01 Alpha
+3894 N21E02   295  0010 Axx  01   01 Alpha
+3895 S03W49   346  0005 Axx  01   01 Alpha
+3896 N05W04   301  0050 Cao  03   05 Beta
+3897 S12W47   344  0070 Cao  05   09 Beta
+3898 S15E19   278  0050 Cao  06   05 Beta
+3899 S13E60   237  0010 Bxo  05   03 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 17/2400Z Nov
+Nmbr  Location  Lo
+3891  S15W84   021
+3892  S11W57   354
+II. Regions Due to Return 18 Nov to 20 Nov
+Nmbr Lat    Lo
+3882 N23    203
+3872 S16    200
+3873 S10    196
+3885 S10    185
+3887 N16    167

@@ -1,0 +1,22 @@
+:Product: 1205SRS.txt
+:Issued: 2022 Dec 05 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 339 Issued at 0030Z on 05 Dec 2022
+Report compiled from data received at SWO on 04 Dec
+I.  Regions with Sunspots.  Locations Valid at 04/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3153 S17E33   327  1080 Fko  16   13 Beta
+3155 N23W25   026  0140 Dai  07   14 Beta
+3156 N25E39   320  0170 Cso  06   04 Beta
+3157 N16E61   300  0210 Dso  08   06 Beta
+3158 N24E06   355  0020 Cro  06   06 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 04/2400Z Dec
+Nmbr  Location  Lo
+3152  N28W79   080
+3154  S38W46   047
+II. Regions Due to Return 05 Dec to 07 Dec
+Nmbr Lat    Lo
+3150 N21    269

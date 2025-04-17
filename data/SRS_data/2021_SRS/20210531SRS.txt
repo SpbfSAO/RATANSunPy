@@ -1,0 +1,18 @@
+:Product: 0531SRS.txt
+:Issued: 2021 May 31 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 151 Issued at 0030Z on 31 May 2021
+Report compiled from data received at SWO on 30 May
+I.  Regions with Sunspots.  Locations Valid at 30/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2827 N11E29   073  0060 Cro  05   05 Beta
+2828 S32E33   069  0010 Axx  01   02 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 30/2400Z May
+Nmbr  Location  Lo
+2825  N17W45   147
+II. Regions Due to Return 31 May to 02 Jun
+Nmbr Lat    Lo
+2822 N17    353

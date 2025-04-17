@@ -1,0 +1,29 @@
+:Product: 0211SRS.txt
+:Issued: 2023 Feb 11 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 42 Issued at 0030Z on 11 Feb 2023
+Report compiled from data received at SWO on 10 Feb
+I.  Regions with Sunspots.  Locations Valid at 10/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3208 N09W66   251  0020 Cro  03   05 Beta
+3209 N22W38   223  0010 Bxo  02   02 Beta
+3213 N30W39   224  0450 Fki  17   22 Beta-Gamma
+3214 N11W20   205  0300 Dho  09   11 Beta
+3215 N22E03   182  0010 Axx  01   01 Alpha
+3216 N24E19   166  0140 Hsx  02   03 Alpha
+3217 S11E49   136  0380 Dki  09   11 Beta-Gamma-Delta
+3218 N11E35   150  0010 Bxo  02   02 Beta
+3219 S07E42   143  0030 Cro  05   06 Beta
+3220 S15E64   121  0130 Cso  06   03 Beta
+3221 N16E62   123  0100 Hax  05   02 Alpha
+3222 N35W64   249  0030 Cro  04   02 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 10/2400Z Feb
+Nmbr  Location  Lo
+3207  S13W75   260
+II. Regions Due to Return 11 Feb to 13 Feb
+Nmbr Lat    Lo
+3198 N26    072
+3199 N16    064

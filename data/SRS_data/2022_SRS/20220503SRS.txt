@@ -1,0 +1,23 @@
+:Product: 0503SRS.txt
+:Issued: 2022 May 03 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 123 Issued at 0030Z on 03 May 2022
+Report compiled from data received at SWO on 02 May
+I.  Regions with Sunspots.  Locations Valid at 02/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2997 N12W58   033  0010 Bxo  04   03 Beta
+2999 S19W41   016  0070 Hsx  02   02 Alpha
+3001 S32E01   334  0110 Hsx  07   02 Alpha
+3004 S16E12   323  0030 Bxo  06   09 Beta
+3005 N20E05   330  0020 Bxo  03   03 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 02/2400Z May
+Nmbr  Location  Lo
+3000  S17W10   345
+3002  N13W31   006
+3003  S23E08   327
+II. Regions Due to Return 03 May to 05 May
+Nmbr Lat    Lo
+None

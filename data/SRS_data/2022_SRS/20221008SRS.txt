@@ -1,0 +1,24 @@
+:Product: 1008SRS.txt
+:Issued: 2022 Oct 08 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 281 Issued at 0030Z on 08 Oct 2022
+Report compiled from data received at SWO on 07 Oct
+I.  Regions with Sunspots.  Locations Valid at 07/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3111 N27W61   106  0040 Hsx  01   01 Alpha
+3112 N23W04   049  0550 Fkc  18   36 Beta-Delta
+3115 S18W52   097  0030 Cao  06   06 Beta
+3116 N29W00   045  0140 Dai  10   11 Beta
+3117 S11W39   084  0010 Axx  01   01 Alpha
+3118 N09E46   359  0020 Bxo  02   03 Beta
+3119 N28E31   014  0030 Bxo  03   06 Beta
+3120 N20W20   065  0030 Hax  04   02 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 07/2400Z Oct
+Nmbr  Location  Lo
+3114  S34W58   103
+II. Regions Due to Return 08 Oct to 10 Oct
+Nmbr Lat    Lo
+3102 S25    309

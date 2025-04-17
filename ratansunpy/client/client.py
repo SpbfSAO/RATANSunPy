@@ -22,6 +22,10 @@ import re
 from ratansunpy.scrapper import Scrapper
 from ratansunpy.time import TimeRange
 from ratansunpy.utils import *
+import ftplib
+import gzip
+import tarfile
+import os
 
 __all__ = ['RATANClient', 'SRSClient']
 
@@ -41,7 +45,11 @@ class BaseClient(metaclass=ABCMeta):
 
 
 class SRSClient(BaseClient):
-    base_url = 'ftp://ftp.ngdc.noaa.gov/STP/swpc_products/daily_reports/solar_region_summaries/%Y/%m/%Y%m%dSRS.txt'
+
+    def __init__(self, base_url=None):
+        self.main_url = 'ftp://ftp.swpc.noaa.gov/pub/warehouse/%Y/SRS/%Y%m%dSRS.txt'
+        self.backup_url = 'ftp://ftp.swpc.noaa.gov/pub/warehouse/%Y/%Y_SRS.tar.gz' 
+        self.base_url = base_url if base_url else self.main_url
 
     def extract_lines(self, content: str) -> object:
         """
@@ -164,7 +172,48 @@ class SRSClient(BaseClient):
         :rtype: list of string
         """
         scrapper = Scrapper(self.base_url)
-        return scrapper.form_fileslist(timerange)
+        file_urls = scrapper.form_fileslist(timerange)
+
+        if not file_urls:
+            print("No results from the main URL, trying the backup URL.")
+            scrapper = Scrapper(self.backup_url)
+            file_urls = scrapper.form_fileslist(timerange)
+
+        return file_urls if file_urls else 'No urls fetched' 
+
+
+    def get_table(self, filename):
+
+        tables = []
+        with open(filename, 'r', encoding='utf-8') as file:
+            content = file.read().split('\n')
+        header, section_lines, supplementary_lines = self.extract_lines(content)
+        issued_lines = [line for line in header if 'issued' in line.lower() and line.startswith(':')][0]
+        _, date_text = issued_lines.strip().split(':')[1:]
+        issued_date = datetime.strptime(date_text.strip(), "%Y %b %d %H%M UTC")
+        meta_id = OrderedDict()
+        for h in header:
+            if h.startswith(("I.", "IA.", "II.")):
+                pos = h.find('.')
+                id = h[:pos]
+                id_text = h[pos + 2:]
+                meta_id[id] = id_text.strip()
+        for key, lines in zip(list(meta_id.keys()), section_lines):
+            raw_data = self.proccess_lines(issued_date.strftime("%Y-%m-%d"), key, lines)
+            tables.append(raw_data)
+        srs_table = vstack(tables)
+
+        if 'Location' in srs_table.columns:
+            col_lat, col_lon = self.parse_location(srs_table['Location'])
+            del srs_table['Location']
+            srs_table.add_column(col_lat)
+            srs_table.add_column(col_lon)
+
+        if 'Lat' in srs_table.columns:
+            self.parse_lat_col(srs_table['Lat'], srs_table['Latitude'])
+            del srs_table['Lat']
+
+        return srs_table
 
     def form_data(self, file_urls):
         total_table, section_lines, final_section_lines = [], [], []
@@ -279,7 +328,7 @@ class RATANClient(BaseClient):
     """
 
     base_url = 'http://spbf.sao.ru/data/ratan/%Y/%m/%Y%m%d_%H%M%S_sun+0_out.fits'
-    regex_pattern = '((\d{6,8})[^0-9].*[^0-9]0_out.fits)'
+    regex_pattern = '((\d{6,8})[^0-9].*[^0-9][+-]?\d+_out.fits)'
 
     convolution_template = pd.read_excel(Path(__file__).absolute().parent.joinpath('quiet_sun_template.xlsx'))
     quiet_sun_model = pd.read_excel(Path(__file__).absolute().parent.joinpath('quiet_sun_model.xlsx'))
@@ -369,13 +418,14 @@ class RATANClient(BaseClient):
         header['TIME-OBS'] = OBS_TIME
         header['AZIMUTH'] = AZIMUTH
         header['SOL_DEC'] = SOL_DEC
-        header['SOLAR_P'] = SOLAR_P
         header['ANGLE'] = angle
+        header['SOLAR_P'] = SOLAR_P
 
         hdulist = fits.HDUList([primary_hdu, I_hdu, V_hdu, freq_hdu, mask_hdu, hdul[1]])
         hdulist.verify('fix')
 
         if save_path:
+            os.makedirs(save_path, exist_ok=True)
             hdulist.writeto(Path(save_path) / file_name_processed, overwrite=True)
         if save_raw:
             hdul.writeto(Path(save_path) / file_name, overwrite=True)
@@ -564,10 +614,10 @@ class RATANClient(BaseClient):
                               names=('Number', 'TotalFlux', 'MaxAmplitude', 'MaxLat', 'MinLat'))
         ar_info = join(ar_info_part1, ar_info_part2, keys='Number')
         return fits.HDUList([primary_hdu, fits.BinTableHDU(ar_info)])
-    
-    def find_ar_intervals_using_peaks(self, x: np.ndarray, 
-                                    y: np.ndarray, 
-                                    ar_table: Table) -> Table:
+
+    def find_ar_intervals_using_peaks(self, x: np.ndarray,
+                                      y: np.ndarray,
+                                      ar_table: Table) -> Table:
         """
         Identify intervals around active region centers using peak detection
 
@@ -594,12 +644,12 @@ class RATANClient(BaseClient):
             if len(left_minima) > 0:
                 left_index = left_minima[-1]
             else:
-                left_index = 0 
+                left_index = 0
 
             if len(right_minima) > 0:
                 right_index = right_minima[0]
             else:
-                right_index = len(y) - 1 
+                right_index = len(y) - 1
 
             ar_interval = (x[left_index], x[right_index])
             ar_intervals.append(ar_interval)
@@ -607,10 +657,10 @@ class RATANClient(BaseClient):
         ar_table_with_intervals = ar_table.copy()
         ar_table_with_intervals.add_column(Column(data=ar_intervals, name='Interval'))
         return ar_table_with_intervals
-    
-    def compute_fluxes(self, x: np.ndarray, 
-                       y: np.ndarray, 
-                       ar_table: Table, 
+
+    def compute_fluxes(self, x: np.ndarray,
+                       y: np.ndarray,
+                       ar_table: Table,
                        mode: str = 'I') -> Table:
         """
         Calculate fluxes for active regions over specified intervals.
@@ -650,10 +700,10 @@ class RATANClient(BaseClient):
         ar_table_with_fluxes = ar_table.copy()
         ar_table_with_fluxes.add_column(flux_column)
         return ar_table_with_fluxes
-    
-    def get_ar_info(self, 
+
+    def get_ar_info(self,
                     pr_data: Union[str, fits.hdu.hdulist.HDUList],
-                    bad_freq: Optional[list[float]] = None, 
+                    bad_freq: Optional[list[float]] = None,
                     **kwargs) -> Table:
         """
         Retrieve Extract active region information from processed FITS data.
@@ -694,7 +744,7 @@ class RATANClient(BaseClient):
 
         primary_hdu = fits.PrimaryHDU(FREQ)
         primary_hdu.header = processed[0].header
-        
+
         ar_intervals = self.find_ar_intervals_using_peaks(x[mask], I[0][mask], srs_table)
         ar_info = self.compute_fluxes(x, I, ar_intervals, mode='I')
         ar_info = self.compute_fluxes(x, V, ar_info, mode='V')
@@ -906,7 +956,7 @@ class RATANClient(BaseClient):
         p = SOLAR_P + 360.0 if np.abs(SOLAR_P) > 30 else SOLAR_P
         return (p + q)
 
-    def form_srstable_with_time_shift(self, processed_file: fits.HDUList) -> Table:
+    def form_srstable_with_time_shift(self, processed_file: fits.HDUList, base_url: str = None) -> Table:
         """ Create table with AR info with SRSClient
         with correct NOAA coordinates for RATAN time difference
 
@@ -930,8 +980,10 @@ class RATANClient(BaseClient):
         noaa_datetime = datetime.strptime(OBS_DATE, '%Y/%m/%d')
         diff_hours = int((ratan_datetime - noaa_datetime).total_seconds() / 3600)
 
-        srs = SRSClient()
-        srs_table = srs.get_data(TimeRange(OBS_DATE, OBS_DATE))
+        srs = SRSClient(base_url=base_url)
+        file_urls = srs.acquire_data(TimeRange(OBS_DATE, OBS_DATE))
+        srs_table = srs.get_table(file_urls[0])
+        #srs_table = srs.get_data(TimeRange(OBS_DATE, OBS_DATE))
         srs_table = srs_table[srs_table['ID'] == 'I']
         len_tbl = len(srs_table)
         srs_table.add_column(Column(name='RatanTime', data=[ratan_datetime_str] * len_tbl))

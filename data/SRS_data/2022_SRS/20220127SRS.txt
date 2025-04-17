@@ -1,0 +1,22 @@
+:Product: 0127SRS.txt
+:Issued: 2022 Jan 27 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 27 Issued at 0030Z on 27 Jan 2022
+Report compiled from data received at SWO on 26 Jan
+I.  Regions with Sunspots.  Locations Valid at 26/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2934 S24W12   171  0100 Hsx  02   01 Alpha
+2935 N27W21   180  0010 Bxo  06   02 Beta
+2936 N15E47   112  0100 Dsi  04   08 Beta
+2937 S20E01   158  0090 Dao  05   08 Beta
+2938 N18E68   092  0010 Bxo  02   02 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 26/2400Z Jan
+Nmbr  Location  Lo
+None
+II. Regions Due to Return 27 Jan to 29 Jan
+Nmbr Lat    Lo
+2926 N22    048
+2924 S31    048

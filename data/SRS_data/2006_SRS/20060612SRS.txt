@@ -1,0 +1,19 @@
+:Product: 0612SRS.txt
+:Issued: 2006 Jun 12 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 163 Issued at 0030Z on 12 Jun 2006
+Report compiled from data received at SWO on 11 Jun
+I.  Regions with Sunspots.  Locations Valid at 11/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0892 S07W27   285  0120 Cao  09   11 Beta-Gamma
+0893 S02W03   261  0040 Cso  05   04 Beta
+0894 S07E36   222  0010 Hsx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 11/2400Z Jun
+Nmbr  Location  Lo
+None
+II. Regions Due to Return 12 Jun to 14 Jun
+Nmbr Lat    Lo
+0885 S12    151

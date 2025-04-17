@@ -1,0 +1,21 @@
+:Product: 0402SRS.txt
+:Issued: 2023 Apr 02 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 92 Issued at 0030Z on 02 Apr 2023
+Report compiled from data received at SWO on 01 Apr
+I.  Regions with Sunspots.  Locations Valid at 01/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3262 S19W61   307  0080 Hax  02   02 Alpha
+3264 N16W33   279  0070 Hsx  02   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 01/2400Z Apr
+Nmbr  Location  Lo
+3265  N21W85   331
+3266  N09E01   245
+3267  S17E05   241
+3268  S24W19   265
+II. Regions Due to Return 02 Apr to 04 Apr
+Nmbr Lat    Lo
+3251 S13    137

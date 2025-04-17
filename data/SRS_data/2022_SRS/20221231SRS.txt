@@ -1,0 +1,27 @@
+:Product: 1231SRS.txt
+:Issued: 2022 Dec 31 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 365 Issued at 0030Z on 31 Dec 2022
+Report compiled from data received at SWO on 30 Dec
+I.  Regions with Sunspots.  Locations Valid at 30/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3171 N23W79   098  0030 Hax  02   02 Alpha
+3172 S35W50   068  0010 Axx  01   01 Alpha
+3173 N25W29   047  0020 Hsx  03   03 Alpha
+3176 N20E10   008  0420 Eki  13   14 Beta-Gamma
+3177 S17E44   334  0170 Dao  07   05 Beta
+3178 S03W84   102  0020 Cro  03   02 Beta
+3179 N13W24   042  0070 Dao  06   11 Beta
+3180 N19E68   310  0120 Dao  07   03 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 30/2400Z Dec
+Nmbr  Location  Lo
+3174  N23W73   091
+3175  S20W11   029
+II. Regions Due to Return 31 Dec to 02 Jan
+Nmbr Lat    Lo
+3160 N23    272
+3162 S13    257
+3167 N20    255

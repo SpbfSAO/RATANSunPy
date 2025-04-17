@@ -1,0 +1,22 @@
+:Product: 0602SRS.txt
+:Issued: 2022 Jun 02 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 153 Issued at 0030Z on 02 Jun 2022
+Report compiled from data received at SWO on 01 Jun
+I.  Regions with Sunspots.  Locations Valid at 01/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3023 S14W27   324  0120 Hax  02   02 Alpha
+3024 S33W19   316  0070 Hsx  01   01 Alpha
+3026 N16W36   333  0100 Dsi  05   11 Beta
+3027 S17E03   294  0040 Dso  04   05 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 01/2400Z Jun
+Nmbr  Location  Lo
+3020  S21W79   017
+3021  N13W66   004
+3022  S08W55   353
+II. Regions Due to Return 02 Jun to 04 Jun
+Nmbr Lat    Lo
+3007 S22    198

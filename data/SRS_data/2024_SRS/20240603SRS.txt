@@ -1,0 +1,28 @@
+:Product: 0603SRS.txt
+:Issued: 2024 Jun 03 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 155 Issued at 0030Z on 03 Jun 2024
+Report compiled from data received at SWO on 02 Jun
+I.  Regions with Sunspots.  Locations Valid at 02/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3690 N17W60   056  0010 Axx  01   01 Alpha
+3691 N25W46   042  0180 Dso  10   18 Beta-Gamma
+3695 N27W33   029  0030 Cao  05   11 Beta
+3697 S18E07   349  0410 Ekc  13   33 Beta-Gamma-Delta
+3698 N22W04   000  0160 Dsi  06   11 Beta
+3699 N04W36   032  0070 Cso  04   08 Beta
+3700 S04W52   048  0180 Dai  07   08 Beta
+3701 S04E15   341  0040 Cao  03   05 Beta
+3702 N17E71   285  0050 Hsx  02   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 02/2400Z Jun
+Nmbr  Location  Lo
+3693  N04W62   058
+3694  S12W54   050
+3696  N08W28   024
+II. Regions Due to Return 03 Jun to 05 Jun
+Nmbr Lat    Lo
+3683 S23    253
+3674 S13    241

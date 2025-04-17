@@ -1,0 +1,25 @@
+:Product: 1209SRS.txt
+:Issued: 2024 Dec 09 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 344 Issued at 0030Z on 09 Dec 2024
+Report compiled from data received at SWO on 08 Dec
+I.  Regions with Sunspots.  Locations Valid at 08/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3910 N16W86   106  0150 Hsx  03   01 Alpha
+3912 S06W61   081  0200 Dao  07   07 Beta
+3916 S15E01   019  0170 Dac  08   12 Beta-Gamma
+3917 S07E11   009  0210 Dac  10   15 Beta
+3919 S14E08   012  0050 Cso  04   02 Beta
+3920 N22E52   326  0090 Csi  09   06 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 08/2400Z Dec
+Nmbr  Location  Lo
+3913  S07W75   095
+3915  N12W16   036
+3918  N13W89   109
+II. Regions Due to Return 09 Dec to 11 Dec
+Nmbr Lat    Lo
+3903 S11    283
+3899 S10    265

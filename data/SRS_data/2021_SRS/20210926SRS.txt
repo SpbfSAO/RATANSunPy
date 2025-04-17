@@ -1,0 +1,22 @@
+:Product: 0926SRS.txt
+:Issued: 2021 Sep 26 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 269 Issued at 0030Z on 26 Sep 2021
+Report compiled from data received at SWO on 25 Sep
+I.  Regions with Sunspots.  Locations Valid at 25/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2871 S28W13   354  0140 Dac  04   09 Beta
+2872 N18W24   005  0060 Cro  07   09 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 25/2400Z Sep
+Nmbr  Location  Lo
+2873  N25W73   054
+2874  S25W68   049
+2875  S33W73   054
+2876  S22W10   351
+II. Regions Due to Return 26 Sep to 28 Sep
+Nmbr Lat    Lo
+2868 S20    230
+2866 S19    215

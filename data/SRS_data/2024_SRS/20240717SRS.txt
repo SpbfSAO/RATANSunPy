@@ -1,0 +1,38 @@
+:Product: 0717SRS.txt
+:Issued: 2024 Jul 17 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 199 Issued at 0030Z on 17 Jul 2024
+Report compiled from data received at SWO on 16 Jul
+I.  Regions with Sunspots.  Locations Valid at 16/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3738 N09W83   217  0450 Fki  18   11 Beta-Gamma-Delta
+3743 S11W30   164  0150 Eai  15   22 Beta
+3744 N16W16   150  0090 Cao  03   05 Beta
+3745 S19W23   157  0030 Dro  05   07 Beta
+3747 S26W20   154  0120 Hsx  02   02 Alpha
+3748 N15E01   133  0020 Cro  04   06 Beta
+3749 S33E29   105  0020 Hrx  01   04 Alpha
+3750 S20E27   107  0080 Dao  08   06 Beta
+3751 S08E41   093  0280 Ekc  11   12 Beta-Gamma
+3752 N23E40   094  0030 Hsx  01   01 Alpha
+3753 N12W36   170  0100 Dai  05   11 Beta
+3754 N24E53   081  0050 Eao  11   07 Beta
+3755 N03E61   073  0050 Dao  04   04 Beta
+3756 S18E68   066  0040 Hsx  02   01 Alpha
+3757 N17E74   060  0030 Hsx  02   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 16/2400Z Jul
+Nmbr  Location  Lo
+3741  N09W65   199
+3742  S21W39   173
+II. Regions Due to Return 17 Jul to 19 Jul
+Nmbr Lat    Lo
+3722 S11    044
+3724 S15    044
+3721 N26    039
+3730 S18    033
+3737 S14    024
+3732 S20    015
+3727 S18    006

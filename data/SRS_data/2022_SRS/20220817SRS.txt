@@ -1,0 +1,24 @@
+:Product: 0817SRS.txt
+:Issued: 2022 Aug 17 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 229 Issued at 0030Z on 17 Aug 2022
+Report compiled from data received at SWO on 16 Aug
+I.  Regions with Sunspots.  Locations Valid at 16/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3074 S17W76   088  0030 Hsx  01   02 Alpha
+3075 N16W78   090  0020 Axx  01   01 Alpha
+3076 N15W49   061  0010 Axx  01   02 Alpha
+3078 S23W18   030  0270 Dao  05   10 Beta-Gamma-Delta
+3079 S11W66   078  0080 Cao  08   07 Beta
+3081 N12E04   008  0120 Dao  09   10 Beta-Gamma
+3082 N27E49   323  0010 Bxo  04   03 Beta
+3083 S24W29   041  0020 Cro  05   04 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 16/2400Z Aug
+Nmbr  Location  Lo
+3080  N18W80   092
+II. Regions Due to Return 17 Aug to 19 Aug
+Nmbr Lat    Lo
+None

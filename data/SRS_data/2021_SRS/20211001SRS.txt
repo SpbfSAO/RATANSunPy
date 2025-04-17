@@ -1,0 +1,22 @@
+:Product: 1001SRS.txt
+:Issued: 2021 Oct 01 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 274 Issued at 0030Z on 01 Oct 2021
+Report compiled from data received at SWO on 30 Sep
+I.  Regions with Sunspots.  Locations Valid at 30/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2877 S18W52   327  0200 Dao  09   13 Beta-Gamma
+2880 N32E30   245  0210 Dao  08   13 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 30/2400Z Sep
+Nmbr  Location  Lo
+2871  S28W79   354
+2876  S22W80   355
+2878  S23W17   292
+2879  N13W73   348
+2881  N16W47   322
+II. Regions Due to Return 01 Oct to 03 Oct
+Nmbr Lat    Lo
+None

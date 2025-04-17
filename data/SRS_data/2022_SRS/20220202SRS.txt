@@ -1,0 +1,23 @@
+:Product: 0202SRS.txt
+:Issued: 2022 Feb 02 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 33 Issued at 0030Z on 02 Feb 2022
+Report compiled from data received at SWO on 01 Feb
+I.  Regions with Sunspots.  Locations Valid at 01/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+2934 S23W91   172  0120 Hsx  01   01 Alpha
+2936 N16W35   116  0670 Eki  11   09 Beta
+2938 N18W20   095  0020 Cro  02   03 Beta
+2939 S15E47   034  0500 Dho  05   07 Beta
+2940 N22E46   035  0410 Dki  05   18 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 01/2400Z Feb
+Nmbr  Location  Lo
+2937  S20W81   162
+II. Regions Due to Return 02 Feb to 04 Feb
+Nmbr Lat    Lo
+2929 N08    344
+2930 N22    340
+2927 S21    334

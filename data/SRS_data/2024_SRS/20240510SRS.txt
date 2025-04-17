@@ -1,0 +1,30 @@
+:Product: 0510SRS.txt
+:Issued: 2024 May 10 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 131 Issued at 0030Z on 10 May 2024
+Report compiled from data received at SWO on 09 May
+I.  Regions with Sunspots.  Locations Valid at 09/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3663 N25W83   037  0300 Fkc  17   10 Beta-Gamma
+3664 S19W34   348  1090 Fkc  20   81 Beta-Gamma-Delta
+3666 N08W65   019  0050 Hsx  02   01 Alpha
+3667 N27E07   307  0130 Hsx  02   01 Alpha
+3670 N16E31   283  0040 Hsx  03   01 Alpha
+3671 N20E33   281  0040 Hax  50   01 Alpha
+3672 N18E58   256  0030 Cro  04   05 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 09/2400Z May
+Nmbr  Location  Lo
+3661  N22W70   024
+3665  S05W30   344
+3668  S15W27   341
+3669  S09W13   327
+II. Regions Due to Return 10 May to 12 May
+Nmbr Lat    Lo
+3648 N18    214
+3644 N13    200
+3658 S23    199
+3646 N22    187
+3652 N14    187

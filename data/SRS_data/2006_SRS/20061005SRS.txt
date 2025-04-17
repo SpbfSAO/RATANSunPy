@@ -1,0 +1,18 @@
+:Product: 1005SRS.txt
+:Issued: 2006 Oct 05 0033 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Environment Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 278 Issued at 0030Z on 05 Oct 2006
+Report compiled from data received at SWO on 04 Oct
+I.  Regions with Sunspots.  Locations Valid at 04/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+0913 S19W12   191  0040 Hsx  02   02 Alpha
+0914 S09W04   183  0010 Hrx  01   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 04/2400Z Oct
+Nmbr  Location  Lo
+0912  N03W13   193
+II. Regions Due to Return 05 Oct to 07 Oct
+Nmbr Lat    Lo
+None

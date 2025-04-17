@@ -1,0 +1,22 @@
+:Product: 0902SRS.txt
+:Issued: 2022 Sep 02 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 245 Issued at 0030Z on 02 Sep 2022
+Report compiled from data received at SWO on 01 Sep
+I.  Regions with Sunspots.  Locations Valid at 01/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3086 S22W78   239  0010 Cro  04   03 Beta
+3089 S22W33   194  0350 Eki  12   20 Beta-Delta
+3091 N14W17   178  0010 Axx  01   01 Alpha
+3092 S09E67   094  0110 Cao  03   03 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 01/2400Z Sep
+Nmbr  Location  Lo
+3087  S14W55   216
+3090  N16W33   194
+II. Regions Due to Return 02 Sep to 04 Sep
+Nmbr Lat    Lo
+3083 S24    055
+3078 S24    047

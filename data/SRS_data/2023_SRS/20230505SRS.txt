@@ -1,0 +1,26 @@
+:Product: 0505SRS.txt
+:Issued: 2023 May 05 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 125 Issued at 0030Z on 05 May 2023
+Report compiled from data received at SWO on 04 May
+I.  Regions with Sunspots.  Locations Valid at 04/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3289 N20W41   212  0010 Bxo  04   04 Beta
+3293 N13E21   150  0240 Dac  10   14 Beta-Delta
+3294 S08E44   127  0120 Hsx  02   01 Alpha
+3295 N16W47   216  0010 Bxo  04   03 Beta
+3296 N16E34   135  0300 Dki  05   11 Beta
+3297 N08E50   119  0500 Eki  11   18 Beta
+3298 S16E32   137  0010 Bxo  03   02 Beta
+3299 S06E69   101  0030 Dao  04   06 Beta
+IA. H-alpha Plages without Spots.  Locations Valid at 04/2400Z May
+Nmbr  Location  Lo
+3287  S25W77   248
+3292  N14W40   211
+II. Regions Due to Return 05 May to 07 May
+Nmbr Lat    Lo
+3279 S19    048
+3282 N12    043

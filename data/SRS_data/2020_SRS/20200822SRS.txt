@@ -1,0 +1,18 @@
+:Product: 0822SRS.txt
+:Issued: 2020 Aug 22 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 235 Issued at 0030Z on 22 Aug 2020
+Report compiled from data received at SWO on 21 Aug
+I.  Regions with Sunspots.  Locations Valid at 21/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+None
+IA. H-alpha Plages without Spots.  Locations Valid at 21/2400Z Aug
+Nmbr  Location  Lo
+2771  S18W80   301
+2772  N17W77   298
+II. Regions Due to Return 22 Aug to 24 Aug
+Nmbr Lat    Lo
+None

@@ -1,0 +1,24 @@
+:Product: 0809SRS.txt
+:Issued: 2022 Aug 09 0030 UTC
+# Prepared jointly by the U.S. Dept. of Commerce, NOAA,
+# Space Weather Prediction Center and the U.S. Air Force.
+#
+Joint USAF/NOAA Solar Region Summary
+SRS Number 221 Issued at 0030Z on 09 Aug 2022
+Report compiled from data received at SWO on 08 Aug
+I.  Regions with Sunspots.  Locations Valid at 08/2400Z 
+Nmbr Location  Lo  Area  Z   LL   NN Mag Type
+3071 S21W07   125  0110 Hsx  03   02 Alpha
+3073 S34W76   199  0070 Hsx  03   01 Alpha
+3074 S16E26   092  0150 Hsx  06   04 Alpha
+3075 N22E38   080  0010 Bxo  05   05 Beta
+3076 N16E61   059  0180 Hsx  02   01 Alpha
+IA. H-alpha Plages without Spots.  Locations Valid at 08/2400Z Aug
+Nmbr  Location  Lo
+3070  N15W48   166
+3072  S24W78   196
+II. Regions Due to Return 09 Aug to 11 Aug
+Nmbr Lat    Lo
+3063 N11    020
+3064 N09    003
+3065 S21    356
