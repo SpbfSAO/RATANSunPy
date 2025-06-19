@@ -4,6 +4,6 @@
 /venv
 .DS_Store
 /data/SRS_data
+/data/AR_data
 __pycache__/
-*.fits
-*.fits
+/log

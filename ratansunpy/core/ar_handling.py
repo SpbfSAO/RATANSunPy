@@ -261,6 +261,29 @@ class ARHandler:
         else:
             return "NONE"
 
+    def get_mcintosh(self,
+                     latitude: float,
+                     ar_number: str,):
+        """
+        Return mcintosh classification of an active region by number and latitude.
+
+        Args
+            latitude : float
+                Latitude of the active region.
+            ar_number : str
+                Active region number.
+
+        Returns
+            str
+                mcintosh classification (e.g., 'Hsx'), or 'NONE' if not found.
+        """
+        mask = (self.srs_table['Number'] == ar_number) & (
+            self.srs_table['Latitude'] == latitude)
+        if any(mask):
+            return str(self.srs_table['Z'][mask][0])
+        else:
+            return "NONE"
+
     def process_one_regions(
             self,
             latitude: float,
@@ -300,7 +323,9 @@ class ARHandler:
 
         primary_hdu.header['MAG_TYPE'] = self.get_mag_type(latitude=latitude,
                                                            ar_number=ar_number)
-        primary_hdu.header['LATITUDE_INTERSECTIONS'] = self.get_lat_intersections(latitude=latitude,
+        primary_hdu.header['MCINTOSH'] = self.get_mcintosh(latitude=latitude,
+                                                           ar_number=ar_number)
+        primary_hdu.header['LAT_INTR'] = self.get_lat_intersections(latitude=latitude,
                                                                                   window_size=window_size)
 
         hdu_list = [primary_hdu]

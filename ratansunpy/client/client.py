@@ -48,8 +48,9 @@ class SRSClient(BaseClient):
 
     def __init__(self, base_url=None):
         self.main_url = 'ftp://ftp.swpc.noaa.gov/pub/warehouse/%Y/SRS/%Y%m%dSRS.txt'
-        self.backup_url = 'ftp://ftp.swpc.noaa.gov/pub/warehouse/%Y/%Y_SRS.tar.gz' 
+        self.backup_url = 'http://spbf.sao.ru/data/solar_data/SRS_data/%Y_SRS/%Y%m%dSRS.txt' 
         self.base_url = base_url if base_url else self.main_url
+        self.regex_pattern = r'([\d]{8}SRS\.txt)'
 
     def extract_lines(self, content: str) -> object:
         """
@@ -171,12 +172,12 @@ class SRSClient(BaseClient):
         :returns: list of urls with txt files.
         :rtype: list of string
         """
-        scrapper = Scrapper(self.base_url)
+        scrapper = Scrapper(self.base_url, regex_pattern=self.regex_pattern)
         file_urls = scrapper.form_fileslist(timerange)
 
         if not file_urls:
             print("No results from the main URL, trying the backup URL.")
-            scrapper = Scrapper(self.backup_url)
+            scrapper = Scrapper(self.backup_url, regex_pattern=self.regex_pattern)
             file_urls = scrapper.form_fileslist(timerange)
 
         return file_urls if file_urls else 'No urls fetched' 

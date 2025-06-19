@@ -203,6 +203,7 @@ class Scrapper:
         :param timerange: The `TimeRange` object representing the time range.
         :return: A list of file URLs.
         """
+        
         directories = self.range(timerange)
         file_urls = []
         ftpurl = urlsplit(directories[0]).netloc
@@ -219,6 +220,7 @@ class Scrapper:
                         file_urls.append(file_path)
         return file_urls
     
+    
     def ftp_archived_files(self, timerange) -> List[str]:
         """
         Retrieve a list of files from an archived .tar.gz FTP server within the specified time range,
@@ -227,6 +229,7 @@ class Scrapper:
         :param timerange: The `TimeRange` object representing the time range.
         :return: A list of paths to the extracted files.
         """
+        print("firing archived func")
         directories = self.range(timerange)
         downloaded_files = []
         extracted_files = []
@@ -265,6 +268,7 @@ class Scrapper:
                 except Exception as e:
                     print(f"Failed to download {tar_file_path}: {e}")
                     continue
+
         for tar_file in downloaded_files:
             try:
                 with tarfile.open(tar_file, 'r:gz') as tar:
@@ -290,6 +294,7 @@ class Scrapper:
         :param timerange: The `TimeRange` object representing the time range.
         :return: A list of file URLs.
          """
+   
         base_dir = self.baseurl
         directories = self.range(timerange)
         file_paths = []
@@ -301,6 +306,27 @@ class Scrapper:
                     file_paths.append(str(file_path))
 
         return file_paths
+    
+    def srs_localfiles(self, timerange: TimeRange) -> List[str]:
+        """
+        Retrieve a list of local fits files within the specified time range.
+
+        :param timerange: The `TimeRange` object representing the time range.
+        :return: A list of file URLs.
+         """
+   
+        base_dir = self.baseurl
+        directories = self.range(timerange)
+        file_paths = []
+
+        for year_dir in directories:
+            year_dir = Path(year_dir)
+            for file_path in year_dir.glob("*.fits"):
+                if self.check_date_in_timerange_from_url(str(file_path), timerange):
+                    file_paths.append(str(file_path))
+
+        return file_paths
+
 
 
     def httpfiles(self, timerange: TimeRange) -> List[str]:
@@ -312,6 +338,7 @@ class Scrapper:
         """
         directories = self.range(timerange)
         file_urls = []
+        
         for current_directory in directories:
             directory_parts = current_directory.split('/')
             year = directory_parts[-3]
@@ -319,10 +346,22 @@ class Scrapper:
             try:
                 page = requests.get(current_directory)
                 page.raise_for_status()
+
             except (requests.exceptions.RequestException, ConnectionResetError) as err:
                 continue
+
             for match in re.findall(fr'href="{self.regex_pattern}"', page.text):
-                relative_path, date_text = match
+                # добавка if - else ниже нужна, чтобы обработать случай с srs файлами, 
+                # там нет групп (файлов с одинаковой датой), поэтому возвращается строка
+                # ->
+                # date_text в случае srs файлов это первые 8 символов в названии
+                
+                # также чтобы это всё отрабатывало добавил regex pattern в SRSClient
+                if isinstance(match, tuple):
+                    relative_path, date_text = match
+                else:
+                    date_text = match[:8]
+                    relative_path =  match
                 date = self.condition(year, month,
                                       date_text) if self.condition else f'{date_text[:-4]}-{date_text[-4:-2]}-{date_text[-2:]}'
                 url = current_directory + relative_path
@@ -367,9 +406,14 @@ class Scrapper:
         # SWPC SRS, for example
         if len(urlsplit(self.baseurl).scheme) == 0:
             return self.srs_localfiles(timerange)
+        
+        # Local fits files
+        if len(urlsplit(self.baseurl).scheme) == 0 and self.baseurl.split(".")[-1] == 'fits':
+            return self.fits_localfiles(timerange)
 
         if urlsplit(self.baseurl).scheme == 'ftp':
             return self.ftpfiles(timerange)
+        
         # RATAN, for example
         if urlsplit(self.baseurl).scheme in ['http', 'https']:
             return self.httpfiles(timerange)
