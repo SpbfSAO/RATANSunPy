@@ -5,3 +5,5 @@
 .DS_Store
 /data/SRS_data
 __pycache__/
+*.fits
+*.fits
