@@ -1,10 +1,5 @@
 """
-Example on how to gather AR data.
-
-Must have corresponding SRS and RATAN data to proccess and extract AR fits.
-In this branch historic SRS data (up to 22.03.2025) can be found in ./data/SRS_data.
-
-Current setting parse data for the period 01.12.2024 - 31.12.2024.
+Example on how to gather AR data from SAO server using ARClient.
 """
 
 import os
