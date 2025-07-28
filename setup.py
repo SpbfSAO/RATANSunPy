@@ -25,14 +25,15 @@ setup(
         "scipy" == "1.13.1",
         "PyWavelets" == "1.7.0",
         "et-xmlfile" >= "1.1.0",
-        "openpyxl" >= "3.1.5" 
+        "openpyxl" >= "3.1.5",
+        "tqdm" >= "4.67.1"
     ],
     classifiers=[
         "Development Status :: 4 - Beta",
         "Programming Language :: Python :: 3",
         "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering",
-        "Topic :: Scientific/Engineering :: Physics"
+        "Topic :: Scientific/Engineering :: Physics",
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.10',
