@@ -288,10 +288,7 @@ class ARHandler:
             self,
             latitude: float,
             ar_number: str,
-<<<<<<< HEAD
             # ? сюда не передаётся окно, если явно не указать
-=======
->>>>>>> ar_extraction
             window_size: Optional[int] = None,
             threshold_multiplier: float = 2.5,
     ) -> tuple[fits.HDUList, str]:
@@ -329,11 +326,7 @@ class ARHandler:
         primary_hdu.header['MCINTOSH'] = self.get_mcintosh(latitude=latitude,
                                                            ar_number=ar_number)
         primary_hdu.header['LAT_INTR'] = self.get_lat_intersections(latitude=latitude,
-<<<<<<< HEAD
                                                                                   window_size=window_size)
-=======
-                                                                    window_size=window_size)
->>>>>>> ar_extraction
 
         hdu_list = [primary_hdu]
         for key, value in ar_stats.items():
