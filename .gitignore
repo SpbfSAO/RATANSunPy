@@ -1,7 +1,4 @@
 # created by virtualenv automatically
-/.github/
-/.idea
 /venv
-.DS_Store
 *__pycache__*
 /log
