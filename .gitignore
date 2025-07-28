@@ -3,7 +3,5 @@
 /.idea
 /venv
 .DS_Store
-/data/SRS_data
-/data/AR_data
-__pycache__/
+*__pycache__*
 /log
