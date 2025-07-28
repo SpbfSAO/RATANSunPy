@@ -63,4 +63,8 @@ def get_logger(
 
         logger.propagate = propagate
 
+<<<<<<< HEAD
     return logger
+=======
+    return logger
+>>>>>>> ar_extraction

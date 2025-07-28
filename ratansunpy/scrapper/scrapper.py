@@ -14,7 +14,11 @@ import tarfile
 from ftplib import FTP
 from urllib.parse import urlsplit
 from typing import List
+<<<<<<< HEAD
 from io import BytesIO
+=======
+
+>>>>>>> ar_extraction
 TIME_REGEX = {'%Y': r'\d{4}', '%y': r'\d{2}',
               '%b': '[A-Z][a-z]{2}', '%m': r'\d{2}',
               '%d': r'\d{2}', '%j': r'\d{3}',
@@ -23,6 +27,7 @@ TIME_REGEX = {'%Y': r'\d{4}', '%y': r'\d{2}',
               '%S': r'\d{2}'}
 
 __all__ = ['Scrapper']
+
 
 class Scrapper:
     def __init__(
@@ -110,7 +115,8 @@ class Scrapper:
             return [filepath_pattern]
         directories = []
         current_date = self.floor_datetime(timerange.start, smallest_step)
-        end_date = self.floor_datetime(timerange.end, smallest_step) + smallest_step
+        end_date = self.floor_datetime(
+            timerange.end, smallest_step) + smallest_step
         while current_date < end_date:
             directories.append(current_date.strftime(filepath_pattern))
             current_date += smallest_step
@@ -142,10 +148,12 @@ class Scrapper:
 
             extracted_date.append(u_elem)
             extracted_pattern.append(p_elem)
-            time_formats = [fmt for fmt in time_formats if fmt not in present_formats]
+            time_formats = [
+                fmt for fmt in time_formats if fmt not in present_formats]
 
         # Find the index of the fullest pattern
-        fullest_pattern_index = extracted_pattern.index(max(extracted_pattern, key=len))
+        fullest_pattern_index = extracted_pattern.index(
+            max(extracted_pattern, key=len))
         # Find the corresponding date part
         date_part = extracted_date[fullest_pattern_index]
         return Time.strptime(date_part, extracted_pattern[fullest_pattern_index])
@@ -177,7 +185,7 @@ class Scrapper:
         :return: True if the date is within the range, False otherwise.
         """
         file_date = self.extract_date_from_url(url).to_datetime()
-        #smallest_pattern = self.smallest_significant_pattern(self.baseurl)
+        # smallest_pattern = self.smallest_significant_pattern(self.baseurl)
         file_range = TimeRange(file_date, file_date)
         return timerange.have_intersection(file_range)
 
@@ -192,7 +200,7 @@ class Scrapper:
         :return: True if the date is within the range, False otherwise.
         """
         file_date = datetime.strptime(file_date, "%Y-%m-%d")
-        #smallest_pattern = self.smallest_significant_pattern(self.baseurl)
+        # smallest_pattern = self.smallest_significant_pattern(self.baseurl)
         file_range = TimeRange(file_date, file_date)
         return timerange.have_intersection(file_range)
 
@@ -203,7 +211,11 @@ class Scrapper:
         :param timerange: The `TimeRange` object representing the time range.
         :return: A list of file URLs.
         """
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ar_extraction
         directories = self.range(timerange)
         file_urls = []
         ftpurl = urlsplit(directories[0]).netloc
@@ -329,6 +341,115 @@ class Scrapper:
 
 
 
+    def ftp_archived_files(self, timerange) -> List[str]:
+        """
+        Retrieve a list of files from an archived .tar.gz FTP server within the specified time range,
+        unzip them, and delete the archives, leaving only the extracted files.
+
+        :param timerange: The `TimeRange` object representing the time range.
+        :return: A list of paths to the extracted files.
+        """
+        print("firing archived func")
+        directories = self.range(timerange)
+        downloaded_files = []
+        extracted_files = []
+        ftpurl = urlsplit(directories[0]).netloc
+
+        tmp_dir = os.path.join(os.getcwd(), "SRS_data")
+        os.makedirs(tmp_dir, exist_ok=True)
+
+        with FTP(ftpurl, user="anonymous", passwd="anonymous@example.com") as ftp:
+            for current_directory in directories:
+                dir_name = urlsplit(current_directory).path.strip(
+                    '/').split('/')[-1]
+                tar_file_name = f"{dir_name}_SRS.tar.gz"
+                tar_file_path = f"{urlsplit(current_directory).path}/{tar_file_name}"
+                local_file_path = os.path.join(tmp_dir, tar_file_name)
+
+                try:
+                    ftp.cwd(urlsplit(current_directory).path)
+                except Exception as e:
+                    print(f'FTP CWD failed: {e}')
+                    continue
+
+                try:
+                    files = ftp.nlst()
+                    if tar_file_name not in files:
+                        print(
+                            f"File {tar_file_name} does not exist in {current_directory}")
+                        continue
+                except Exception as e:
+                    print(f"Failed to list files in {current_directory}: {e}")
+                    continue
+
+                try:
+                    with open(local_file_path, 'wb') as local_file:
+                        ftp.retrbinary(
+                            f"RETR {tar_file_path}", local_file.write)
+                    print(f"Downloaded {tar_file_path} to {local_file_path}")
+                    downloaded_files.append(local_file_path)
+                except Exception as e:
+                    print(f"Failed to download {tar_file_path}: {e}")
+                    continue
+
+        for tar_file in downloaded_files:
+            try:
+                with tarfile.open(tar_file, 'r:gz') as tar:
+                    tar.extractall(path=tmp_dir)
+                    print(f"Extracted {tar_file} to {tmp_dir}")
+                    extracted_files.extend([
+                        os.path.join(tmp_dir, member.name)
+                        for member in tar.getmembers()
+                        if member.isfile()
+                    ])
+                os.remove(tar_file)
+                print(f"Deleted archive {tar_file}")
+            except Exception as e:
+                print(f"Failed to extract or delete {tar_file}: {e}")
+                continue
+
+        return extracted_files
+
+    def srs_localfiles(self, timerange: TimeRange) -> List[str]:
+        """
+        Retrieve a list of files from an HTTP server within the specified time range.
+
+        :param timerange: The `TimeRange` object representing the time range.
+        :return: A list of file URLs.
+         """
+
+        base_dir = self.baseurl
+        directories = self.range(timerange)
+        file_paths = []
+
+        for year_dir in directories:
+            year_dir = Path(year_dir)
+            for file_path in year_dir.glob("*.txt"):
+                if self.check_date_in_timerange_from_url(str(file_path), timerange):
+                    file_paths.append(str(file_path))
+
+        return file_paths
+
+    def srs_localfiles(self, timerange: TimeRange) -> List[str]:
+        """
+        Retrieve a list of local fits files within the specified time range.
+
+        :param timerange: The `TimeRange` object representing the time range.
+        :return: A list of file URLs.
+         """
+
+        base_dir = self.baseurl
+        directories = self.range(timerange)
+        file_paths = []
+
+        for year_dir in directories:
+            year_dir = Path(year_dir)
+            for file_path in year_dir.glob("*.fits"):
+                if self.check_date_in_timerange_from_url(str(file_path), timerange):
+                    file_paths.append(str(file_path))
+
+        return file_paths
+
     def httpfiles(self, timerange: TimeRange) -> List[str]:
         """
         Retrieve a list of files from an HTTP server within the specified time range.
@@ -338,7 +459,11 @@ class Scrapper:
         """
         directories = self.range(timerange)
         file_urls = []
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ar_extraction
         for current_directory in directories:
             directory_parts = current_directory.split('/')
             year = directory_parts[-3]
@@ -351,17 +476,29 @@ class Scrapper:
                 continue
 
             for match in re.findall(fr'href="{self.regex_pattern}"', page.text):
+<<<<<<< HEAD
                 # добавка if - else ниже нужна, чтобы обработать случай с srs файлами, 
                 # там нет групп (файлов с одинаковой датой), поэтому возвращается строка
                 # ->
                 # date_text в случае srs файлов это первые 8 символов в названии
                 
+=======
+                # добавка if - else ниже нужна, чтобы обработать случай с srs файлами,
+                # там нет групп (файлов с одинаковой датой), поэтому возвращается строка
+                # ->
+                # date_text в случае srs файлов это первые 8 символов в названии
+
+>>>>>>> ar_extraction
                 # также чтобы это всё отрабатывало добавил regex pattern в SRSClient
                 if isinstance(match, tuple):
                     relative_path, date_text = match
                 else:
                     date_text = match[:8]
+<<<<<<< HEAD
                     relative_path =  match
+=======
+                    relative_path = match
+>>>>>>> ar_extraction
                 date = self.condition(year, month,
                                       date_text) if self.condition else f'{date_text[:-4]}-{date_text[-4:-2]}-{date_text[-2:]}'
                 url = current_directory + relative_path
@@ -406,14 +543,22 @@ class Scrapper:
         # SWPC SRS, for example
         if len(urlsplit(self.baseurl).scheme) == 0:
             return self.srs_localfiles(timerange)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ar_extraction
         # Local fits files
         if len(urlsplit(self.baseurl).scheme) == 0 and self.baseurl.split(".")[-1] == 'fits':
             return self.fits_localfiles(timerange)
 
         if urlsplit(self.baseurl).scheme == 'ftp':
             return self.ftpfiles(timerange)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> ar_extraction
         # RATAN, for example
         if urlsplit(self.baseurl).scheme in ['http', 'https']:
             return self.httpfiles(timerange)

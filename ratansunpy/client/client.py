@@ -1,24 +1,24 @@
-from abc import ABCMeta, abstractmethod
+import os
 import pathlib
-from typing import List, Tuple, Any, Optional
-from pathlib import Path
-from urllib.request import urlopen
+import re
+from abc import ABCMeta, abstractmethod
 from collections import OrderedDict
 from datetime import datetime
-import astropy.io.ascii
-from astropy.table import Column, MaskedColumn, vstack, Table, join
-from astropy.io import fits
-import pandas as pd
-from scipy.interpolate import interp1d
-from scipy.integrate import trapezoid, cumulative_trapezoid
-from scipy.optimize import minimize
-from scipy.optimize import curve_fit
-from scipy.optimize import leastsq
-from scipy.signal import fftconvolve
-from scipy.signal import find_peaks
-import numpy as np
 from functools import lru_cache
-import re
+from pathlib import Path
+from typing import List, Optional, Tuple
+from urllib.request import urlopen
+
+import astropy.io.ascii
+import numpy as np
+import pandas as pd
+from astropy.io import fits
+from astropy.table import Column, MaskedColumn, Table, join, vstack
+from scipy.integrate import cumulative_trapezoid, trapezoid
+from scipy.interpolate import interp1d
+from scipy.optimize import leastsq, minimize
+from scipy.signal import fftconvolve, find_peaks
+
 from ratansunpy.scrapper import Scrapper
 from ratansunpy.time import TimeRange
 from ratansunpy.utils import *
@@ -27,7 +27,9 @@ import gzip
 import tarfile
 import os
 
-__all__ = ['RATANClient', 'SRSClient']
+from tqdm import tqdm 
+
+__all__ = ['RATANClient', 'SRSClient', 'ARClient']
 
 
 class BaseClient(metaclass=ABCMeta):
@@ -48,7 +50,7 @@ class SRSClient(BaseClient):
 
     def __init__(self, base_url=None):
         self.main_url = 'ftp://ftp.swpc.noaa.gov/pub/warehouse/%Y/SRS/%Y%m%dSRS.txt'
-        self.backup_url = 'http://spbf.sao.ru/data/solar_data/SRS_data/%Y_SRS/%Y%m%dSRS.txt' 
+        self.backup_url = 'http://spbf.sao.ru/data/solar_data/SRS_data/%Y_SRS/%Y%m%dSRS.txt'
         self.base_url = base_url if base_url else self.main_url
         self.regex_pattern = r'([\d]{8}SRS\.txt)'
 
@@ -74,7 +76,8 @@ class SRSClient(BaseClient):
             content[line] = '# ' + content[line]
 
         table1 = content[section[0]:section[1]]
-        table1[1] = re.sub(r'Mag\s*Type', r'Magtype', table1[1], flags=re.IGNORECASE)
+        table1[1] = re.sub(r'Mag\s*Type', r'Magtype',
+                           table1[1], flags=re.IGNORECASE)
         table2 = content[section[1]:section[2]]
         if len(section) > 3:
             table3 = content[section[2]:section[3]]
@@ -117,17 +120,22 @@ class SRSClient(BaseClient):
             raw_data = astropy.io.ascii.read(lines)
             column_names = list(raw_data.columns)
             raw_data.rename_columns(
-                column_names, new_names=[column_mapping[col.title()] for col in column_names]
+                column_names, new_names=[
+                    column_mapping[col.title()] for col in column_names]
             )
 
             if len(raw_data) == 0:
                 for c in raw_data.itercols():
                     c.dtype = column_types[c._name]
-                raw_data.add_column(Column(data=None, name="ID", dtype=('S2')), index=0)
-                raw_data.add_column(Column(data=None, name="Date", dtype=('S10')), index=0)
+                raw_data.add_column(
+                    Column(data=None, name="ID", dtype=('S2')), index=0)
+                raw_data.add_column(
+                    Column(data=None, name="Date", dtype=('S10')), index=0)
             else:
-                raw_data.add_column(Column(data=[key] * len(raw_data), name="ID"), index=0)
-                raw_data.add_column(Column(data=[date] * len(raw_data), name="Date"), index=0)
+                raw_data.add_column(
+                    Column(data=[key] * len(raw_data), name="ID"), index=0)
+                raw_data.add_column(
+                    Column(data=[date] * len(raw_data), name="Date"), index=0)
             return raw_data
         return None
 
@@ -177,19 +185,21 @@ class SRSClient(BaseClient):
 
         if not file_urls:
             print("No results from the main URL, trying the backup URL.")
-            scrapper = Scrapper(self.backup_url, regex_pattern=self.regex_pattern)
+            scrapper = Scrapper(
+                self.backup_url, regex_pattern=self.regex_pattern)
             file_urls = scrapper.form_fileslist(timerange)
 
-        return file_urls if file_urls else 'No urls fetched' 
-
+        return file_urls if file_urls else 'No urls fetched'
 
     def get_table(self, filename):
 
         tables = []
         with open(filename, 'r', encoding='utf-8') as file:
             content = file.read().split('\n')
-        header, section_lines, supplementary_lines = self.extract_lines(content)
-        issued_lines = [line for line in header if 'issued' in line.lower() and line.startswith(':')][0]
+        header, section_lines, supplementary_lines = self.extract_lines(
+            content)
+        issued_lines = [
+            line for line in header if 'issued' in line.lower() and line.startswith(':')][0]
         _, date_text = issued_lines.strip().split(':')[1:]
         issued_date = datetime.strptime(date_text.strip(), "%Y %b %d %H%M UTC")
         meta_id = OrderedDict()
@@ -200,7 +210,8 @@ class SRSClient(BaseClient):
                 id_text = h[pos + 2:]
                 meta_id[id] = id_text.strip()
         for key, lines in zip(list(meta_id.keys()), section_lines):
-            raw_data = self.proccess_lines(issued_date.strftime("%Y-%m-%d"), key, lines)
+            raw_data = self.proccess_lines(
+                issued_date.strftime("%Y-%m-%d"), key, lines)
             tables.append(raw_data)
         srs_table = vstack(tables)
 
@@ -222,10 +233,13 @@ class SRSClient(BaseClient):
             tables = []
             with urlopen(file_url) as response:
                 content = response.read().decode('utf-8').split('\n')
-                header, section_lines, supplementary_lines = self.extract_lines(content)
-                issued_lines = [line for line in header if 'issued' in line.lower() and line.startswith(':')][0]
+                header, section_lines, supplementary_lines = self.extract_lines(
+                    content)
+                issued_lines = [
+                    line for line in header if 'issued' in line.lower() and line.startswith(':')][0]
                 _, date_text = issued_lines.strip().split(':')[1:]
-                issued_date = datetime.strptime(date_text.strip(), "%Y %b %d %H%M UTC")
+                issued_date = datetime.strptime(
+                    date_text.strip(), "%Y %b %d %H%M UTC")
                 meta_id = OrderedDict()
                 for h in header:
                     if h.startswith(("I.", "IA.", "II.")):
@@ -235,18 +249,21 @@ class SRSClient(BaseClient):
                         meta_id[id] = id_text.strip()
 
                 for key, lines in zip(list(meta_id.keys()), section_lines):
-                    raw_data = self.proccess_lines(issued_date.strftime("%Y-%m-%d"), key, lines)
+                    raw_data = self.proccess_lines(
+                        issued_date.strftime("%Y-%m-%d"), key, lines)
                     tables.append(raw_data)
                 stacked_table = vstack(tables)
 
                 if 'Location' in stacked_table.columns:
-                    col_lat, col_lon = self.parse_location(stacked_table['Location'])
+                    col_lat, col_lon = self.parse_location(
+                        stacked_table['Location'])
                     del stacked_table['Location']
                     stacked_table.add_column(col_lat)
                     stacked_table.add_column(col_lon)
 
                 if 'Lat' in stacked_table.columns:
-                    self.parse_lat_col(stacked_table['Lat'], stacked_table['Latitude'])
+                    self.parse_lat_col(
+                        stacked_table['Lat'], stacked_table['Latitude'])
                     del stacked_table['Lat']
 
             total_table.append(stacked_table)
@@ -331,8 +348,10 @@ class RATANClient(BaseClient):
     base_url = 'http://spbf.sao.ru/data/ratan/%Y/%m/%Y%m%d_%H%M%S_sun+0_out.fits'
     regex_pattern = '((\d{6,8})[^0-9].*[^0-9][+-]?\d+_out.fits)'
 
-    convolution_template = pd.read_excel(Path(__file__).absolute().parent.joinpath('quiet_sun_template.xlsx'))
-    quiet_sun_model = pd.read_excel(Path(__file__).absolute().parent.joinpath('quiet_sun_model.xlsx'))
+    convolution_template = pd.read_excel(
+        Path(__file__).absolute().parent.joinpath('quiet_sun_template.xlsx'))
+    quiet_sun_model = pd.read_excel(
+        Path(__file__).absolute().parent.joinpath('quiet_sun_model.xlsx'))
 
     def process_fits_data(self,
                           path_to_file: str,
@@ -369,7 +388,8 @@ class RATANClient(BaseClient):
             True
         """
         if bad_freq is None:
-            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062]
+            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562,
+                        15.8438, 16.0312, 16.2188, 16.4062]
         file_name = str(path_to_file).split('/')[-1]
         file_name_processed = file_name.split('.fits')[0] + '_processed.fits'
         hdul = fits.open(path_to_file)
@@ -397,7 +417,8 @@ class RATANClient(BaseClient):
             num=N_shape
         )
         flux_eficiency = self.antenna_efficiency(FREQ, SOLAR_R)
-        mask, I, V = self.calibrate_QSModel(x, data, SOLAR_R, FREQ, flux_eficiency)
+        mask, I, V = self.calibrate_QSModel(
+            x, data, SOLAR_R, FREQ, flux_eficiency)
         I, V, FREQ = I[~bad_freq], V[~bad_freq], FREQ[~bad_freq]
 
         # Pack the processed data into FITS format
@@ -422,12 +443,14 @@ class RATANClient(BaseClient):
         header['ANGLE'] = angle
         header['SOLAR_P'] = SOLAR_P
 
-        hdulist = fits.HDUList([primary_hdu, I_hdu, V_hdu, freq_hdu, mask_hdu, hdul[1]])
+        hdulist = fits.HDUList(
+            [primary_hdu, I_hdu, V_hdu, freq_hdu, mask_hdu, hdul[1]])
         hdulist.verify('fix')
 
         if save_path:
             os.makedirs(save_path, exist_ok=True)
-            hdulist.writeto(Path(save_path) / file_name_processed, overwrite=True)
+            hdulist.writeto(Path(save_path) /
+                            file_name_processed, overwrite=True)
         if save_raw:
             hdul.writeto(Path(save_path) / file_name, overwrite=True)
 
@@ -485,7 +508,8 @@ class RATANClient(BaseClient):
             NotImplementedError
 
         if bad_freq is None:
-            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062]
+            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562,
+                        15.8438, 16.0312, 16.2188, 16.4062]
 
         srs_table = self.form_srstable_with_time_shift(processed)
 
@@ -507,7 +531,8 @@ class RATANClient(BaseClient):
         source_info = self.active_regions_search(srs_table, x, V, mask)
 
         ar_amount = len(source_info)
-        source_info.add_column(Column(name='Azimuth', data=[AZIMUTH] * ar_amount, dtype=('i2')), index=1)
+        source_info.add_column(
+            Column(name='Azimuth', data=[AZIMUTH] * ar_amount, dtype=('i2')), index=1)
         source_info.add_column(
             Column(name='Amplitude', data=[[{} for _ in range(len(FREQ))] for _ in range(ar_amount)], dtype=object))
         source_info.add_column(
@@ -561,7 +586,8 @@ class RATANClient(BaseClient):
             processed = pr_data
 
         if bad_freq is None:
-            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062]
+            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562,
+                        15.8438, 16.0312, 16.2188, 16.4062]
 
         srs_table = self.form_srstable_with_time_shift(processed)
 
@@ -598,10 +624,12 @@ class RATANClient(BaseClient):
             min_x = np.zeros_like(FREQ)
             for index, elem in enumerate(scan_data):
                 freq, I_data, V_data = elem
-                gauss_params, y_min, x_range = self.make_multigauss_fit(x, I_data, region_info)
+                gauss_params, y_min, x_range = self.make_multigauss_fit(
+                    x, I_data, region_info)
                 gauss_params = gauss_params.reshape(-1, 3)
                 gauss_params[:, 0] += y_min
-                total_flux[index] = np.sum(np.sqrt(2 * np.pi) * gauss_params[:, 0] * gauss_params[:, 2])
+                total_flux[index] = np.sum(
+                    np.sqrt(2 * np.pi) * gauss_params[:, 0] * gauss_params[:, 2])
                 max_amplitude[index] = np.max(gauss_params[:, 0])
                 max_x[index] = np.max(x_range)
                 min_x[index] = np.min(x_range)
@@ -610,7 +638,8 @@ class RATANClient(BaseClient):
             max_amplitude_list.append(max_amplitude)
             max_x_list.append(max_x)
             min_x_list.append(min_x)
-        ar_info_part1 = srs_table[['RatanTime', 'Number', 'Mag Type', 'Number of Sunspots', 'Area', 'Z']]
+        ar_info_part1 = srs_table[['RatanTime', 'Number',
+                                   'Mag Type', 'Number of Sunspots', 'Area', 'Z']]
         ar_info_part2 = Table([ar_numbers, total_flux_list, max_amplitude_list, max_x_list, min_x_list],
                               names=('Number', 'TotalFlux', 'MaxAmplitude', 'MaxLat', 'MinLat'))
         ar_info = join(ar_info_part1, ar_info_part2, keys='Number')
@@ -656,7 +685,8 @@ class RATANClient(BaseClient):
             ar_intervals.append(ar_interval)
 
         ar_table_with_intervals = ar_table.copy()
-        ar_table_with_intervals.add_column(Column(data=ar_intervals, name='Interval'))
+        ar_table_with_intervals.add_column(
+            Column(data=ar_intervals, name='Interval'))
         return ar_table_with_intervals
 
     def compute_fluxes(self, x: np.ndarray,
@@ -689,7 +719,8 @@ class RATANClient(BaseClient):
         left_x = intervals[:, 0].astype(np.float64)
         right_x = intervals[:, 1].astype(np.float64)
 
-        left_x, right_x = np.minimum(left_x, right_x), np.maximum(left_x, right_x)
+        left_x, right_x = np.minimum(
+            left_x, right_x), np.maximum(left_x, right_x)
 
         cum_int_left = cum_integral_interp(left_x)
         cum_int_right = cum_integral_interp(right_x)
@@ -708,7 +739,7 @@ class RATANClient(BaseClient):
                     **kwargs) -> Table:
         """
         Retrieve Extract active region information from processed FITS data.
-        
+
         :param pr_data: Path to FITS file, URL, or FITS HDUList with processed data.
         :type pr_data: Union[str, fits.hdu.hdulist.HDUList]
         :param kwargs: Additional keyword arguments for processing options.
@@ -725,7 +756,8 @@ class RATANClient(BaseClient):
             processed = pr_data
 
         if bad_freq is None:
-            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062]
+            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562,
+                        15.8438, 16.0312, 16.2188, 16.4062]
 
         srs_table = self.form_srstable_with_time_shift(processed)
 
@@ -746,7 +778,8 @@ class RATANClient(BaseClient):
         primary_hdu = fits.PrimaryHDU(FREQ)
         primary_hdu.header = processed[0].header
 
-        ar_intervals = self.find_ar_intervals_using_peaks(x[mask], I[0][mask], srs_table)
+        ar_intervals = self.find_ar_intervals_using_peaks(
+            x[mask], I[0][mask], srs_table)
         ar_info = self.compute_fluxes(x, I, ar_intervals, mode='I')
         ar_info = self.compute_fluxes(x, V, ar_info, mode='V')
         return fits.HDUList([primary_hdu, fits.BinTableHDU(ar_info)])
@@ -789,8 +822,10 @@ class RATANClient(BaseClient):
         rectangle = create_rectangle(size, 6 * sigma_horiz, 4 * R)
         sun_model = create_sun_model(size, R)
         # Perform convolutions
-        convolved_gaussian = fftconvolve(sun_model, gaussian, mode='same', axes=1) / np.sum(gaussian)
-        convolved_rectangle = fftconvolve(sun_model, rectangle, mode='same', axes=1) / np.sum(rectangle)
+        convolved_gaussian = fftconvolve(
+            sun_model, gaussian, mode='same', axes=1) / np.sum(gaussian)
+        convolved_rectangle = fftconvolve(
+            sun_model, rectangle, mode='same', axes=1) / np.sum(rectangle)
 
         convolved_gaussian = convolved_gaussian / np.max(convolved_gaussian)
         convolved_rectangle = convolved_rectangle / np.max(convolved_rectangle)
@@ -849,7 +884,8 @@ class RATANClient(BaseClient):
 
         template_freq = self.quiet_sun_model['freq']
         template_val = self.quiet_sun_model['T_brightness']
-        real_brightness = interp1d(template_freq, template_val, bounds_error=False, fill_value="extrapolate")
+        real_brightness = interp1d(
+            template_freq, template_val, bounds_error=False, fill_value="extrapolate")
         full_flux = np.column_stack([
             frequency,
             2 * 10 ** 22 * K_b * real_brightness(frequency) * SunSolidAngle(solar_r) * (c / (frequency * 10 ** 9)) ** (
@@ -871,18 +907,23 @@ class RATANClient(BaseClient):
             freq_diff = np.abs(columns - frequency[freq_num])
             freq_template = np.argmin(freq_diff) + 1
 
-            template_values = self.convolution_template.iloc[:, freq_template].values.copy()
+            template_values = self.convolution_template.iloc[:, freq_template].values.copy(
+            )
             x_values = self.convolution_template.iloc[:, 0].values.copy()
 
             convolution_template_arcsec = flip_and_concat(template_values)
             x_arcsec = flip_and_concat(x_values, flip_values=True)
 
-            coeff = full_flux[freq_num, 1] * flux_eficiency[freq_num] / trapezoid(convolution_template_arcsec, x_arcsec)
-            theoretical_data = np.interp(x, x_arcsec, coeff * convolution_template_arcsec)
+            coeff = full_flux[freq_num, 1] * flux_eficiency[freq_num] / \
+                trapezoid(convolution_template_arcsec, x_arcsec)
+            theoretical_data = np.interp(
+                x, x_arcsec, coeff * convolution_template_arcsec)
             theoretical_new[freq_num] = theoretical_data
 
-            res_R = minimize(error, np.array([1]), args=(real_R[mask], theoretical_data[mask]))
-            res_L = minimize(error, np.array([1]), args=(real_L[mask], theoretical_data[mask]))
+            res_R = minimize(error, np.array([1]), args=(
+                real_R[mask], theoretical_data[mask]))
+            res_L = minimize(error, np.array([1]), args=(
+                real_L[mask], theoretical_data[mask]))
 
             calibrated_R[freq_num, :] = real_R * res_R.x
             calibrated_L[freq_num, :] = real_L * res_L.x
@@ -925,8 +966,10 @@ class RATANClient(BaseClient):
         :rtype: Tuple[np.ndarray, np.ndarray]
         """
         return (
-            Lat * np.cos(angle * np.pi / 180) - Long * np.sin(angle * np.pi / 180),
-            Lat * np.sin(angle * np.pi / 180) + Long * np.cos(angle * np.pi / 180)
+            Lat * np.cos(angle * np.pi / 180) - Long *
+            np.sin(angle * np.pi / 180),
+            Lat * np.sin(angle * np.pi / 180) + Long *
+            np.cos(angle * np.pi / 180)
         )
 
     def differential_rotation(self, Lat: np.ndarray) -> np.ndarray:
@@ -953,7 +996,8 @@ class RATANClient(BaseClient):
         :return: Positional angle of the sun
         :rtype: float
         """
-        q = -np.arcsin(np.tan(AZIMUTH * np.pi / 180) * np.tan(SOL_DEC * np.pi / 180)) * 180 / np.pi
+        q = -np.arcsin(np.tan(AZIMUTH * np.pi / 180) *
+                       np.tan(SOL_DEC * np.pi / 180)) * 180 / np.pi
         p = SOLAR_P + 360.0 if np.abs(SOLAR_P) > 30 else SOLAR_P
         return (p + q)
 
@@ -976,20 +1020,24 @@ class RATANClient(BaseClient):
         SOL_DEC = processed_file[0].header['SOL_DEC']
         SOLAR_P = processed_file[0].header['SOLAR_P']
         angle = self.pozitional_angle(AZIMUTH, SOL_DEC, SOLAR_P)
-        ratan_datetime = datetime.strptime(OBS_DATE + ' ' + OBS_TIME, '%Y/%m/%d %H:%M:%S.%f')
+        ratan_datetime = datetime.strptime(
+            OBS_DATE + ' ' + OBS_TIME, '%Y/%m/%d %H:%M:%S.%f')
         ratan_datetime_str = ratan_datetime.strftime('%Y/%m/%d %H:%M')
         noaa_datetime = datetime.strptime(OBS_DATE, '%Y/%m/%d')
-        diff_hours = int((ratan_datetime - noaa_datetime).total_seconds() / 3600)
+        diff_hours = int(
+            (ratan_datetime - noaa_datetime).total_seconds() / 3600)
 
         srs = SRSClient(base_url=base_url)
         file_urls = srs.acquire_data(TimeRange(OBS_DATE, OBS_DATE))
         srs_table = srs.get_table(file_urls[0])
-        #srs_table = srs.get_data(TimeRange(OBS_DATE, OBS_DATE))
+        # srs_table = srs.get_data(TimeRange(OBS_DATE, OBS_DATE))
         srs_table = srs_table[srs_table['ID'] == 'I']
         len_tbl = len(srs_table)
-        srs_table.add_column(Column(name='RatanTime', data=[ratan_datetime_str] * len_tbl))
+        srs_table.add_column(Column(name='RatanTime', data=[
+                             ratan_datetime_str] * len_tbl))
         srs_table['Longitude'] = (
-                srs_table['Longitude'] + self.differential_rotation(srs_table['Latitude']) * diff_hours / 24
+            srs_table['Longitude'] +
+            self.differential_rotation(srs_table['Latitude']) * diff_hours / 24
         ).astype(int)
 
         srs_table['Latitude'], srs_table['Longitude'] = self.heliocentric_transform(
@@ -1024,23 +1072,28 @@ class RATANClient(BaseClient):
         wavelet = 'sym6'  # Daubechies wavelet
         level = 4  # Level of decomposition
         denoised_data = wavelet_denoise(V, wavelet, level)
-        height_threshold = lambda x: np.abs(np.median(x) + 0.1 * np.std(x))
+        def height_threshold(x): return np.abs(np.median(x) + 0.1 * np.std(x))
         # Finding peaks in the denoised data
-        peaks, _ = find_peaks(denoised_data, height=height_threshold(denoised_data))
-        valleys, _ = find_peaks(-denoised_data, height=height_threshold(-denoised_data))
+        peaks, _ = find_peaks(
+            denoised_data, height=height_threshold(denoised_data))
+        valleys, _ = find_peaks(-denoised_data,
+                                height=height_threshold(-denoised_data))
         extremums = np.concatenate((peaks, valleys))
 
         theoretical_latitudes = np.array(srs['Latitude'])
         experimental_latitudes = x[extremums]
-        abs_diff = np.abs(experimental_latitudes[:, np.newaxis] - theoretical_latitudes)
+        abs_diff = np.abs(
+            experimental_latitudes[:, np.newaxis] - theoretical_latitudes)
         min_index = np.argmin(abs_diff, axis=1)
         closest_data = srs[min_index]
         closest_data['Latitude'] = experimental_latitudes
 
         original_indices = np.where(mask)[0]
         extremums_original = original_indices[extremums]
-        closest_data.add_column(Column(name='Data Index', data=extremums_original, dtype=('i4')), index=3)
-        closest_data.add_column(Column(name='Masked Index', data=extremums, dtype=('i4')), index=4)
+        closest_data.add_column(
+            Column(name='Data Index', data=extremums_original, dtype=('i4')), index=3)
+        closest_data.add_column(
+            Column(name='Masked Index', data=extremums, dtype=('i4')), index=4)
         return closest_data
 
     def make_multigauss_fit(self, x: np.ndarray, y: np.ndarray,
@@ -1064,7 +1117,8 @@ class RATANClient(BaseClient):
         ar_info = [[y[index] - y_min, x[index]] for index in indexes]
         widths = np.repeat(1, len(peak_info))
         initial_guesses = np.ravel(np.column_stack((ar_info, widths)))
-        params, _ = leastsq(gaussian_mixture, initial_guesses, args=(x_masked, y_masked - y_min))
+        params, _ = leastsq(gaussian_mixture, initial_guesses,
+                            args=(x_masked, y_masked - y_min))
         return np.array(params), y_min, x_masked
 
     def gauss_analysis(self, x, scan_data, ar_info):
@@ -1084,20 +1138,28 @@ class RATANClient(BaseClient):
             indices = np.where(ar_info['Number'] == noaa_ar)[0]
             for index, elem in enumerate(scan_data):
                 freq, I_data, V_data = elem
-                gauss_params, y_min, x_range = self.make_multigauss_fit(x, I_data, region_info)
+                gauss_params, y_min, x_range = self.make_multigauss_fit(
+                    x, I_data, region_info)
                 gauss_params = gauss_params.reshape(-1, 3)
                 gauss_params[:, 0] += y_min
-                total_flux = np.sum(np.sqrt(2 * np.pi) * gauss_params[:, 0] * gauss_params[:, 2])
+                total_flux = np.sum(np.sqrt(2 * np.pi) *
+                                    gauss_params[:, 0] * gauss_params[:, 2])
                 for local_index, gaussian in zip(indices, gauss_params):
                     amplitude, mean, stddev = gaussian
-                    ar_info['Amplitude'][local_index][index] = {'freq': freq, 'amplitude': amplitude}
-                    ar_info['Mean'][local_index][index] = {'freq': freq, 'mean': mean}
-                    ar_info['Sigma'][local_index][index] = {'freq': freq, 'sigma': stddev}
-                    ar_info['FWHM'][local_index][index] = {'freq': freq, 'fwhm': 2 * np.sqrt(2 * np.log(2)) * stddev}
-                    ar_info['Range'][local_index][index] = {'freq': freq, 'x_range': (np.min(x_range), np.max(x_range))}
+                    ar_info['Amplitude'][local_index][index] = {
+                        'freq': freq, 'amplitude': amplitude}
+                    ar_info['Mean'][local_index][index] = {
+                        'freq': freq, 'mean': mean}
+                    ar_info['Sigma'][local_index][index] = {
+                        'freq': freq, 'sigma': stddev}
+                    ar_info['FWHM'][local_index][index] = {
+                        'freq': freq, 'fwhm': 2 * np.sqrt(2 * np.log(2)) * stddev}
+                    ar_info['Range'][local_index][index] = {
+                        'freq': freq, 'x_range': (np.min(x_range), np.max(x_range))}
                     ar_info['Flux'][local_index][index] = {'freq': freq,
                                                            'flux': np.sqrt(2 * np.pi) * amplitude * stddev}
-                    ar_info['Total Flux'][local_index][index] = {'freq': freq, 'flux': total_flux}
+                    ar_info['Total Flux'][local_index][index] = {
+                        'freq': freq, 'flux': total_flux}
         return ar_info
 
     def acquire_data(self, timerange: TimeRange) -> List[str]:
@@ -1130,7 +1192,8 @@ class RATANClient(BaseClient):
             'V': np.dtype('O'),
         }
 
-        table = Table(names=tuple(column_types.keys()), dtype=tuple(column_types.values()))
+        table = Table(names=tuple(column_types.keys()),
+                      dtype=tuple(column_types.values()))
         for file_url in file_urls:
             hdul = fits.open(file_url)
             data = hdul[0].data
@@ -1142,7 +1205,8 @@ class RATANClient(BaseClient):
             FREQ = hdul[1].data['FREQ']
             OBS_DATE = hdul[0].header['DATE-OBS']
             OBS_TIME = hdul[0].header['TIME-OBS']
-            bad_freq = np.isin(FREQ, [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062])
+            bad_freq = np.isin(
+                FREQ, [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062])
 
             AZIMUTH = hdul[0].header['AZIMUTH']
             SOL_DEC = hdul[0].header['SOL_DEC']
@@ -1155,7 +1219,8 @@ class RATANClient(BaseClient):
                 num=N_shape
             )
             flux_eficiency = self.antenna_efficiency(FREQ, SOLAR_R)
-            mask, I, V = self.calibrate_QSModel(x, data, SOLAR_R, FREQ, flux_eficiency)
+            mask, I, V = self.calibrate_QSModel(
+                x, data, SOLAR_R, FREQ, flux_eficiency)
             I, V, FREQ = I[~bad_freq], V[~bad_freq], FREQ[~bad_freq]
             table.add_row([
                 OBS_DATE.replace('/', '-'),
@@ -1187,11 +1252,14 @@ class RATANClient(BaseClient):
             FREQ = hdul[1].data['FREQ']
             OBS_DATE = hdul[0].header['DATE-OBS']
             OBS_TIME = hdul[0].header['TIME-OBS']
-            bad_freq = np.isin(FREQ, [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062])
+            bad_freq = np.isin(
+                FREQ, [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062])
 
-            ratan_datetime = datetime.strptime(OBS_DATE + ' ' + OBS_TIME, '%Y/%m/%d %H:%M:%S.%f')
+            ratan_datetime = datetime.strptime(
+                OBS_DATE + ' ' + OBS_TIME, '%Y/%m/%d %H:%M:%S.%f')
             noaa_datetime = datetime.strptime(OBS_DATE, '%Y/%m/%d')
-            diff_hours = int((ratan_datetime - noaa_datetime).total_seconds() / 3600)
+            diff_hours = int(
+                (ratan_datetime - noaa_datetime).total_seconds() / 3600)
 
             AZIMUTH = hdul[0].header['AZIMUTH']
             SOL_DEC = hdul[0].header['SOL_DEC']
@@ -1205,14 +1273,17 @@ class RATANClient(BaseClient):
             )
 
             flux_eficiency = self.antenna_efficiency(FREQ, SOLAR_R)
-            mask, I, V = self.calibrate_QSModel(x, data, SOLAR_R, FREQ, flux_eficiency)
+            mask, I, V = self.calibrate_QSModel(
+                x, data, SOLAR_R, FREQ, flux_eficiency)
             I, V, FREQ = I[~bad_freq], V[~bad_freq], FREQ[~bad_freq]
 
             srs = SRSClient()
             srs_table = srs.get_data(TimeRange(OBS_DATE, OBS_DATE))
             srs_table = srs_table[srs_table['ID'] == 'I']
             srs_table['Longitude'] = (
-                    srs_table['Longitude'] + self.differential_rotation(srs_table['Latitude']) * diff_hours / 24
+                srs_table['Longitude'] +
+                self.differential_rotation(
+                    srs_table['Latitude']) * diff_hours / 24
             ).astype(int)
 
             srs_table['Latitude'], srs_table['Longitude'] = self.heliocentric_transform(
@@ -1230,7 +1301,8 @@ class RATANClient(BaseClient):
 
             ar_info = self.active_regions_search(srs_table, x, V, mask)
             ar_amount = len(ar_info)
-            ar_info.add_column(Column(name='Azimuth', data=[AZIMUTH] * ar_amount, dtype=('i2')), index=1)
+            ar_info.add_column(Column(name='Azimuth', data=[
+                               AZIMUTH] * ar_amount, dtype=('i2')), index=1)
             ar_info.add_column(
                 Column(name='Amplitude', data=[[{} for _ in range(len(FREQ))] for _ in range(ar_amount)], dtype=object))
             ar_info.add_column(
@@ -1255,3 +1327,101 @@ class RATANClient(BaseClient):
     def get_data(self, timerange):
         file_urls = self.acquire_data(timerange)
         return self.form_data(file_urls)
+
+
+class ARClient(BaseClient):
+    """
+    A client for accessing and downloading solar active region (AR) RATAN-600 FITS data 
+    from the SPB SAO server.
+
+    This client supports retrieving file URLs and downloading FITS files for 
+    a given time range.
+
+    Parameters
+    ----------
+    base_url : str, optional
+        The base URL pattern used to locate the FITS files. If not provided,
+        a default URL pattern pointing to the public RATAN-600 AR data server 
+        is used. The URL should contain date/time formatting compatible with 
+        `datetime.strftime`.
+    output_dir : str, optional
+        The local directory where downloaded files will be saved. Defaults to 
+        the current working directory.
+
+    Attributes
+    ----------
+    base_url : str
+        URL template to locate files on the server.
+    main_url : str
+        Default URL template with datetime placeholders.
+    regex_pattern : str
+        Regular expression to match FITS file names from the server listing.
+    output_dir : str
+        Local directory where downloaded files are saved.
+
+    Methods
+    -------
+    acquire_data(timerange: TimeRange) -> list[str]
+        Returns a list of file URLs matching the given time range.
+
+    download_data(timerange: TimeRange, save_to: str = None) -> list[str]
+        Downloads files within the time range to a specified directory.
+    """
+
+    def __init__(self, base_url=None, output_dir=os.getcwd()):
+        self.main_url = 'http://spbf.sao.ru/data/solar_data/AR_data/%Y/%Y%m%d_%H%M%S_*.fits'
+        self.base_url = base_url if base_url else self.main_url
+        self.regex_pattern = r'(\d{8}_\d{6}_AR\d{4}_-?\d+\.\d+\.fits)'
+        self.output_dir = output_dir
+        os.makedirs(self.output_dir, exist_ok=True)
+
+    def acquire_data(self, timerange: TimeRange) -> list[str]:
+        """
+        Retrieves a list of URLs of FITS files for the given time range.
+        """
+        scrapper = Scrapper(self.base_url, regex_pattern=self.regex_pattern)
+        try:
+            file_urls = scrapper.form_fileslist(timerange)
+        except Exception as e:
+            raise RuntimeError(f"Failed to get URLs: {e}")
+
+        return file_urls if file_urls else 'No urls fetched'
+    
+
+    def download_data(self, timerange: TimeRange, save_to: str = None) -> list[str]:
+        """
+        Downloads FITS files from the given URLs and saves them to the specified directory.
+        Returns a list of paths to the saved files.
+        """
+        save_dir = save_to if save_to else self.output_dir
+        os.makedirs(save_dir, exist_ok=True)
+        
+        file_urls = self.acquire_data(timerange)
+        
+        if not file_urls or isinstance(file_urls, str):
+            return []
+
+        filepaths = []
+
+        for url in tqdm(file_urls, desc="Downloading AR FITS files"):
+            try:
+                filename = os.path.basename(url)
+                filepath = os.path.join(save_dir, filename)
+                if not os.path.exists(filepath):
+                    with urlopen(url) as response:
+                        with open(filepath, 'wb') as out_file:
+                            out_file.write(response.read())
+                filepaths.append(filepath)
+            except Exception as e:
+                print(f"Failed to download {url}: {e}")
+
+        return filepaths
+
+
+    def form_data(self):
+        raise NotImplementedError(
+            "The function 'form_data' is not implemented yet.")
+
+    def get_data(self):
+        raise NotImplementedError(
+            "The method 'get_data' is not implemented yet.")
