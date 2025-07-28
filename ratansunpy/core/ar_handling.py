@@ -1,18 +1,14 @@
+from datetime import datetime
+from pathlib import Path
+from typing import List, Optional
+
+import matplotlib.pyplot as plt
+import numpy as np
 from astropy.io import fits
 from astropy.table import Table
-from pathlib import Path
-from typing import Optional, List, Tuple
-from datetime import datetime
 from numpy import ndarray
-
-from ratansunpy.client import SRSClient, RATANClient
-import numpy as np
+from ratansunpy.client import RATANClient
 from scipy.ndimage import binary_fill_holes
-from scipy.stats import zscore
-import matplotlib.pyplot as plt
-
-from ratansunpy.scrapper import Scrapper
-from ratansunpy.time import TimeRange
 
 
 class ARHandler:
@@ -36,9 +32,11 @@ class ARHandler:
         :param srs_base_url: Base URL for scraping the SRS table (optional).
         """
 
-        assert isinstance(calibrated_data, fits.HDUList), "Input data should be hdu list type"
+        assert isinstance(
+            calibrated_data, fits.HDUList), "Input data should be hdu list type"
         if bad_freq is None:
-            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562, 15.8438, 16.0312, 16.2188, 16.4062]
+            bad_freq = [15.0938, 15.2812, 15.4688, 15.6562,
+                        15.8438, 16.0312, 16.2188, 16.4062]
         self.bad_freq = bad_freq
 
         # Extract header and data
@@ -57,7 +55,6 @@ class ARHandler:
         self.V = calibrated_data[2].data[~bad_freq_mask]
         self.FREQ = FREQ[~bad_freq_mask]
         self.mask = calibrated_data[4].data.astype(bool)
-
         # Solar x-coordinates
         self.solar_x = np.linspace(
             -self.CRPIX * self.CDELT1,
@@ -68,7 +65,8 @@ class ARHandler:
 
         # Load or scrape SRS table
         if srs_table is None and scrap_srs_table:
-            self.srs_table = RATANClient().form_srstable_with_time_shift(calibrated_data, base_url=srs_base_url)
+            self.srs_table = RATANClient().form_srstable_with_time_shift(
+                calibrated_data, base_url=srs_base_url)
         else:
             self.srs_table = srs_table
 
@@ -100,8 +98,10 @@ class ARHandler:
         # Extract data
         nfreq = self.I.shape[0]
         spectrum_data = np.zeros((2, nfreq, 2 * window_size + 1))
-        spectrum_data[0, :, pad_left:2 * window_size + 1 - pad_right] = self.I[:, left_index:right_index]
-        spectrum_data[1, :, pad_left:2 * window_size + 1 - pad_right] = self.V[:, left_index:right_index]
+        spectrum_data[0, :, pad_left:2 * window_size + 1 -
+                      pad_right] = self.I[:, left_index:right_index]
+        spectrum_data[1, :, pad_left:2 * window_size + 1 -
+                      pad_right] = self.V[:, left_index:right_index]
 
         return spectrum_data
 
@@ -203,6 +203,87 @@ class ARHandler:
             'sum': np.sum(data, axis=1).filled(np.nan),
         }
 
+    def get_lat_intersections(self,
+                              latitude: float,
+                              window_size: Optional[int] = None):
+        """
+        Return nearby active regions by latitude within a window.
+
+        Args
+            latitude : float
+                Central latitude to compare against.
+            window_size : Optional[int]
+                Range above and below the latitude to search in degrees.
+
+        Returns
+            str
+                Formatted string of AR numbers and latitudes (e.g., 'AR12345:-10.3'),
+                or 'NONE' if no matches.
+        """
+        if window_size is None:
+            window_size = self.window_size
+
+        area_lat_dict = dict(
+            zip(self.srs_table['Number'], self.srs_table['Latitude']))
+
+        min_lat = latitude - window_size
+        max_lat = latitude + window_size
+        intercepts = {}
+
+        for ar, lat in area_lat_dict.items():
+            if (min_lat <= lat <= max_lat) and lat != latitude:
+                intercepts[ar] = lat
+
+        if not intercepts:
+            return "NONE"
+        return ",".join(f"AR{ar}:{lat:.2f}" for ar, lat in sorted(intercepts.items()))
+
+    def get_mag_type(self,
+                     latitude: float,
+                     ar_number: str,):
+        """
+        Return the magnetic type of an active region by number and latitude.
+
+        Args
+            latitude : float
+                Latitude of the active region.
+            ar_number : str
+                Active region number.
+
+        Returns
+            str
+                Magnetic classification (e.g., 'Beta'), or 'NONE' if not found.
+        """
+        mask = (self.srs_table['Number'] == ar_number) & (
+            self.srs_table['Latitude'] == latitude)
+        if any(mask):
+            return str(self.srs_table['Mag Type'][mask][0])
+        else:
+            return "NONE"
+
+    def get_mcintosh(self,
+                     latitude: float,
+                     ar_number: str,):
+        """
+        Return mcintosh classification of an active region by number and latitude.
+
+        Args
+            latitude : float
+                Latitude of the active region.
+            ar_number : str
+                Active region number.
+
+        Returns
+            str
+                mcintosh classification (e.g., 'Hsx'), or 'NONE' if not found.
+        """
+        mask = (self.srs_table['Number'] == ar_number) & (
+            self.srs_table['Latitude'] == latitude)
+        if any(mask):
+            return str(self.srs_table['Z'][mask][0])
+        else:
+            return "NONE"
+
     def process_one_regions(
             self,
             latitude: float,
@@ -214,9 +295,9 @@ class ARHandler:
         # Extract AR data
         spectrum_data = self.extract_ar_data_with_window(latitude, window_size)
 
-
         # Compute AR mask and statistics
-        ar_mask = np.expand_dims(self.compute_ar_mask(spectrum_data).astype('float'), axis=0)
+        ar_mask = np.expand_dims(self.compute_ar_mask(
+            spectrum_data).astype('float'), axis=0)
         spectrum_data = np.concatenate((spectrum_data, ar_mask), axis=0)
         ar_stats = self.compute_ar_stats(spectrum_data,
                                          mask=ar_mask,
@@ -239,20 +320,30 @@ class ARHandler:
         primary_hdu.header['SOL_DEC'] = self.SOL_DEC
         primary_hdu.header['ANGLE'] = self.ANGLE
 
+        primary_hdu.header['MAG_TYPE'] = self.get_mag_type(latitude=latitude,
+                                                           ar_number=ar_number)
+        primary_hdu.header['MCINTOSH'] = self.get_mcintosh(latitude=latitude,
+                                                           ar_number=ar_number)
+        primary_hdu.header['LAT_INTR'] = self.get_lat_intersections(latitude=latitude,
+                                                                    window_size=window_size)
+
         hdu_list = [primary_hdu]
         for key, value in ar_stats.items():
-            hdu_list.append(fits.ImageHDU(data=value.astype('float32'), name=key))
-        hdu_list.append(fits.ImageHDU(data=self.FREQ.astype('float32'), name='FREQ'))
+            hdu_list.append(fits.ImageHDU(
+                data=value.astype('float32'), name=key))
+        hdu_list.append(fits.ImageHDU(
+            data=self.FREQ.astype('float32'), name='FREQ'))
         ar_hdulist = fits.HDUList(hdu_list)
         ar_hdulist.verify('fix')
         # Combine date and time
-        datetime_obj = datetime.strptime(f"{self.DATE_OBS} {self.TIME_OBS}", "%Y/%m/%d %H:%M:%S.%f")
+        datetime_obj = datetime.strptime(
+            f"{self.DATE_OBS} {self.TIME_OBS}", "%Y/%m/%d %H:%M:%S.%f")
 
         # Format the result as required
         timestamp = datetime_obj.strftime("%Y%m%d_%H%M%S")
 
         # Save to FITS file
-        filename = f"{timestamp}_AR{ar_number}.fits"
+        filename = f"{timestamp}_AR{ar_number}_{self.AZIMUTH}.fits"
 
         return ar_hdulist, filename
 
@@ -266,7 +357,8 @@ class ARHandler:
         for row in self.srs_table:
             ar_number = row['Number']
             latitude = row['Latitude']
-            ar_hdul, filename = self.process_one_regions(latitude=latitude, ar_number=ar_number)
+            ar_hdul, filename = self.process_one_regions(
+                latitude=latitude, ar_number=ar_number)
             ar_data.append((ar_hdul, filename))
             if save_path:
                 ar_hdul.writeto(Path(save_path) / filename, overwrite=True)

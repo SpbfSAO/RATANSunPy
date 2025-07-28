@@ -135,10 +135,6 @@ class TestARHandler:
         assert isinstance(ar_data, list)
 
 
-
-
-
-
     def test_vis_ar_2d(self, sample_radio_data, local_srs_base_url):
         raw_hdul, processed_hdul = sample_radio_data
 
