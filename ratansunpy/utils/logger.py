@@ -10,7 +10,6 @@ ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
 def get_logger(
     name: Optional[str] = None,
-    log_file: Optional[str] = None, # default root/log/ratansunpy.log
     log_level: int = logging.INFO,
     enable_stream: bool = True,
     enable_file: bool = True,
@@ -46,16 +45,9 @@ def get_logger(
             logger.addHandler(stream_handler)
 
         if enable_file:
-            if not log_file:
-
-                default_dir = os.path.join(ROOT_DIR, "log",)
-                os.makedirs(default_dir, exist_ok=True)
-                log_file = os.path.join(default_dir, "ratansunpy.log")
-
-                logger.warning(f"[logger] No log_file provided; using default: {log_file}")
-
-            else:
-                os.makedirs(os.path.dirname(log_file), exist_ok=True)
+            default_dir = os.path.join(ROOT_DIR, "log",)
+            os.makedirs(default_dir, exist_ok=True)
+            log_file = os.path.join(default_dir, "ratansunpy.log")
 
             file_handler = logging.FileHandler(log_file, mode='a', encoding='utf-8')
             file_handler.setFormatter(formatter)

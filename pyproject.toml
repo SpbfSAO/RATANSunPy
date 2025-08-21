@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ratansunpy"
-version = "0.2.2"
+version = "0.2.3"
 description = "RATAN-600 radioastronomical solar data and methods Python library"
 authors = [
     "Igor Lysov <iilysov.sci@gmail.com>", 
@@ -27,6 +27,7 @@ scipy = "^1.13.1"
 PyWavelets = "1.7.0"
 et-xmlfile = "^1.1.0"
 openpyxl = "^3.1.5"
+tqdm = "^4.67.1"
 
 [tool.poetry.group.dev.dependencies]
 sphinx = "^4.0"

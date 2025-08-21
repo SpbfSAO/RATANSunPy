@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="ratansunpy",
-    version="0.2.2",
+    version="0.2.3",
     author=[
         "Igor Lysov <iilysov.sci@gmail.com>", 
         "Irina Knyazeva <iknyazeva@gmail.com>", 

@@ -8,6 +8,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import List, Optional, Tuple
 from urllib.request import urlopen
+from itertools import product
 
 import astropy.io.ascii
 import numpy as np
@@ -22,15 +23,15 @@ from scipy.signal import fftconvolve, find_peaks
 from ratansunpy.scrapper import Scrapper
 from ratansunpy.time import TimeRange
 from ratansunpy.utils import *
-import ftplib
-import gzip
-import tarfile
 import os
-
+import json
 from tqdm import tqdm 
+
+from ratansunpy.utils.logger import get_logger
 
 __all__ = ['RATANClient', 'SRSClient', 'ARClient']
 
+logger = get_logger()
 
 class BaseClient(metaclass=ABCMeta):
     @abstractmethod
@@ -346,7 +347,7 @@ class RATANClient(BaseClient):
     """
 
     base_url = 'http://spbf.sao.ru/data/ratan/%Y/%m/%Y%m%d_%H%M%S_sun+0_out.fits'
-    regex_pattern = '((\d{6,8})[^0-9].*[^0-9][+-]?\d+_out.fits)'
+    regex_pattern = r'((\d{6,8})[^0-9].*[^0-9][+-]?\d+_out.fits)'
 
     convolution_template = pd.read_excel(
         Path(__file__).absolute().parent.joinpath('quiet_sun_template.xlsx'))
@@ -1328,7 +1329,6 @@ class RATANClient(BaseClient):
         file_urls = self.acquire_data(timerange)
         return self.form_data(file_urls)
 
-
 class ARClient(BaseClient):
     """
     A client for accessing and downloading solar active region (AR) RATAN-600 FITS data 
@@ -1368,27 +1368,92 @@ class ARClient(BaseClient):
         Downloads files within the time range to a specified directory.
     """
 
-    def __init__(self, base_url=None, output_dir=os.getcwd()):
+    def __init__(self, base_url=None, output_dir=os.getcwd(), ar_num = None, azimuth=None):
         self.main_url = 'http://spbf.sao.ru/data/solar_data/AR_data/%Y/%Y%m%d_%H%M%S_*.fits'
         self.base_url = base_url if base_url else self.main_url
         self.regex_pattern = r'(\d{8}_\d{6}_AR\d{4}_-?\d+\.\d+\.fits)'
-        self.output_dir = output_dir
+        self.output_dir = Path(output_dir)
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+
         os.makedirs(self.output_dir, exist_ok=True)
 
-    def acquire_data(self, timerange: TimeRange) -> list[str]:
-        """
-        Retrieves a list of URLs of FITS files for the given time range.
-        """
-        scrapper = Scrapper(self.base_url, regex_pattern=self.regex_pattern)
-        try:
-            file_urls = scrapper.form_fileslist(timerange)
-        except Exception as e:
-            raise RuntimeError(f"Failed to get URLs: {e}")
+    def _normalize_ar_num(self, ar_num: str) -> str:
+        if not re.fullmatch(r"\d{4,5}", ar_num):
+            raise ValueError("ar_num must consist of 4 or 5 digits")
+        if len(ar_num) == 5:
+            if not ar_num.startswith("1"):
+                raise ValueError("If ar_num has 5 digits, the first must be '1'")
+            ar_num = ar_num[1:]
+        return f"_AR{ar_num}_"
 
-        return file_urls if file_urls else 'No urls fetched'
-    
+    def _normalize_azimuth(self, azimuth: float) -> str:
+        azimuth = float(azimuth)
+        if not (-30 <= azimuth <= 30):
+            raise ValueError("azimuth must be in range [-30, 30]")
+        return f"_{azimuth:.1f}.fits"
 
-    def download_data(self, timerange: TimeRange, save_to: str = None) -> list[str]:
+    def acquire_data(self, timerange, ar_nums=None, azimuths=None, cache=True) -> list[str]:
+        """
+        Retrieves URLs of FITS files for a given time range, filtered by multiple AR numbers and azimuths.
+        
+        Parameters
+        ----------
+        timerange : TimeRange
+            The time range to fetch FITS files.
+        ar_nums : str or list[str], optional
+            Single AR number or list of AR numbers (4–5 digits).
+        azimuths : float or list[float], optional
+            Single azimuth or list of azimuths (range [-30, 30]).
+        cache : bool, default True
+            Whether to use local caching.
+
+        Returns
+        -------
+        list[str]
+            List of URLs matching the criteria.
+        """
+        if isinstance(ar_nums, str):
+            ar_nums = [ar_nums]
+        if isinstance(azimuths, (int, float)):
+            azimuths = [azimuths]
+
+        all_urls = []
+        if not ar_nums and not azimuths:
+            return super().acquire_data(timerange)
+
+        cache_dir = Path(self.output_dir) / "queries_cache"
+        cache_dir.mkdir(parents=True, exist_ok=True)
+
+        for ar_num, az in product(ar_nums or [None], azimuths or [None]):
+            cache_file = cache_dir / f"cache_{ar_num}_{az}_{timerange.start}_{timerange.end}.json"
+            if cache and cache_file.exists():
+                with open(cache_file) as f:
+                    urls = json.load(f)
+            else:
+                regex_pattern = r'(\d{8}_\d{6}_AR\d{4}_-?\d+\.\d+\.fits)'
+                if ar_num:
+                    ar_token = self._normalize_ar_num(ar_num)
+                    regex_pattern = regex_pattern.replace(r"_AR\d{4}_", ar_token)
+                if az is not None:
+                    az_token = self._normalize_azimuth(az)
+                    regex_pattern = regex_pattern.replace(r"-?\d+\.\d+\.fits", az_token[1:])
+                
+                scrapper = Scrapper(self.base_url, regex_pattern=regex_pattern)
+                try:
+                    urls = scrapper.form_fileslist(timerange)
+                except Exception as e:
+                    print(f"Failed for AR {ar_num}, az {az}: {e}")
+                    urls = []
+
+                if cache:
+                    with open(cache_file, "w") as f:
+                        json.dump(urls, f)
+            
+            all_urls.extend(urls)
+
+        return list(sorted(set(all_urls)))
+
+    def download_data(self, timerange: TimeRange, ar_nums=None, azimuths=None, save_to: str = None, cache=True) -> list[str]:
         """
         Downloads FITS files from the given URLs and saves them to the specified directory.
         Returns a list of paths to the saved files.
@@ -1396,7 +1461,7 @@ class ARClient(BaseClient):
         save_dir = save_to if save_to else self.output_dir
         os.makedirs(save_dir, exist_ok=True)
         
-        file_urls = self.acquire_data(timerange)
+        file_urls = self.acquire_data(timerange, ar_nums=ar_nums, azimuths=azimuths, cache=cache)
         
         if not file_urls or isinstance(file_urls, str):
             return []
