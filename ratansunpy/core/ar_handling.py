@@ -288,7 +288,6 @@ class ARHandler:
             self,
             latitude: float,
             ar_number: str,
-            # ? сюда не передаётся окно, если явно не указать
             window_size: Optional[int] = None,
             threshold_multiplier: float = 2.5,
     ) -> tuple[fits.HDUList, str]:
