@@ -934,9 +934,9 @@ class RATANClient(BaseClient):
                                SOLAR_R: float, SOLAR_B: float) -> Tuple[np.ndarray, np.ndarray]:
         """
         Transforms solar coordinates to a heliocentric system.
-        :param Lat:  Latitude array in degrees
+        :param Lat:  Latitude array in arcsec
         :type: np.ndarray
-        :param Long: Longitude array in degrees
+        :param Long: Longitude array in arcsec
         :type: np.ndarray
         :param SOLAR_R:  Solar radius.
         :type: float
@@ -957,9 +957,9 @@ class RATANClient(BaseClient):
         """
         Rotates positional data by a given angle.
 
-        :param Lat:  Latitude array in degrees
+        :param Lat:  Latitude array in arcsec
         :type: np.ndarray
-        :param Long: Longitude array in degrees
+        :param Long: Longitude array in arcsec
         :type: np.ndarray
         :param angle:    Rotation angle in degrees.
         :type: float
@@ -976,7 +976,7 @@ class RATANClient(BaseClient):
     def differential_rotation(self, Lat: np.ndarray) -> np.ndarray:
         """
         Calculates the differential rotation of the Sun based on latitude.
-        :param Lat:  Latitude array in degrees
+        :param Lat:  Latitude array in arcsec
         :type: np.ndarray
         :return:
         """

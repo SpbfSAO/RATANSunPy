@@ -213,7 +213,7 @@ class ARHandler:
             latitude : float
                 Central latitude to compare against.
             window_size : Optional[int]
-                Range above and below the latitude to search in degrees.
+                Range above and below the latitude to search in arcsec.
 
         Returns
             str
