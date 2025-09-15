@@ -284,7 +284,7 @@ class ARHandler:
         else:
             return "NONE"
 
-    def process_one_regions(
+    def process_one_region(
             self,
             latitude: float,
             ar_number: str,
@@ -357,7 +357,7 @@ class ARHandler:
         for row in self.srs_table:
             ar_number = row['Number']
             latitude = row['Latitude']
-            ar_hdul, filename = self.process_one_regions(
+            ar_hdul, filename = self.process_one_region(
                 latitude=latitude, ar_number=ar_number)
             ar_data.append((ar_hdul, filename))
             if save_path:

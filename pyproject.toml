@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "ratansunpy"
-version = "0.2.3"
+version = "0.2.5"
 description = "RATAN-600 radioastronomical solar data and methods Python library"
 authors = [
     "Igor Lysov <iilysov.sci@gmail.com>", 
     "Irina Knyazeva <iknyazeva@gmail.com>", 
     "Evgenii Kurochkin <k-u-r-o-k@yandex.ru>", 
     "Andrey Shendrik <ashend90@gmail.com>",
+    "Korelov Maksim <mskorelov@gmail.com>",
 ]
 license = "MIT"
 readme = "README.md"

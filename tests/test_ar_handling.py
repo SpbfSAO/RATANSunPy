@@ -117,12 +117,12 @@ class TestARHandler:
         assert isinstance(stats['mean'], np.ndarray)
         assert stats['mean'].max() > mean_all.max()
 
-    def test_process_one_regions(self, sample_radio_data, local_srs_base_url):
-        """Test interval calculation for active regions."""
+    def test_process_one_region(self, sample_radio_data, local_srs_base_url):
+        """Test interval calculation for active region."""
         raw_hdul, processed_hdul = sample_radio_data
 
         handler = ARHandler(processed_hdul, srs_base_url=local_srs_base_url)
-        ar_hdul, filename = handler.process_one_regions(latitude=408.69, ar_number='2673')
+        ar_hdul, filename = handler.process_one_region(latitude=408.69, ar_number='2673')
 
         assert True
 
