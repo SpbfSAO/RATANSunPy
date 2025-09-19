@@ -192,15 +192,23 @@ class SRSClient(BaseClient):
 
         return file_urls if file_urls else 'No urls fetched'
 
-    def get_table(self, filename):
 
+    def get_table(self, filename):
         tables = []
-        with open(filename, 'r', encoding='utf-8') as file:
-            content = file.read().split('\n')
-        header, section_lines, supplementary_lines = self.extract_lines(
-            content)
+        
+        if filename.startswith("http://") or filename.startswith("https://") or filename.startswith("ftp://"):
+            with urlopen(filename) as response:
+                content = response.read().decode('utf-8').split('\n')
+        elif os.path.exists(filename):
+            with open(filename, 'r', encoding='utf-8') as file:
+                content = file.read().split('\n')
+        else:
+            raise FileNotFoundError(f"File or URL not found: {filename}")
+        
+        header, section_lines, supplementary_lines = self.extract_lines(content)
         issued_lines = [
-            line for line in header if 'issued' in line.lower() and line.startswith(':')][0]
+            line for line in header if 'issued' in line.lower() and line.startswith(':')
+        ][0]
         _, date_text = issued_lines.strip().split(':')[1:]
         issued_date = datetime.strptime(date_text.strip(), "%Y %b %d %H%M UTC")
         meta_id = OrderedDict()
@@ -211,8 +219,7 @@ class SRSClient(BaseClient):
                 id_text = h[pos + 2:]
                 meta_id[id] = id_text.strip()
         for key, lines in zip(list(meta_id.keys()), section_lines):
-            raw_data = self.proccess_lines(
-                issued_date.strftime("%Y-%m-%d"), key, lines)
+            raw_data = self.proccess_lines(issued_date.strftime("%Y-%m-%d"), key, lines)
             tables.append(raw_data)
         srs_table = vstack(tables)
 

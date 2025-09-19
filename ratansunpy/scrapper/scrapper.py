@@ -332,37 +332,54 @@ class Scrapper:
     def httpfiles(self, timerange: TimeRange) -> List[str]:
         """
         Retrieve a list of files from an HTTP server within the specified time range.
-
-        :param timerange: The `TimeRange` object representing the time range.
-        :return: A list of file URLs.
+        Works with regex patterns that have 1 or 2 capturing groups.
         """
         directories = self.range(timerange)
         file_urls = []
-        
+
         for current_directory in directories:
-            directory_parts = current_directory.split('/')
-            year = directory_parts[-3]
-            month = directory_parts[-2]
+            directory_parts = current_directory.rstrip('/').split('/')
+            year = directory_parts[-2] if len(directory_parts) >= 2 else None
+            month = directory_parts[-1] if len(directory_parts) >= 1 else None
+
             try:
                 page = requests.get(current_directory)
                 page.raise_for_status()
-
-            except (requests.exceptions.RequestException, ConnectionResetError) as err:
+            except (requests.exceptions.RequestException, ConnectionResetError):
                 continue
 
-            for match in re.findall(fr'href="{self.regex_pattern}"', page.text):
+            matches = re.findall(fr'href="{self.regex_pattern}"', page.text)
+
+            for match in matches:
+                # match может быть строкой (1 группа) или кортежем (2+ группы)
                 if isinstance(match, tuple):
-                    relative_path, date_text = match
+                    relative_path = match[0]
+                    date_text = match[1] if len(match) > 1 else match[0]
                 else:
-                    date_text = match[:8]
-                    relative_path =  match
-                date = self.condition(year, month,
-                                      date_text) if self.condition else f'{date_text[:-4]}-{date_text[-4:-2]}-{date_text[-2:]}'
+                    relative_path = match
+                    date_text = match
+
+                # Убираем расширение .txt, если есть
+                if date_text.endswith(".txt"):
+                    date_text = date_text[:-4]
+
+                # Формируем дату для проверки
+                if self.condition:
+                    date = self.condition(year, month, date_text)
+                else:
+                    # date_text = "20150110" → "2015-01-10"
+                    try:
+                        date = f'{date_text[0:4]}-{date_text[4:6]}-{date_text[6:8]}'
+                    except Exception:
+                        # fallback: если формат не совпал — пропускаем
+                        continue
+
                 url = current_directory + relative_path
                 if self.check_date_in_timerange_from_file_date(date, timerange):
                     file_urls.append(url)
-        return file_urls
 
+        return file_urls
+    
     def form_fileslist(self, timerange: TimeRange) -> List[str]:
         """
         Retrieve a list of files from an HTTP or FTP server within the specified time range.
