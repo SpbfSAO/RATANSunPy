@@ -1427,7 +1427,8 @@ class ARClient(BaseClient):
 
         all_urls = []
         if not ar_nums and not azimuths:
-            return super().acquire_data(timerange)
+            scrapper = Scrapper(self.base_url, regex_pattern=self.regex_pattern)
+            return scrapper.form_fileslist(timerange)
 
         cache_dir = Path(self.output_dir) / "queries_cache"
         cache_dir.mkdir(parents=True, exist_ok=True)
