@@ -31,6 +31,14 @@ also includes a collection of shorter and more specific examples of using ratans
   <img src="images/raw_ratan_scan.png" alt="ratan fits data" style="width:65%;"/>
 </p>
 
+## Related works
+
+Articles:
+- RatanSunPy: A robust preprocessing pipeline for RATAN-600 solar radio observations data: https://arxiv.org/abs/2412.08230
+- The Ratan Active Region Patches (RARPs) Database: A New Database of Solar Active Region Radio Signatures from the RATAN-600 Telescope: https://arxiv.org/abs/2512.05702
+
+Conference paper:
+- https://link.springer.com/chapter/10.1007/978-3-032-07690-8_7
 
 ## Contributing
 
