@@ -15,6 +15,10 @@ from ftplib import FTP
 from urllib.parse import urlsplit
 from typing import List
 from io import BytesIO
+from ratansunpy.utils.logger import get_logger
+
+logger = get_logger()
+
 TIME_REGEX = {'%Y': r'\d{4}', '%y': r'\d{2}',
               '%b': '[A-Z][a-z]{2}', '%m': r'\d{2}',
               '%d': r'\d{2}', '%j': r'\d{3}',
@@ -212,7 +216,7 @@ class Scrapper:
                 try:
                     ftp.cwd(urlsplit(current_directory).path)
                 except Exception as e:
-                    print(f'FTP CWD tried: {e}')
+                    logger.debug(f'FTP CWD tried: {e}')
                     continue
                 for file_name in ftp.nlst():
                     file_path = current_directory + file_name

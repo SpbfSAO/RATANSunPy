@@ -185,7 +185,7 @@ class SRSClient(BaseClient):
         file_urls = scrapper.form_fileslist(timerange)
 
         if not file_urls:
-            print("No results from the main URL, trying the backup URL.")
+            logger.debug("No results from the main URL, trying the backup URL.")
             scrapper = Scrapper(
                 self.backup_url, regex_pattern=self.regex_pattern)
             file_urls = scrapper.form_fileslist(timerange)
@@ -354,7 +354,8 @@ class RATANClient(BaseClient):
     """
 
     base_url = 'http://spbf.sao.ru/data/ratan/%Y/%m/%Y%m%d_%H%M%S_sun+0_out.fits'
-    regex_pattern = r'((\d{6,8})[^0-9].*[^0-9][+-]?\d+_out.fits)'
+    regex_pattern = r'((\d{8})_\d{6}_sun[+-]?\d+_out\.fits)'
+
 
     convolution_template = pd.read_excel(
         Path(__file__).absolute().parent.joinpath('quiet_sun_template.xlsx'))

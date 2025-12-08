@@ -1,9 +1,12 @@
-# created by virtualenv automatically
 /.github/
 /.idea
 /venv
-.DS_Store
-*__pycache__*
 /log
+
+.DS_Store
+
+*__pycache__*
 *queries_cache*
+
 /notebooks/data/
+notebooks/TestNotebook.ipynb
