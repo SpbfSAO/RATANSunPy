@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>ratansunpy.client package &#8212; RATANSunPy v1 documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d1102ebc" />
-    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=686e5160" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
     <script src="_static/documentation_options.js?v=5cb08e4e"></script>
     <script src="_static/doctools.js?v=9bcbadda"></script>
@@ -41,8 +41,125 @@
 <section id="module-ratansunpy.client.client">
 <span id="ratansunpy-client-client-module"></span><h2>ratansunpy.client.client module<a class="headerlink" href="#module-ratansunpy.client.client" title="Link to this heading">¶</a></h2>
 <dl class="py class">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ratansunpy.client.client.</span></span><span class="sig-name descname"><span class="pre">ARClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'/home/runner/work/RATANSunPy/RATANSunPy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratansunpy/client/client.html#ARClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.ARClient" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseClient</span></code></p>
+<p>A client for accessing and downloading solar active region (AR) RATAN-600 FITS data
+from the SPB SAO server.</p>
+<p>This client supports retrieving file URLs and downloading FITS files for
+a given time range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_url</strong> (<em>str</em><em>, </em><em>optional</em>) – The base URL pattern used to locate the FITS files. If not provided,
+a default URL pattern pointing to the public RATAN-600 AR data server
+is used. The URL should contain date/time formatting compatible with
+<cite>datetime.strftime</cite>.</p></li>
+<li><p><strong>output_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – The local directory where downloaded files will be saved. Defaults to
+the current working directory.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient.base_url">
+<span class="sig-name descname"><span class="pre">base_url</span></span><a class="headerlink" href="#ratansunpy.client.client.ARClient.base_url" title="Link to this definition">¶</a></dt>
+<dd><p>URL template to locate files on the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient.main_url">
+<span class="sig-name descname"><span class="pre">main_url</span></span><a class="headerlink" href="#ratansunpy.client.client.ARClient.main_url" title="Link to this definition">¶</a></dt>
+<dd><p>Default URL template with datetime placeholders.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient.regex_pattern">
+<span class="sig-name descname"><span class="pre">regex_pattern</span></span><a class="headerlink" href="#ratansunpy.client.client.ARClient.regex_pattern" title="Link to this definition">¶</a></dt>
+<dd><p>Regular expression to match FITS file names from the server listing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient.output_dir">
+<span class="sig-name descname"><span class="pre">output_dir</span></span><a class="headerlink" href="#ratansunpy.client.client.ARClient.output_dir" title="Link to this definition">¶</a></dt>
+<dd><p>Local directory where downloaded files are saved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient.acquire_data">
+<span class="sig-name descname"><span class="pre">acquire_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timerange</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ratansunpy.time.html#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><span class="pre">TimeRange</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#ARClient.acquire_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.ARClient.acquire_data" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a list of file URLs matching the given time range.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient.download_data">
+<span class="sig-name descname"><span class="pre">download_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timerange</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ratansunpy.time.html#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><span class="pre">TimeRange</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#ARClient.download_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.ARClient.download_data" title="Link to this definition">¶</a></dt>
+<dd><p>Downloads files within the time range to a specified directory.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id0">
+<span class="sig-name descname"><span class="pre">acquire_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timerange</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_nums</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#ARClient.acquire_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves URLs of FITS files for a given time range, filtered by multiple AR numbers and azimuths.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>timerange</strong> (<a class="reference internal" href="ratansunpy.time.html#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><em>TimeRange</em></a>) – The time range to fetch FITS files.</p></li>
+<li><p><strong>ar_nums</strong> (<em>str</em><em> or </em><em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Single AR number or list of AR numbers (4–5 digits).</p></li>
+<li><p><strong>azimuths</strong> (<em>float</em><em> or </em><em>list</em><em>[</em><em>float</em><em>]</em><em>, </em><em>optional</em>) – Single azimuth or list of azimuths (range [-30, 30]).</p></li>
+<li><p><strong>cache</strong> (<em>bool</em><em>, </em><em>default True</em>) – Whether to use local caching.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of URLs matching the criteria.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="id1">
+<span class="sig-name descname"><span class="pre">download_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timerange</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="ratansunpy.time.html#ratansunpy.time.timerange.TimeRange" title="ratansunpy.time.timerange.TimeRange"><span class="pre">TimeRange</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_nums</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">azimuths</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#ARClient.download_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dd><p>Downloads FITS files from the given URLs and saves them to the specified directory.
+Returns a list of paths to the saved files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient.form_data">
+<span class="sig-name descname"><span class="pre">form_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratansunpy/client/client.html#ARClient.form_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.ARClient.form_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.client.client.ARClient.get_data">
+<span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratansunpy/client/client.html#ARClient.get_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.ARClient.get_data" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="ratansunpy.client.client.RATANClient">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ratansunpy.client.client.</span></span><span class="sig-name descname"><span class="pre">RATANClient</span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#RATANClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.RATANClient" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ratansunpy.client.client.</span></span><span class="sig-name descname"><span class="pre">RATANClient</span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#RATANClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.RATANClient" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseClient</span></code></p>
 <p>Client for processing and analyzing data from the RATAN-600 radio telescope.</p>
 <p>RATANClient class is a complex implementation that extends a base client class for handling and processing data
@@ -204,8 +321,8 @@ and matching with NOAA active location.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id0">
-<span class="sig-name descname"><span class="pre">base_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'http://spbf.sao.ru/data/ratan/%Y/%m/%Y%m%d_%H%M%S_sun+0_out.fits'</span></em><a class="headerlink" href="#id0" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="id2">
+<span class="sig-name descname"><span class="pre">base_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'http://spbf.sao.ru/data/ratan/%Y/%m/%Y%m%d_%H%M%S_sun+0_out.fits'</span></em><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -261,8 +378,8 @@ and matching with NOAA active location.</p>
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id1">
-<span class="sig-name descname"><span class="pre">convolution_template</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">x,</span> <span class="pre">solarR</span> <span class="pre">=</span> <span class="pre">750.0</span>&#160;&#160;&#160; <span class="pre">3.0938</span>&#160;&#160;&#160; <span class="pre">3.2813</span>&#160; <span class="pre">...</span>&#160;&#160; <span class="pre">15.6563</span>&#160;&#160; <span class="pre">16.9688</span>&#160;&#160; <span class="pre">17.1563</span> <span class="pre">0</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0.000000</span>&#160; <span class="pre">1.005630</span>&#160; <span class="pre">1.005766</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007845</span>&#160; <span class="pre">1.007125</span>&#160; <span class="pre">1.007156</span> <span class="pre">1</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">2.254778</span>&#160; <span class="pre">1.005581</span>&#160; <span class="pre">1.005717</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007810</span>&#160; <span class="pre">1.007108</span>&#160; <span class="pre">1.007138</span> <span class="pre">2</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">4.509555</span>&#160; <span class="pre">1.005526</span>&#160; <span class="pre">1.005666</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007772</span>&#160; <span class="pre">1.007078</span>&#160; <span class="pre">1.007123</span> <span class="pre">3</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">6.764333</span>&#160; <span class="pre">1.005473</span>&#160; <span class="pre">1.005613</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007720</span>&#160; <span class="pre">1.007045</span>&#160; <span class="pre">1.007104</span> <span class="pre">4</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">9.019111</span>&#160; <span class="pre">1.005420</span>&#160; <span class="pre">1.005556</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007666</span>&#160; <span class="pre">1.007018</span>&#160; <span class="pre">1.007059</span> <span class="pre">..</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span> <span class="pre">882</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1988.713900</span>&#160; <span class="pre">0.003226</span>&#160; <span class="pre">0.003282</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017368</span>&#160; <span class="pre">0.014721</span>&#160; <span class="pre">0.013982</span> <span class="pre">883</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1990.968677</span>&#160; <span class="pre">0.003204</span>&#160; <span class="pre">0.003267</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017328</span>&#160; <span class="pre">0.014686</span>&#160; <span class="pre">0.013947</span> <span class="pre">884</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1993.223455</span>&#160; <span class="pre">0.003178</span>&#160; <span class="pre">0.003258</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017320</span>&#160; <span class="pre">0.014664</span>&#160; <span class="pre">0.013903</span> <span class="pre">885</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1995.478233</span>&#160; <span class="pre">0.003163</span>&#160; <span class="pre">0.003248</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017199</span>&#160; <span class="pre">0.014639</span>&#160; <span class="pre">0.013854</span> <span class="pre">886</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1997.733010</span>&#160; <span class="pre">0.003150</span>&#160; <span class="pre">0.003231</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017071</span>&#160; <span class="pre">0.014646</span>&#160; <span class="pre">0.013774</span>&#160; <span class="pre">[887</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">66</span> <span class="pre">columns]</span></em><a class="headerlink" href="#id1" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="id3">
+<span class="sig-name descname"><span class="pre">convolution_template</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">x,</span> <span class="pre">solarR</span> <span class="pre">=</span> <span class="pre">750.0</span>&#160;&#160;&#160; <span class="pre">3.0938</span>&#160;&#160;&#160; <span class="pre">3.2813</span>&#160; <span class="pre">...</span>&#160;&#160; <span class="pre">15.6563</span>&#160;&#160; <span class="pre">16.9688</span>&#160;&#160; <span class="pre">17.1563</span> <span class="pre">0</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0.000000</span>&#160; <span class="pre">1.005630</span>&#160; <span class="pre">1.005766</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007845</span>&#160; <span class="pre">1.007125</span>&#160; <span class="pre">1.007156</span> <span class="pre">1</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">2.254778</span>&#160; <span class="pre">1.005581</span>&#160; <span class="pre">1.005717</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007810</span>&#160; <span class="pre">1.007108</span>&#160; <span class="pre">1.007138</span> <span class="pre">2</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">4.509555</span>&#160; <span class="pre">1.005526</span>&#160; <span class="pre">1.005666</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007772</span>&#160; <span class="pre">1.007078</span>&#160; <span class="pre">1.007123</span> <span class="pre">3</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">6.764333</span>&#160; <span class="pre">1.005473</span>&#160; <span class="pre">1.005613</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007720</span>&#160; <span class="pre">1.007045</span>&#160; <span class="pre">1.007104</span> <span class="pre">4</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">9.019111</span>&#160; <span class="pre">1.005420</span>&#160; <span class="pre">1.005556</span>&#160; <span class="pre">...</span>&#160; <span class="pre">1.007666</span>&#160; <span class="pre">1.007018</span>&#160; <span class="pre">1.007059</span> <span class="pre">..</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span> <span class="pre">882</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1988.713900</span>&#160; <span class="pre">0.003226</span>&#160; <span class="pre">0.003282</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017368</span>&#160; <span class="pre">0.014721</span>&#160; <span class="pre">0.013982</span> <span class="pre">883</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1990.968677</span>&#160; <span class="pre">0.003204</span>&#160; <span class="pre">0.003267</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017328</span>&#160; <span class="pre">0.014686</span>&#160; <span class="pre">0.013947</span> <span class="pre">884</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1993.223455</span>&#160; <span class="pre">0.003178</span>&#160; <span class="pre">0.003258</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017320</span>&#160; <span class="pre">0.014664</span>&#160; <span class="pre">0.013903</span> <span class="pre">885</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1995.478233</span>&#160; <span class="pre">0.003163</span>&#160; <span class="pre">0.003248</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017199</span>&#160; <span class="pre">0.014639</span>&#160; <span class="pre">0.013854</span> <span class="pre">886</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1997.733010</span>&#160; <span class="pre">0.003150</span>&#160; <span class="pre">0.003231</span>&#160; <span class="pre">...</span>&#160; <span class="pre">0.017071</span>&#160; <span class="pre">0.014646</span>&#160; <span class="pre">0.013774</span>&#160; <span class="pre">[887</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">66</span> <span class="pre">columns]</span></em><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -287,7 +404,7 @@ and matching with NOAA active location.</p>
 <dt class="sig sig-object py" id="ratansunpy.client.client.RATANClient.differential_rotation">
 <span class="sig-name descname"><span class="pre">differential_rotation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#RATANClient.differential_rotation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.RATANClient.differential_rotation" title="Link to this definition">¶</a></dt>
 <dd><p>Calculates the differential rotation of the Sun based on latitude.
-:param Lat:  Latitude array in degrees
+:param Lat:  Latitude array in arcsec
 :type: np.ndarray
 :return:</p>
 </dd></dl>
@@ -325,7 +442,7 @@ and matching with NOAA active location.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ratansunpy.client.client.RATANClient.form_srstable_with_time_shift">
-<span class="sig-name descname"><span class="pre">form_srstable_with_time_shift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processed_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HDUList</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Table</span></span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#RATANClient.form_srstable_with_time_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.RATANClient.form_srstable_with_time_shift" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">form_srstable_with_time_shift</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processed_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">HDUList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Table</span></span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#RATANClient.form_srstable_with_time_shift"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.RATANClient.form_srstable_with_time_shift" title="Link to this definition">¶</a></dt>
 <dd><p>Create table with AR info with SRSClient
 with correct NOAA coordinates for RATAN time difference</p>
 <dl class="field-list simple">
@@ -426,9 +543,9 @@ a processed FITS HDUList and NOAA active regions coordnate info
 <dt class="sig sig-object py" id="ratansunpy.client.client.RATANClient.heliocentric_transform">
 <span class="sig-name descname"><span class="pre">heliocentric_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Lat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Long</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SOLAR_R</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">SOLAR_B</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#RATANClient.heliocentric_transform"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.RATANClient.heliocentric_transform" title="Link to this definition">¶</a></dt>
 <dd><p>Transforms solar coordinates to a heliocentric system.
-:param Lat:  Latitude array in degrees
+:param Lat:  Latitude array in arcsec
 :type: np.ndarray
-:param Long: Longitude array in degrees
+:param Long: Longitude array in arcsec
 :type: np.ndarray
 :param SOLAR_R:  Solar radius.
 :type: float
@@ -490,8 +607,8 @@ a processed FITS HDUList and NOAA active regions coordnate info
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Lat</strong> – Latitude array in degrees</p></li>
-<li><p><strong>Long</strong> – Longitude array in degrees</p></li>
+<li><p><strong>Lat</strong> – Latitude array in arcsec</p></li>
+<li><p><strong>Long</strong> – Longitude array in arcsec</p></li>
 <li><p><strong>angle</strong> – Rotation angle in degrees.</p></li>
 </ul>
 </dd>
@@ -583,20 +700,20 @@ fits files and processed fits, all kwargs from process_fits_data are available,<
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id2">
-<span class="sig-name descname"><span class="pre">quiet_sun_model</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Unnamed:</span> <span class="pre">0</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">freq</span>&#160; <span class="pre">T_brightness</span> <span class="pre">0</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0</span>&#160;&#160; <span class="pre">1.400000</span>&#160; <span class="pre">49418.635189</span> <span class="pre">1</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1</span>&#160;&#160; <span class="pre">1.448649</span>&#160; <span class="pre">48858.340961</span> <span class="pre">2</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">2</span>&#160;&#160; <span class="pre">1.497297</span>&#160; <span class="pre">48311.044957</span> <span class="pre">3</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">3</span>&#160;&#160; <span class="pre">1.545946</span>&#160; <span class="pre">47776.300045</span> <span class="pre">4</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">4</span>&#160;&#160; <span class="pre">1.594595</span>&#160; <span class="pre">47253.679371</span> <span class="pre">..</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span> <span class="pre">995</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">995</span>&#160; <span class="pre">49.805405</span>&#160;&#160; <span class="pre">5400.867144</span> <span class="pre">996</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">996</span>&#160; <span class="pre">49.854054</span>&#160;&#160; <span class="pre">5397.418371</span> <span class="pre">997</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">997</span>&#160; <span class="pre">49.902703</span>&#160;&#160; <span class="pre">5393.975977</span> <span class="pre">998</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">998</span>&#160; <span class="pre">49.951351</span>&#160;&#160; <span class="pre">5390.539945</span> <span class="pre">999</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">999</span>&#160; <span class="pre">50.000000</span>&#160;&#160; <span class="pre">5387.110257</span>&#160; <span class="pre">[1000</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">3</span> <span class="pre">columns]</span></em><a class="headerlink" href="#id2" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="id4">
+<span class="sig-name descname"><span class="pre">quiet_sun_model</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">Unnamed:</span> <span class="pre">0</span>&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">freq</span>&#160; <span class="pre">T_brightness</span> <span class="pre">0</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">0</span>&#160;&#160; <span class="pre">1.400000</span>&#160; <span class="pre">49418.635189</span> <span class="pre">1</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">1</span>&#160;&#160; <span class="pre">1.448649</span>&#160; <span class="pre">48858.340961</span> <span class="pre">2</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">2</span>&#160;&#160; <span class="pre">1.497297</span>&#160; <span class="pre">48311.044957</span> <span class="pre">3</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">3</span>&#160;&#160; <span class="pre">1.545946</span>&#160; <span class="pre">47776.300045</span> <span class="pre">4</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">4</span>&#160;&#160; <span class="pre">1.594595</span>&#160; <span class="pre">47253.679371</span> <span class="pre">..</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">...</span> <span class="pre">995</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">995</span>&#160; <span class="pre">49.805405</span>&#160;&#160; <span class="pre">5400.867144</span> <span class="pre">996</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">996</span>&#160; <span class="pre">49.854054</span>&#160;&#160; <span class="pre">5397.418371</span> <span class="pre">997</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">997</span>&#160; <span class="pre">49.902703</span>&#160;&#160; <span class="pre">5393.975977</span> <span class="pre">998</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">998</span>&#160; <span class="pre">49.951351</span>&#160;&#160; <span class="pre">5390.539945</span> <span class="pre">999</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">999</span>&#160; <span class="pre">50.000000</span>&#160;&#160; <span class="pre">5387.110257</span>&#160; <span class="pre">[1000</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">3</span> <span class="pre">columns]</span></em><a class="headerlink" href="#id4" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="id3">
-<span class="sig-name descname"><span class="pre">regex_pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'((\\d{6,8})[^0-9].*[^0-9]0_out.fits)'</span></em><a class="headerlink" href="#id3" title="Link to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="id5">
+<span class="sig-name descname"><span class="pre">regex_pattern</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'((\\d{8})_\\d{6}_sun[+-]?\\d+_out\\.fits)'</span></em><a class="headerlink" href="#id5" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="ratansunpy.client.client.SRSClient">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ratansunpy.client.client.</span></span><span class="sig-name descname"><span class="pre">SRSClient</span></span><a class="reference internal" href="_modules/ratansunpy/client/client.html#SRSClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.SRSClient" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ratansunpy.client.client.</span></span><span class="sig-name descname"><span class="pre">SRSClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratansunpy/client/client.html#SRSClient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.SRSClient" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseClient</span></code></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ratansunpy.client.client.SRSClient.acquire_data">
@@ -614,11 +731,6 @@ fits files and processed fits, all kwargs from process_fits_data are available,<
 </dd>
 </dl>
 </dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="ratansunpy.client.client.SRSClient.base_url">
-<span class="sig-name descname"><span class="pre">base_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ftp://ftp.ngdc.noaa.gov/STP/swpc_products/daily_reports/solar_region_summaries/%Y/%m/%Y%m%dSRS.txt'</span></em><a class="headerlink" href="#ratansunpy.client.client.SRSClient.base_url" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ratansunpy.client.client.SRSClient.extract_lines">
@@ -641,6 +753,11 @@ fits files and processed fits, all kwargs from process_fits_data are available,<
 :return: data table
 :rtype: Table</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ratansunpy.client.client.SRSClient.get_table">
+<span class="sig-name descname"><span class="pre">get_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratansunpy/client/client.html#SRSClient.get_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratansunpy.client.client.SRSClient.get_table" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ratansunpy.client.client.SRSClient.parse_lat_col">
@@ -739,7 +856,7 @@ fits files and processed fits, all kwargs from process_fits_data are available,<
       &#169;2024, Igor Lysov, Evgenii Kurochkin, Andrey Shendrik, Irina Knyazeva.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.1.3</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
